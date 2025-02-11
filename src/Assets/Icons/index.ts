@@ -8,6 +8,7 @@ import MessagesIcon from "./Messages.svg";
 import SolidMessagesIcon from "./Messages_Solid.svg";
 import ProfileIcon from "./Profile.svg";
 import SolidProfileIcon from "./Profile.svg";
+import AppLogo from "./appLogo.svg";
 
 const ICONS = {
   HomeIcon,
@@ -20,6 +21,7 @@ const ICONS = {
   SolidMessagesIcon,
   ProfileIcon,
   SolidProfileIcon,
+  AppLogo,
 };
 
 export default ICONS;

@@ -102,8 +102,8 @@ const Routing = () => {
         headerShown: false,
       }}
     >
-      <RootStack.Screen name="authStack" component={AuthStack} />
       <RootStack.Screen name="mainStack" component={MainStack} />
+      <RootStack.Screen name="authStack" component={AuthStack} />
     </RootStack.Navigator>
   );
 };
