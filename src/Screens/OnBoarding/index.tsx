@@ -1,20 +1,27 @@
 import React, { FC } from "react";
 import {
+  Alert,
   FlatList,
-  Image,
+  ImageBackground,
   NativeScrollEvent,
   NativeSyntheticEvent,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../../Components/Buttons/CustomButton";
 import { OnBoardingProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
-import { deviceWidth, horizontalScale, wp } from "../../Utilities/Metrics";
+import {
+  deviceWidth,
+  horizontalScale,
+  responsiveFontSize,
+  verticalScale,
+  wp,
+} from "../../Utilities/Metrics";
 import styles from "./styles";
 import OnBoardingSlides, { SlideType } from "../../Seeds/OnBoardingSeeds";
+import { CustomText } from "../../Components/CustomText";
 
 const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
   const flatListRef = React.useRef<FlatList>(null);
@@ -30,22 +37,18 @@ const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
 
   const goToNextSlide = async () => {
     const nextSlideIndex = currentSlideIndex + 1;
-    if (nextSlideIndex != OnBoardingSlides.length) {
+    if (nextSlideIndex === OnBoardingSlides.length) {
+      // Alert.alert("ssss");
+      navigation.navigate("referral");
+    } else {
       const offset = nextSlideIndex * deviceWidth;
 
       if (flatListRef.current) {
         flatListRef?.current.scrollToOffset({ offset });
-        setCurrentSlideIndex(currentSlideIndex + 1);
+        setCurrentSlideIndex(nextSlideIndex);
       }
-    } else {
-      navigation.navigate("referral");
     }
   };
-
-  const handleSkip = () => {
-    navigation.navigate("referral");
-  };
-
   const renderSlides = ({
     item,
     index,
@@ -55,11 +58,17 @@ const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
   }) => {
     return (
       <View key={item.id + index} style={styles.slideContainer}>
-        <Image source={item?.image} style={styles.slideImage} />
-        <View style={styles.slideTextCont}>
-          <Text style={styles.title}>{item?.title}</Text>
-          <Text style={styles.subtitle}>{item?.subtitle}</Text>
-        </View>
+        <ImageBackground
+          source={item?.image}
+          style={styles.slideImage}
+          resizeMode="cover"
+        >
+          {renderIndicators()}
+          <View style={styles.slideTextCont}>
+            <Text style={styles.title}>{item?.title}</Text>
+            <Text style={styles.subtitle}>{item?.subtitle}</Text>
+          </View>
+        </ImageBackground>
       </View>
     );
   };
@@ -72,10 +81,7 @@ const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
             key={index}
             style={[
               styles.indicator,
-              currentSlideIndex == index && {
-                backgroundColor: COLORS.primaryPink,
-                width: horizontalScale(25),
-              },
+              currentSlideIndex === index && styles.indicatorActive,
             ]}
           />
         ))}
@@ -84,7 +90,7 @@ const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         ref={flatListRef}
         data={OnBoardingSlides}
@@ -94,18 +100,30 @@ const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
         pagingEnabled
         renderItem={renderSlides}
       />
-      {renderIndicators()}
-      <View style={styles.buttonCont}>
+      <View style={{ marginBottom: 50 }}>
         <CustomButton
-          title="Next"
+          title="Get Started"
           onPress={goToNextSlide}
-          style={{ width: wp(90) }}
+          style={styles.buttonstyle}
         />
-        <TouchableOpacity onPress={handleSkip}>
-          <Text style={styles.skipText}>Skip</Text>
-        </TouchableOpacity>
+        <CustomText
+          fontSize={responsiveFontSize(14)}
+          fontFamily="bold"
+          style={styles.text}
+        >
+          Already have an account?{` `}
+          <Text
+            style={{
+              fontSize: responsiveFontSize(14),
+              fontWeight: "700",
+              color: COLORS.primaryPink,
+            }}
+          >
+            Sign in
+          </Text>
+        </CustomText>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -20,6 +20,14 @@ import RedCrossIcon from "./redCrossIcon.svg";
 import ChatIcon from "./chatIcon.svg";
 import SuperLikeIcon from "./fireIcon.svg";
 import LikeIcon from "./likeIcon.svg";
+import backArrow from "./backarrow.svg";
+import Chatsicon from "./chat.svg";
+import UniqueEvents from "./unevents.svg";
+import blueHeart from "./blueheart.svg";
+import Google from "./googleicon.svg";
+import facebook from "./facebookicon.svg";
+import Apple from "./appleicon.svg";
+import Twitter from "./twittericon.svg";
 
 const ICONS = {
   HomeIcon,
@@ -44,6 +52,14 @@ const ICONS = {
   ChatIcon,
   SuperLikeIcon,
   LikeIcon,
+  backArrow,
+  Chatsicon,
+  UniqueEvents,
+  blueHeart,
+  Google,
+  facebook,
+  Apple,
+  Twitter,
 };
 
 export default ICONS;

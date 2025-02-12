@@ -11,14 +11,16 @@ const OnBoardingSlides: SlideType[] = [
   {
     id: "1",
     image: IMAGES.slide1,
-    title: "STRESS LESS.",
-    subtitle: "Make mindfulness a daily habit and be kind to your mind.",
+    title: "Find Events, Meet People",
+    subtitle:
+      "Discover local events and meet like-minded people who share your vibe.",
   },
   {
     id: "2",
     image: IMAGES.slide2,
-    title: "RELAX MORE.",
-    subtitle: "Unwind and find serenity in a guided meditation sessions",
+    title: "Your Social Circle, Expanded",
+    subtitle:
+      "Connect with matches, build friendships, and create unforgettable memories.",
   },
 ];
 

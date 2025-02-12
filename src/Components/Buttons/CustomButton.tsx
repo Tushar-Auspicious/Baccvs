@@ -47,7 +47,7 @@ export default CustomButton;
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: verticalScale(16),
+    paddingVertical: verticalScale(12),
     paddingHorizontal: horizontalScale(20),
     borderRadius: verticalScale(20),
     alignItems: "center",

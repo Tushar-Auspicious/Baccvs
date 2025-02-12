@@ -92,3 +92,11 @@ export type OnBoardingProps = NativeStackScreenProps<
   AuthStackParams,
   "onBoarding"
 >;
+export type ReferralProps = NativeStackScreenProps<AuthStackParams, "referral">;
+export type WelcomeProps = NativeStackScreenProps<AuthStackParams, "welcome">;
+export type StepsIndicatorProps = NativeStackScreenProps<
+  AuthStackParams,
+  "register"
+>;
+
+
