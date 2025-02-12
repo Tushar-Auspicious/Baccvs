@@ -14,6 +14,10 @@ import Dating from "../Screens/Dating";
 import Events from "../Screens/Events";
 import Profile from "../Screens/Profile";
 import Messages from "../Screens/Messages";
+import Referral from "../Screens/Referral";
+import Welcome from "../Screens/Welcome";
+import StepsIndicator from "../Screens/Register";
+import Register from "../Screens/Register";
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
 const Auth = createNativeStackNavigator<AuthStackParams>();
@@ -29,9 +33,9 @@ const Routing = () => {
         }}
       >
         <Auth.Screen name="onBoarding" component={OnBoarding} />
-        <Auth.Screen name="referral" component={OnBoarding} />
-        <Auth.Screen name="register" component={OnBoarding} />
-        <Auth.Screen name="welcome" component={OnBoarding} />
+        <Auth.Screen name="referral" component={Referral} />
+        <Auth.Screen name="welcome" component={Welcome} />
+        <Auth.Screen name="register" component={Register} />
         <Auth.Screen name="signIn" component={OnBoarding} />
       </Auth.Navigator>
     );

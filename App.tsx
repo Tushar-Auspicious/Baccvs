@@ -6,6 +6,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import Splash from "./src/Screens/Splash";
 import Routing from "./src/Routes";
+import OnBoarding from "./src/Screens/OnBoarding";
+import OnBoardingSlides from "./src/Seeds/OnBoardingSeeds";
 
 LogBox.ignoreAllLogs();
 

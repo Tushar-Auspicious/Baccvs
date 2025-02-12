@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 import COLORS from "../../Utilities/Colors";
 import {
+  deviceHeight,
+  deviceWidth,
   horizontalScale,
   hp,
   responsiveFontSize,
@@ -12,56 +14,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.appBackground,
-    paddingTop: verticalScale(10),
+  },
+  slideImage: {
+    height: deviceHeight * 0.8,
+    width: deviceWidth,
+    justifyContent: "flex-end",
   },
 
   slideContainer: {
     alignItems: "center",
-    paddingVertical: verticalScale(10),
     width: wp(100),
-    paddingHorizontal: wp(10),
+    paddingHorizontal: wp(8),
   },
-
-  slideImage: {
-    height: hp(52),
-    resizeMode: "cover",
-    width: wp(90),
-    borderRadius: verticalScale(10),
-  },
-
   slideTextCont: {
-    gap: verticalScale(10),
+    gap: verticalScale(15),
+    paddingHorizontal: horizontalScale(12),
   },
 
   subtitle: {
     color: COLORS.white,
     fontSize: responsiveFontSize(14),
     textAlign: "center",
-    lineHeight: responsiveFontSize(19.6),
-    maxWidth: wp(60),
+    lineHeight: responsiveFontSize(24),
+    width: "80%",
+    alignSelf: "center",
   },
 
   title: {
     color: COLORS.white,
-    fontSize: 22,
+    fontSize: responsiveFontSize(22),
     fontWeight: "bold",
     marginTop: 20,
     textAlign: "center",
+    width: "70%",
+    alignSelf: "center",
   },
-
-  buttonCont: {
-    paddingVertical: verticalScale(10),
-    width: wp(100),
-    alignItems: "center",
-    gap: verticalScale(10),
-  },
-
-  skipText: {
-    textDecorationLine: "underline",
-    color: COLORS.white,
-    fontWeight: "800",
-  },
-
   image: {
     height: "100%",
     width: "100%",
@@ -75,11 +62,27 @@ const styles = StyleSheet.create({
   },
 
   indicator: {
-    height: verticalScale(9),
-    width: verticalScale(9),
-    backgroundColor: COLORS.primaryPink,
+    height: verticalScale(7),
+    width: verticalScale(7),
+    backgroundColor: COLORS.darkVoilet,
     marginHorizontal: horizontalScale(5),
     borderRadius: 100,
+  },
+
+  indicatorActive: {
+    backgroundColor: COLORS.primaryPink,
+    width: horizontalScale(25),
+  },
+
+  text: {
+    textAlign: "center",
+    marginTop: 10,
+  },
+  buttonstyle: {
+    width: wp(90),
+    alignSelf: "center",
+    marginBottom: 10,
+    borderRadius: 25,
   },
 });
 
