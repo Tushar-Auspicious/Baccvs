@@ -11,14 +11,8 @@ type CustomButtonProps = {
   textColor?: string;
   style?: ViewStyle;
   disabled?: boolean;
-  textSize?:
-    | "heading"
-    | "subHeading"
-    | "title"
-    | "subTitle"
-    | "default"
-    | "small"
-    | "extraSmall";
+  textSize?: number;
+  isFullWidth?: boolean;
 };
 
 const CustomButton: FC<CustomButtonProps> = ({
@@ -27,21 +21,22 @@ const CustomButton: FC<CustomButtonProps> = ({
   backgroundColor = COLORS.darkVoilet,
   textColor = COLORS.white,
   style,
-  textSize = "subTitle",
+  textSize = 16,
   disabled = false,
+  isFullWidth = true,
 }) => {
   return (
     <TouchableOpacity
       disabled={disabled}
       activeOpacity={0.7}
       style={[
-        styles.button,
+        isFullWidth && styles.button,
         { backgroundColor: backgroundColor, opacity: disabled ? 0.5 : 1 },
         style,
       ]}
       onPress={onPress}
     >
-      <CustomText type={textSize} color={textColor} fontFamily="bold">
+      <CustomText fontSize={textSize} color={textColor} fontFamily="bold">
         {title}
       </CustomText>
     </TouchableOpacity>
@@ -54,7 +49,7 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: verticalScale(16),
     paddingHorizontal: horizontalScale(20),
-    borderRadius: verticalScale(12),
+    borderRadius: verticalScale(20),
     alignItems: "center",
     justifyContent: "center",
     marginVertical: verticalScale(5),
