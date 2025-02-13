@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: verticalScale(50),
+    marginVertical: verticalScale(55),
   },
   noMoreCards: {
     justifyContent: "center",

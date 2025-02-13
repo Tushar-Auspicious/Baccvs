@@ -74,7 +74,7 @@ const BottomTabBar: FC<BottomTabBarProps> = ({
             },
           ]}
           blurType="dark"
-          blurAmount={2}
+          blurAmount={5}
           reducedTransparencyFallbackColor="white"
         />
         {state.routes.map((route, index) => {

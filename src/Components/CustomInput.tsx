@@ -1,10 +1,13 @@
 import React, { FC, forwardRef, useState } from "react";
 import {
+  StyleProp,
   StyleSheet,
   TextInput,
   TextInputProps,
+  TextStyle,
   TouchableOpacity,
   View,
+  ViewStyle,
 } from "react-native";
 import COLORS from "../Utilities/Colors";
 import {
@@ -13,24 +16,31 @@ import {
   verticalScale,
 } from "../Utilities/Metrics";
 import { CustomText } from "./CustomText";
+import CustomIcon from "./CustomIcon";
+import ICONS from "../Assets/Icons";
 
 type CustomInputProps = TextInputProps & {
   placeholder?: string;
   type?: "text" | "password" | "search";
+  isBackArrow?: boolean;
   onChangeText: (text: string) => void;
   value: string;
   style?: object;
   isFilterIcon?: boolean;
   onFilterPress?: () => void;
+  onBackPress?: () => void;
   label?: string;
   height?: number;
   backgroundColor?: string;
+  inputStyle?: StyleProp<TextStyle>;
+  baseStyle?: StyleProp<ViewStyle>;
 };
 
 const CustomInput = forwardRef<TextInput, CustomInputProps>(
   (
     {
       placeholder,
+      isBackArrow = false,
       onChangeText,
       value,
       style,
@@ -38,8 +48,11 @@ const CustomInput = forwardRef<TextInput, CustomInputProps>(
       label,
       isFilterIcon = false,
       onFilterPress,
+      onBackPress,
       height = 56,
       backgroundColor = COLORS.inputColor,
+      inputStyle,
+      baseStyle,
       ...rest
     },
     ref
@@ -64,22 +77,29 @@ const CustomInput = forwardRef<TextInput, CustomInputProps>(
         <View
           style={[
             styles.container, // Base container style
+            baseStyle,
             {
               backgroundColor,
             },
-            type === "search" && { gap: horizontalScale(10) }, // Add gap for search type
+            (type === "search" || isBackArrow) && { gap: horizontalScale(10) }, // Add gap for search type
           ]}
         >
           {/* Render a search icon for search type */}
-          {/* {type === "search" && (
-          <CustomIcon Icon={ICONS.SearchWhite} height={20} width={20} />
-        )} */}
+          {isBackArrow && (
+            <CustomIcon
+              onPress={onBackPress}
+              Icon={ICONS.backArrow}
+              height={20}
+              width={20}
+            />
+          )}
 
           {/* Main input field */}
           <TextInput
             ref={ref}
             style={[
               styles.input,
+              inputStyle,
               {
                 height: height,
               },

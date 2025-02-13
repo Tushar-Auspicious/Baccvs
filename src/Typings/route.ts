@@ -100,3 +100,22 @@ export type StepsIndicatorProps = NativeStackScreenProps<
 >;
 
 
+export type HomeScreenProps = NativeStackScreenProps<
+  MainStackParams & BottomTabParams,
+  "homeTab"
+>;
+
+export type NotificationScreenProps = NativeStackScreenProps<
+  MainStackParams & BottomTabParams,
+  "notification"
+>;
+
+export type SearchHomeScreenProps = NativeStackScreenProps<
+  MainStackParams & BottomTabParams,
+  "searchHome"
+>;
+
+export type MapsScreenProps = NativeStackScreenProps<
+  MainStackParams & BottomTabParams,
+  "maps"
+>;
