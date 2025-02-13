@@ -11,6 +11,9 @@ import CustomButton from "../../Components/Buttons/CustomButton";
 import Step1 from "./stepScreens/step1";
 import Step2 from "./stepScreens/step2";
 import Step3 from "./stepScreens/step3";
+import Step4 from "./stepScreens/step4";
+import Step5 from "./stepScreens/step5";
+import Step6 from "./stepScreens/step6";
 
 const Register: FC<StepsIndicatorProps> = ({ navigation }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,6 +41,12 @@ const Register: FC<StepsIndicatorProps> = ({ navigation }: any) => {
         return <Step2 />;
       case 2:
         return <Step3 />;
+      case 3:
+        return <Step4 />;
+      case 4:
+        return <Step5 />;
+      case 5:
+        return <Step6 />;
       default:
         return null;
     }

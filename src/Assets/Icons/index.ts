@@ -28,6 +28,7 @@ import Google from "./googleicon.svg";
 import facebook from "./facebookicon.svg";
 import Apple from "./appleicon.svg";
 import Twitter from "./twittericon.svg";
+import RightTick from "./righttick.svg";
 
 const ICONS = {
   HomeIcon,
@@ -60,6 +61,7 @@ const ICONS = {
   facebook,
   Apple,
   Twitter,
+  RightTick,
 };
 
 export default ICONS;

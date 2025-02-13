@@ -74,7 +74,7 @@ export default Step2;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: verticalScale(20),
+    paddingVertical: verticalScale(40),
     paddingHorizontal: horizontalScale(20),
   },
   inputContainer: {

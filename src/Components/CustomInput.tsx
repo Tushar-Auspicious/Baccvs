@@ -26,6 +26,14 @@ type CustomInputProps = {
   onFilterPress?: () => void;
   label?: string;
   heigth?: number;
+  keyboardType?:
+    | "default"
+    | "email-address"
+    | "numeric"
+    | "phone-pad"
+    | "decimal-pad"
+    | "twitter"
+    | "web-search";
 };
 
 const CustomInput: FC<CustomInputProps> = ({
@@ -38,6 +46,7 @@ const CustomInput: FC<CustomInputProps> = ({
   isFilterIcon = false,
   onFilterPress,
   heigth = 56,
+  keyboardType,
 }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false); // State to toggle password visibility
 
@@ -79,6 +88,7 @@ const CustomInput: FC<CustomInputProps> = ({
           placeholderTextColor={COLORS.white} // Placeholder text color
           secureTextEntry={type === "password" && !isPasswordVisible} // Hide input text for password type if visibility is off
           onChangeText={onChangeText} // Handle text change
+          keyboardType={keyboardType}
           value={value} // Display current value
         />
 
