@@ -1,28 +1,30 @@
-import React from "react";
-import {
-  FlatList,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React, { FC, useMemo } from "react";
+import { FlatList, ScrollView, StyleSheet, View } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import ICONS from "../../Assets/Icons";
-import CustomIcon from "../../Components/CustomIcon";
-import { CustomText } from "../../Components/CustomText";
-import COLORS from "../../Utilities/Colors";
-import { horizontalScale, verticalScale, wp } from "../../Utilities/Metrics";
 import CustomButton from "../../Components/Buttons/CustomButton";
 import EventListCard from "../../Components/Cards/EventListCard";
+import PostCard, { PostCardProps } from "../../Components/Cards/PostCard";
 import CardSwiper from "../../Components/CardSwiper";
 import { data } from "../../Components/CardSwiper/data";
+import CustomIcon from "../../Components/CustomIcon";
+import { CustomText } from "../../Components/CustomText";
+import dummyPosts from "../../Seeds/POstData";
+import COLORS from "../../Utilities/Colors";
+import { horizontalScale, verticalScale, wp } from "../../Utilities/Metrics";
+import { useAppDispatch, useAppSelector } from "../../Redux/store";
+import { setIsMainMenuVisible } from "../../Redux/slices/modalSlice";
+import MainMenuModal from "../../Components/Modals/MainMenuModal";
+import { HomeScreenProps } from "../../Typings/route";
 
-const Home = () => {
+const Home: FC<HomeScreenProps> = ({ navigation }) => {
   const isNewUSer = true;
   const insets = useSafeAreaInsets();
+  const dispatch = useAppDispatch();
+  const { isMainMenuVisible } = useAppSelector((state) => state.modals);
 
   const renderFirstPostCard = () => {
     return (
@@ -100,8 +102,8 @@ const Home = () => {
     );
   };
 
-  return (
-    <SafeAreaView edges={["top", "left", "right"]} style={styles.container}>
+  const renderHeader = () => {
+    return (
       <View
         style={{
           flexDirection: "row",
@@ -123,90 +125,187 @@ const Home = () => {
         </View>
 
         <View style={{ flexDirection: "row", gap: horizontalScale(20) }}>
-          <CustomIcon Icon={ICONS.SearchIcon} />
-          <CustomIcon Icon={ICONS.NotificationIcon} />
-          <CustomIcon Icon={ICONS.MapPinIcon} />
-          <CustomIcon Icon={ICONS.MenuIcon} />
-        </View>
-      </View>
-      <ScrollView
-        contentContainerStyle={[
-          styles.scrollContainer,
-          {
-            paddingBottom: verticalScale(80) + insets.bottom,
-          },
-        ]}
-        showsVerticalScrollIndicator={false}
-        nestedScrollEnabled={true}
-      >
-        {isNewUSer && renderFirstPostCard()}
-
-        <View style={{ gap: verticalScale(5) }}>
-          <View
-            style={{
-              width: wp(90),
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <CustomText fontFamily="medium">Suggested Events</CustomText>
-            <CustomText
-              fontFamily="bold"
-              fontSize={14}
-              color={COLORS.lightPink}
-            >
-              See all
-            </CustomText>
-          </View>
-          <FlatList
-            data={Array.from({ length: 10 })}
-            horizontal
-            contentContainerStyle={{
-              gap: horizontalScale(20),
-              paddingHorizontal: horizontalScale(20),
-            }}
-            renderItem={({ item, index }) => {
-              return (
-                <EventListCard
-                  imageUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bXVzaWN8ZW58MHx8MHx8fDA%3D"
-                  title="Speed Dating & Trivia Ni..."
-                  distance="2km away"
-                  date="10 Feb 2025"
-                  time="7: 00 PM"
-                  address="Quizzy Café, 22 Knowledge Lane, Town..."
-                  onPress={() => {}}
-                />
-              );
-            }}
+          <CustomIcon
+            Icon={ICONS.SearchIcon}
+            onPress={() => navigation.navigate("searchHome")}
+          />
+          <CustomIcon
+            Icon={ICONS.NotificationIcon}
+            onPress={() => navigation.navigate("notification")}
+          />
+          <CustomIcon
+            Icon={ICONS.MapPinIcon}
+            onPress={() => navigation.navigate("maps")}
+          />
+          <CustomIcon
+            Icon={ICONS.MenuIcon}
+            onPress={() => dispatch(setIsMainMenuVisible(true))}
           />
         </View>
+      </View>
+    );
+  };
 
-        {renderRefrBanner()}
-        <View>
-          <View
-            style={{
-              width: wp(90),
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
-              justifyContent: "space-between",
-            }}
+  const renderSuggestedEvents = () => {
+    return (
+      <View style={{ gap: verticalScale(5) }}>
+        <View
+          style={{
+            width: wp(90),
+            flexDirection: "row",
+            alignItems: "center",
+            alignSelf: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <CustomText fontFamily="medium">Suggested Events</CustomText>
+          <CustomText
+            fontFamily="bold"
+            fontSize={14}
+            color={COLORS.mediuumPink}
           >
-            <CustomText fontFamily="medium">People you might like</CustomText>
-            <CustomText
-              fontFamily="bold"
-              fontSize={14}
-              color={COLORS.lightPink}
-            >
-              See all
-            </CustomText>
-          </View>
-          <CardSwiper data={data} />
+            See all
+          </CustomText>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+        <FlatList
+          data={Array.from({ length: 10 })}
+          horizontal
+          contentContainerStyle={{
+            gap: horizontalScale(20),
+            paddingHorizontal: horizontalScale(20),
+          }}
+          renderItem={({ item, index }) => {
+            return (
+              <EventListCard
+                imageUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bXVzaWN8ZW58MHx8MHx8fDA%3D"
+                title="Speed Dating & Trivia Ni..."
+                distance="2km away"
+                date="10 Feb 2025"
+                time="7: 00 PM"
+                address="Quizzy Café, 22 Knowledge Lane, Town..."
+                onPress={() => {}}
+              />
+            );
+          }}
+        />
+      </View>
+    );
+  };
+
+  const renderPeopleYouMightKnow = () => {
+    return (
+      <View>
+        <View
+          style={{
+            width: wp(90),
+            flexDirection: "row",
+            alignItems: "center",
+            alignSelf: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <CustomText fontFamily="medium">People you might like</CustomText>
+          <CustomText
+            fontFamily="bold"
+            fontSize={14}
+            color={COLORS.mediuumPink}
+          >
+            See all
+          </CustomText>
+        </View>
+        <CardSwiper data={data} />
+      </View>
+    );
+  };
+
+  const renderPosts = () => {
+    return useMemo(() => {
+      const specialComponents = [
+        renderRefrBanner(),
+        renderSuggestedEvents(),
+        renderPeopleYouMightKnow(),
+      ];
+
+      // Generate unique random indices between 5 and 20
+      const specialIndices = new Set<number>();
+      while (specialIndices.size < specialComponents.length) {
+        const randomIndex = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
+        specialIndices.add(randomIndex);
+      }
+
+      const mergedData: (
+        | PostCardProps
+        | { type: string; component: JSX.Element }
+      )[] = [...dummyPosts];
+
+      // Insert special components at the generated indices
+      Array.from(specialIndices).forEach((index, i) => {
+        if (index < mergedData.length) {
+          mergedData.splice(index, 0, {
+            type: `special-${i}`,
+            component: specialComponents[i],
+          });
+        }
+      });
+
+      const renderItem = ({
+        item,
+        index,
+      }: {
+        item: PostCardProps | { type: string; component: JSX.Element };
+        index: number;
+      }) => {
+        if ("component" in item) {
+          return <View key={item.type}>{item.component}</View>;
+        }
+        return <PostCard {...item} key={(item as PostCardProps).id} />;
+      };
+
+      return (
+        <View>
+          <FlatList
+            data={mergedData}
+            renderItem={renderItem}
+            keyExtractor={(item, index) =>
+              "id" in item ? item.id : `special-${index}`
+            }
+            ListEmptyComponent={() => (
+              <View style={{ justifyContent: "center", alignItems: "center" }}>
+                <CustomText>No more Posts.</CustomText>
+              </View>
+            )}
+          />
+        </View>
+      );
+    }, [dummyPosts]);
+  };
+
+  return (
+    <View style={styles.container}>
+      <SafeAreaView
+        edges={["top", "left", "right"]}
+        style={styles.safeAreaCont}
+      >
+        {renderHeader()}
+        <ScrollView
+          contentContainerStyle={[
+            styles.scrollContainer,
+            {
+              paddingBottom: verticalScale(80) + insets.bottom,
+            },
+          ]}
+          showsVerticalScrollIndicator={false}
+          nestedScrollEnabled={true}
+        >
+          {isNewUSer && renderFirstPostCard()}
+          {renderPosts()}
+          {/* {renderSuggestedEvents()}
+          {renderRefrBanner()}
+          {renderPeopleYouMightKnow()} */}
+        </ScrollView>
+        <MainMenuModal />
+      </SafeAreaView>
+    </View>
   );
 };
 
@@ -216,7 +315,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.appBackground,
-    paddingVertical: verticalScale(10),
+  },
+  safeAreaCont: {
+    flex: 1,
+    paddingVertical: verticalScale(16),
     gap: verticalScale(20),
   },
   scrollContainer: {

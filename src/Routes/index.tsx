@@ -2,22 +2,24 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import BottomTabBar from "../Components/BottomTabBar";
+import Dating from "../Screens/Dating";
+import Events from "../Screens/Events";
+import Home from "../Screens/Home";
+import Messages from "../Screens/Messages";
+import OnBoarding from "../Screens/OnBoarding";
+import Profile from "../Screens/Profile";
+import Referral from "../Screens/Referral";
+import Register from "../Screens/Register";
+import Welcome from "../Screens/Welcome";
 import {
   AuthStackParams,
   BottomTabParams,
   MainStackParams,
   RootStackParams,
 } from "../Typings/route";
-import OnBoarding from "../Screens/OnBoarding";
-import Home from "../Screens/Home";
-import Dating from "../Screens/Dating";
-import Events from "../Screens/Events";
-import Profile from "../Screens/Profile";
-import Messages from "../Screens/Messages";
-import Referral from "../Screens/Referral";
-import Welcome from "../Screens/Welcome";
-import StepsIndicator from "../Screens/Register";
-import Register from "../Screens/Register";
+import Notifications from "../Screens/Notifications";
+import SearchHome from "../Screens/SearchHome";
+import Maps from "../Screens/Maps";
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
 const Auth = createNativeStackNavigator<AuthStackParams>();
@@ -96,6 +98,9 @@ const Routing = () => {
         }}
       >
         <Main.Screen name="tabs" component={TabStack} />
+        <Main.Screen name="notification" component={Notifications} />
+        <Main.Screen name="searchHome" component={SearchHome} />
+        <Main.Screen name="maps" component={Maps} />
       </Main.Navigator>
     );
   }
@@ -106,8 +111,8 @@ const Routing = () => {
         headerShown: false,
       }}
     >
-      <RootStack.Screen name="authStack" component={AuthStack} />
       <RootStack.Screen name="mainStack" component={MainStack} />
+      <RootStack.Screen name="authStack" component={AuthStack} />
     </RootStack.Navigator>
   );
 };

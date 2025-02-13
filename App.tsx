@@ -1,13 +1,13 @@
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Appearance, LogBox } from "react-native";
-import Toast from "react-native-toast-message";
-import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import React from "react";
-import Splash from "./src/Screens/Splash";
+import React, { useEffect, useState } from "react";
+import { Appearance, LogBox, StatusBar } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import Toast from "react-native-toast-message";
+import { Provider } from "react-redux";
+import { store } from "./src/Redux/store";
 import Routing from "./src/Routes";
-import OnBoarding from "./src/Screens/OnBoarding";
-import OnBoardingSlides from "./src/Seeds/OnBoardingSeeds";
+import Splash from "./src/Screens/Splash";
+import COLORS from "./src/Utilities/Colors";
 
 LogBox.ignoreAllLogs();
 
@@ -25,11 +25,17 @@ const App = () => {
 
   return (
     <>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          {isReady ? <Routing /> : <Splash />}
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <Provider store={store}>
+        <SafeAreaProvider>
+          <StatusBar
+            backgroundColor={COLORS.appBackground}
+            barStyle={"light-content"}
+          />
+          <NavigationContainer>
+            {isReady ? <Routing /> : <Splash />}
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </Provider>
       <Toast />
     </>
   );
