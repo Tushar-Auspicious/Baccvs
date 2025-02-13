@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { StyleSheet, TouchableOpacity, ViewStyle } from "react-native";
 import COLORS from "../../Utilities/Colors";
-import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
+import { horizontalScale, verticalScale, wp } from "../../Utilities/Metrics";
 import { CustomText } from "../CustomText";
 
 type CustomButtonProps = {
@@ -18,7 +18,7 @@ type CustomButtonProps = {
 const CustomButton: FC<CustomButtonProps> = ({
   title,
   onPress,
-  backgroundColor = COLORS.darkVoilet,
+  backgroundColor = COLORS.primaryPink,
   textColor = COLORS.white,
   style,
   textSize = 16,
@@ -31,7 +31,10 @@ const CustomButton: FC<CustomButtonProps> = ({
       activeOpacity={0.7}
       style={[
         isFullWidth && styles.button,
-        { backgroundColor: backgroundColor, opacity: disabled ? 0.5 : 1 },
+        {
+          backgroundColor: disabled ? COLORS.inputColor : backgroundColor,
+          opacity: disabled ? 0.8 : 1,
+        },
         style,
       ]}
       onPress={onPress}
@@ -53,5 +56,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginVertical: verticalScale(5),
+    width: wp(90),
+    alignSelf: "center",
   },
 });

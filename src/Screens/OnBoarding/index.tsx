@@ -1,31 +1,28 @@
-import React, { FC } from "react";
+import React, { FC, useMemo, useState } from "react";
 import {
-  Alert,
   FlatList,
   ImageBackground,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  Text,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../../Components/Buttons/CustomButton";
+import { CustomText } from "../../Components/CustomText";
+import OnBoardingSlides, { SlideType } from "../../Seeds/OnBoardingSeeds";
 import { OnBoardingProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
 import {
   deviceWidth,
-  horizontalScale,
   responsiveFontSize,
   verticalScale,
-  wp,
 } from "../../Utilities/Metrics";
 import styles from "./styles";
-import OnBoardingSlides, { SlideType } from "../../Seeds/OnBoardingSeeds";
-import { CustomText } from "../../Components/CustomText";
 
 const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
   const flatListRef = React.useRef<FlatList>(null);
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
+
+  const [layout, setLayout] = useState<null | { height: number }>();
 
   const updateCurrentSlideIndex = (
     e: NativeSyntheticEvent<NativeScrollEvent>
@@ -38,8 +35,7 @@ const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
   const goToNextSlide = async () => {
     const nextSlideIndex = currentSlideIndex + 1;
     if (nextSlideIndex === OnBoardingSlides.length) {
-      // Alert.alert("ssss");
-      navigation.navigate("referral");
+      navigation.navigate("register");
     } else {
       const offset = nextSlideIndex * deviceWidth;
 
@@ -49,6 +45,7 @@ const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
       }
     }
   };
+
   const renderSlides = ({
     item,
     index,
@@ -63,64 +60,95 @@ const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
           style={styles.slideImage}
           resizeMode="cover"
         >
-          {renderIndicators()}
-          <View style={styles.slideTextCont}>
-            <Text style={styles.title}>{item?.title}</Text>
-            <Text style={styles.subtitle}>{item?.subtitle}</Text>
+          <View
+            onLayout={(e) => {
+              setLayout({
+                height: e.nativeEvent.layout.y,
+              });
+            }}
+            style={styles.slideTextCont}
+          >
+            <CustomText
+              fontFamily="bold"
+              fontSize={24}
+              style={{
+                textAlign: "center",
+              }}
+            >
+              {item?.title}
+            </CustomText>
+            <CustomText
+              fontFamily="regular"
+              color={COLORS.greyMedium}
+              style={{
+                textAlign: "center",
+              }}
+              fontSize={14}
+            >
+              {item?.subtitle}
+            </CustomText>
           </View>
         </ImageBackground>
       </View>
     );
   };
 
-  const renderIndicators = () => {
+  const renderIndicators = useMemo(() => {
     return (
-      <View style={styles.indicatorCont}>
-        {OnBoardingSlides.map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.indicator,
-              currentSlideIndex === index && styles.indicatorActive,
-            ]}
-          />
-        ))}
-      </View>
+      layout?.height && (
+        <View
+          style={[
+            styles.indicatorCont,
+            {
+              position: "absolute",
+              alignSelf: "center",
+              top: layout?.height - verticalScale(20),
+            },
+          ]}
+        >
+          {OnBoardingSlides.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.indicator,
+                currentSlideIndex === index && styles.indicatorActive,
+              ]}
+            />
+          ))}
+        </View>
+      )
     );
-  };
+  }, [layout, currentSlideIndex]);
 
   return (
     <View style={styles.container}>
-      <FlatList
-        ref={flatListRef}
-        data={OnBoardingSlides}
-        onMomentumScrollEnd={updateCurrentSlideIndex}
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        pagingEnabled
-        renderItem={renderSlides}
-      />
-      <View style={{ marginBottom: 50 }}>
-        <CustomButton
-          title="Get Started"
-          onPress={goToNextSlide}
-          style={styles.buttonstyle}
+      <View>
+        <FlatList
+          ref={flatListRef}
+          data={OnBoardingSlides}
+          onMomentumScrollEnd={updateCurrentSlideIndex}
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          pagingEnabled
+          renderItem={renderSlides}
         />
+      </View>
+      {renderIndicators}
+      <View style={{ gap: verticalScale(10) }}>
+        <CustomButton title="Get Started" onPress={goToNextSlide} isFullWidth />
         <CustomText
           fontSize={responsiveFontSize(14)}
           fontFamily="bold"
           style={styles.text}
         >
           Already have an account?{` `}
-          <Text
-            style={{
-              fontSize: responsiveFontSize(14),
-              fontWeight: "700",
-              color: COLORS.primaryPink,
-            }}
+          <CustomText
+            fontFamily="bold"
+            fontSize={14}
+            color={COLORS.primaryPink}
           >
             Sign in
-          </Text>
+          </CustomText>
         </CustomText>
       </View>
     </View>

@@ -1,25 +1,22 @@
-import { View, Text, SafeAreaView, Image } from "react-native";
 import React, { FC } from "react";
-import { WelcomeProps } from "../../Typings/route";
-import styles from "./style";
-import CustomIcon from "../../Components/CustomIcon";
+import { Image, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import ICONS from "../../Assets/Icons";
 import IMAGES from "../../Assets/Images";
-import { CustomText } from "../../Components/CustomText";
-import { horizontalScale, responsiveFontSize } from "../../Utilities/Metrics";
 import CustomButton from "../../Components/Buttons/CustomButton";
+import CustomIcon from "../../Components/CustomIcon";
+import { CustomText } from "../../Components/CustomText";
+import { WelcomeProps } from "../../Typings/route";
+import COLORS from "../../Utilities/Colors";
+import styles from "./style";
 
 const Welcome: FC<WelcomeProps> = ({ navigation }) => {
   const handleContinue = () => navigation.navigate("register");
 
   const renderItem = (icon: any, text: string) => (
     <View style={styles.itemscontainer}>
-      <CustomIcon Icon={icon} height={24} width={24} />
-      <CustomText
-        fontSize={responsiveFontSize(12)}
-        fontFamily="regular"
-        style={styles.Whatawaits}
-      >
+      <CustomIcon Icon={icon} height={20} width={20} />
+      <CustomText color={COLORS.greyLight} fontSize={12} fontFamily="regular">
         {text}
       </CustomText>
       <View style={styles.bottomline} />
@@ -28,34 +25,26 @@ const Welcome: FC<WelcomeProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={{ paddingHorizontal: horizontalScale(20) }}>
-          <CustomIcon
-            Icon={ICONS.backArrow}
-            height={24}
-            width={24}
-            onPress={() => navigation.goBack()}
-          />
-          <Image source={IMAGES.applogo} style={styles.logoimg} />
-          <CustomText
-            fontSize={responsiveFontSize(24)}
-            fontFamily="bold"
-            style={styles.welcometxt}
-          >
-            Welcome to Baccvs
-          </CustomText>
-          <CustomText
-            fontSize={responsiveFontSize(12)}
-            fontFamily="regular"
-            style={styles.welcometxt}
-          >
-            Let’s create your account to get started.
-          </CustomText>
+      <SafeAreaView style={styles.safeAreaCont}>
+        <CustomIcon
+          Icon={ICONS.backArrow}
+          height={24}
+          width={24}
+          onPress={() => navigation.goBack()}
+        />
+        <View style={styles.mainCont}>
+          <View style={styles.topCont}>
+            <Image source={IMAGES.applogo} style={styles.logoimg} />
+            <CustomText fontSize={24} fontFamily="bold">
+              Welcome to Baccvs
+            </CustomText>
+            <CustomText fontSize={12} fontFamily="regular">
+              Let’s create your account to get started.
+            </CustomText>
+          </View>
 
           <View style={styles.eventplansvw}>
-            <CustomText fontSize={responsiveFontSize(16)} fontFamily="medium">
-              What awaits
-            </CustomText>
+            <CustomText fontFamily="medium">What awaits</CustomText>
             {renderItem(
               ICONS.UniqueEvents,
               "Explore unique events tailored to your interests."
@@ -72,11 +61,7 @@ const Welcome: FC<WelcomeProps> = ({ navigation }) => {
             )}
           </View>
         </View>
-        <CustomButton
-          title="Let’s Go"
-          onPress={handleContinue}
-          style={styles.buttonstyle}
-        />
+        <CustomButton title="Let’s Go" onPress={handleContinue} />
       </SafeAreaView>
     </View>
   );

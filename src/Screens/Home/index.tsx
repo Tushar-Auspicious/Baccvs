@@ -70,7 +70,7 @@ const Home = () => {
     return (
       <View
         style={{
-          backgroundColor: COLORS.darkVoilet,
+          backgroundColor: COLORS.voilet,
           paddingHorizontal: horizontalScale(16),
           paddingVertical: verticalScale(16),
           flexDirection: "row",
