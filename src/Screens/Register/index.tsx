@@ -19,6 +19,10 @@ import styles from "./style";
 import Step4 from "./stepScreens/step4";
 import Step5 from "./stepScreens/step5";
 import Step6 from "./stepScreens/step6";
+import Step7 from "./stepScreens/step7";
+import Step8 from "./stepScreens/step8";
+import Step9 from "./stepScreens/step9";
+import Step10 from "./stepScreens/step10";
 
 const SOCIAL_BUTTONS = [
   { id: "google", icon: ICONS.Google, text: "Continue with Google" },
@@ -124,6 +128,14 @@ const Register: FC<StepsIndicatorProps> = ({ navigation }: any) => {
         return <Step5 />;
       case 5:
         return <Step6 />;
+      case 6:
+        return <Step7 />;
+      case 7:
+        return <Step8 />;
+      case 8:
+        return <Step9 />;
+      case 9:
+        return <Step10 />;
       default:
         return null;
     }

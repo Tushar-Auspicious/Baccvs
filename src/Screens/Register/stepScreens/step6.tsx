@@ -5,6 +5,7 @@ import CustomIcon from "../../../Components/CustomIcon";
 import { CustomText } from "../../../Components/CustomText";
 import COLORS from "../../../Utilities/Colors";
 import { horizontalScale, verticalScale } from "../../../Utilities/Metrics";
+import SelectDate from "../DatePicker/selectDate";
 
 const Step6 = () => {
   const renderItem = (icon: any, text: string) => (
@@ -25,6 +26,9 @@ const Step6 = () => {
       <CustomText fontSize={12} fontFamily="regular" color={COLORS.greyMedium}>
         Your age will be public
       </CustomText>
+      <View style={{ paddingVertical: verticalScale(20) }}>
+        <SelectDate />
+      </View>
 
       <View style={styles.listCont}>
         <CustomText
@@ -61,7 +65,7 @@ const styles = StyleSheet.create({
 
   listCont: {
     backgroundColor: COLORS.darkVoilet,
-    padding: verticalScale(15),
+    padding: verticalScale(10),
     borderRadius: 16,
   },
 
@@ -69,6 +73,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: horizontalScale(10),
-    paddingVertical: verticalScale(15),
+    paddingVertical: verticalScale(10),
   },
 });

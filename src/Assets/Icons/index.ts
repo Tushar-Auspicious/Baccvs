@@ -29,6 +29,8 @@ import facebook from "./facebookicon.svg";
 import Apple from "./appleicon.svg";
 import Twitter from "./twittericon.svg";
 import RightTick from "./righttick.svg";
+import PlusIcon from "./plusicon.svg";
+import EnableLocation from "./enableLocation.svg";
 
 const ICONS = {
   HomeIcon,
@@ -62,6 +64,8 @@ const ICONS = {
   Apple,
   Twitter,
   RightTick,
+  PlusIcon,
+  EnableLocation,
 };
 
 export default ICONS;
