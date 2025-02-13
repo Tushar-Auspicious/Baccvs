@@ -1,23 +1,21 @@
-import React, { FC, useState } from "react";
+import React, { FC, forwardRef, useState } from "react";
 import {
-  Image,
   StyleSheet,
   TextInput,
+  TextInputProps,
   TouchableOpacity,
   View,
 } from "react-native";
-import ICONS from "../Assets/icons";
 import COLORS from "../Utilities/Colors";
 import {
   horizontalScale,
   responsiveFontSize,
   verticalScale,
 } from "../Utilities/Metrics";
-import CustomIcon from "./CustomIcon";
 import { CustomText } from "./CustomText";
 
-type CustomInputProps = {
-  placeholder: string;
+type CustomInputProps = TextInputProps & {
+  placeholder?: string;
   type?: "text" | "password" | "search";
   onChangeText: (text: string) => void;
   value: string;
@@ -25,85 +23,87 @@ type CustomInputProps = {
   isFilterIcon?: boolean;
   onFilterPress?: () => void;
   label?: string;
-  heigth?: number;
-  keyboardType?:
-    | "default"
-    | "email-address"
-    | "numeric"
-    | "phone-pad"
-    | "decimal-pad"
-    | "twitter"
-    | "web-search";
+  height?: number;
+  backgroundColor?: string;
 };
 
-const CustomInput: FC<CustomInputProps> = ({
-  placeholder,
-  onChangeText,
-  value,
-  style,
-  type = "text",
-  label,
-  isFilterIcon = false,
-  onFilterPress,
-  heigth = 56,
-  keyboardType,
-}) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false); // State to toggle password visibility
+const CustomInput = forwardRef<TextInput, CustomInputProps>(
+  (
+    {
+      placeholder,
+      onChangeText,
+      value,
+      style,
+      type = "text",
+      label,
+      isFilterIcon = false,
+      onFilterPress,
+      height = 56,
+      backgroundColor = COLORS.inputColor,
+      ...rest
+    },
+    ref
+  ) => {
+    const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false); // State to toggle password visibility
 
-  // Toggle password visibility
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
+    // Toggle password visibility
+    const togglePasswordVisibility = () => {
+      setIsPasswordVisible(!isPasswordVisible);
+    };
 
-  return (
-    <View
-      style={[
-        style,
-        {
-          gap: verticalScale(5),
-        },
-      ]}
-    >
-      {label && <CustomText fontFamily="medium">{label}</CustomText>}
+    return (
       <View
         style={[
-          styles.container, // Base container style
-          type === "search" && { gap: horizontalScale(10) }, // Add gap for search type
+          style,
+          {
+            gap: verticalScale(5),
+          },
         ]}
       >
-        {/* Render a search icon for search type */}
-        {/* {type === "search" && (
+        {label && <CustomText fontFamily="medium">{label}</CustomText>}
+        <View
+          style={[
+            styles.container, // Base container style
+            {
+              backgroundColor,
+            },
+            type === "search" && { gap: horizontalScale(10) }, // Add gap for search type
+          ]}
+        >
+          {/* Render a search icon for search type */}
+          {/* {type === "search" && (
           <CustomIcon Icon={ICONS.SearchWhite} height={20} width={20} />
         )} */}
 
-        {/* Main input field */}
-        <TextInput
-          style={[
-            styles.input,
-            {
-              height: heigth,
-            },
-          ]} // Input field style
-          placeholder={placeholder} // Placeholder text
-          placeholderTextColor={COLORS.white} // Placeholder text color
-          secureTextEntry={type === "password" && !isPasswordVisible} // Hide input text for password type if visibility is off
-          onChangeText={onChangeText} // Handle text change
-          keyboardType={keyboardType}
-          value={value} // Display current value
-        />
+          {/* Main input field */}
+          <TextInput
+            ref={ref}
+            style={[
+              styles.input,
+              {
+                height: height,
+              },
+            ]} // Input field style
+            placeholder={placeholder} // Placeholder text
+            placeholderTextColor={COLORS.greyMedium} // Placeholder text color
+            secureTextEntry={type === "password" && !isPasswordVisible} // Hide input text for password type if visibility is off
+            onChangeText={onChangeText} // Handle text change
+            value={value} // Display current value
+            {...rest}
+          />
 
-        {/* Toggle password visibility for password type */}
-        {type === "password" && (
-          <TouchableOpacity
-            style={styles.iconContainer} // Style for the icon container
-            onPress={togglePasswordVisibility} // Toggle visibility on icon press
-          >
-            {/* <CustomIcon Icon={ICONS.eyeoffIcon} height={20} width={20} /> */}
-          </TouchableOpacity>
-        )}
+          {/* Toggle password visibility for password type */}
+          {type === "password" && (
+            <TouchableOpacity
+              style={styles.iconContainer} // Style for the icon container
+              onPress={togglePasswordVisibility} // Toggle visibility on icon press
+            >
+              {/* <CustomIcon Icon={ICONS.eyeoffIcon} height={20} width={20} /> */}
+            </TouchableOpacity>
+          )}
 
-        {/* Render filter icon for search type */}
-        {/* {type === "search" && isFilterIcon && (
+          {/* Render filter icon for search type */}
+          {/* {type === "search" && isFilterIcon && (
           <CustomIcon
             onPress={onFilterPress} // Trigger filter press callback
             Icon={ICONS.Filter}
@@ -111,10 +111,11 @@ const CustomInput: FC<CustomInputProps> = ({
             width={20}
           />
         )} */}
+        </View>
       </View>
-    </View>
-  );
-};
+    );
+  }
+);
 
 export default CustomInput;
 
@@ -124,7 +125,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 12,
     paddingHorizontal: horizontalScale(15),
-    backgroundColor: COLORS.appBackgroung,
   },
   input: {
     flex: 1,

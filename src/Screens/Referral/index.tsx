@@ -1,15 +1,15 @@
-import { View, Text, SafeAreaView, Alert } from "react-native";
 import React, { FC, useState } from "react";
-import { ReferralProps } from "../../Typings/route";
-import styles from "./style";
-import CustomIcon from "../../Components/CustomIcon";
+import { Alert, Text, View } from "react-native";
 import ICONS from "../../Assets/Icons";
-import COLORS from "../../Utilities/Colors";
-import { horizontalScale, responsiveFontSize } from "../../Utilities/Metrics";
-import { CustomText } from "../../Components/CustomText";
-import CustomInput from "../../Components/CustomInput";
 import CustomButton from "../../Components/Buttons/CustomButton";
-import { opacity } from "react-native-reanimated/lib/typescript/Colors";
+import CustomIcon from "../../Components/CustomIcon";
+import CustomInput from "../../Components/CustomInput";
+import { CustomText } from "../../Components/CustomText";
+import { ReferralProps } from "../../Typings/route";
+import COLORS from "../../Utilities/Colors";
+import { responsiveFontSize, verticalScale } from "../../Utilities/Metrics";
+import styles from "./style";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Referral: FC<ReferralProps> = ({ navigation }) => {
   const [referralCode, setReferralCode] = useState("");
@@ -24,7 +24,7 @@ const Referral: FC<ReferralProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={styles.safeAreaCont}>
         <View style={styles.innercontainer}>
           <CustomIcon
             Icon={ICONS.backArrow}
@@ -32,28 +32,19 @@ const Referral: FC<ReferralProps> = ({ navigation }) => {
             width={24}
             onPress={() => navigation.goBack()}
           />
-          <Text
-            style={{
-              fontSize: responsiveFontSize(16),
-              color: COLORS.primaryPink,
-            }}
+          <CustomText
+            fontFamily="bold"
+            fontSize={14}
+            color={COLORS.mediuumPink}
           >
             Sign in
-          </Text>
+          </CustomText>
         </View>
-        <View style={{ paddingHorizontal: 20 }}>
-          <CustomText
-            fontSize={responsiveFontSize(24)}
-            fontFamily="bold"
-            style={styles.Referralcode}
-          >
+        <View style={{ gap: verticalScale(10), flex: 1 }}>
+          <CustomText fontSize={24} fontFamily="bold">
             Referral code
           </CustomText>
-          <CustomText
-            fontSize={responsiveFontSize(12)}
-            fontFamily="regular"
-            style={{ marginTop: 10 }}
-          >
+          <CustomText fontSize={12} fontFamily="regular">
             You need an invitation to join Baccvs. Enter your unique referral
             code to continue
           </CustomText>
@@ -69,15 +60,7 @@ const Referral: FC<ReferralProps> = ({ navigation }) => {
           title="Continue"
           onPress={handleContinue}
           disabled={referralCode.length === 0}
-          style={[
-            styles.buttonstyle,
-            {
-              backgroundColor:
-                referralCode.length > 0
-                  ? COLORS.primaryPink
-                  : COLORS.darkVoilet,
-            },
-          ]}
+          isFullWidth
         />
       </SafeAreaView>
     </View>

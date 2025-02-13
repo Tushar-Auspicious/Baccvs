@@ -1,51 +1,61 @@
 import { StyleSheet } from "react-native";
 import COLORS from "../../Utilities/Colors";
-import { horizontalScale, verticalScale, wp } from "../../Utilities/Metrics";
+import {
+  horizontalScale,
+  hp,
+  verticalScale,
+  wp,
+} from "../../Utilities/Metrics";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.appBackground,
+    paddingVertical: verticalScale(15),
   },
-  logoimg: {
-    height: 56,
-    width: 43.32,
-    resizeMode: "contain",
-    marginTop: verticalScale(50),
+
+  safeAreaCont: {
+    flex: 1,
+    gap: verticalScale(20),
+    paddingHorizontal: horizontalScale(20),
+  },
+
+  mainCont: {
+    flex: 1,
+    justifyContent: "flex-start",
+    gap: verticalScale(60),
+  },
+
+  topCont: {
+    gap: verticalScale(10),
+    alignItems: "center",
     justifyContent: "center",
-    alignSelf: "center",
+    width: "100%",
   },
-  welcometxt: {
-    textAlign: "center",
-    marginTop: 10,
+
+  logoimg: {
+    height: hp(6.5),
+    width: wp(10),
+    resizeMode: "cover",
+    marginTop: verticalScale(50),
   },
+
   eventplansvw: {
     backgroundColor: COLORS.darkVoilet,
-    padding: 20,
-    marginTop: verticalScale(30),
+    padding: verticalScale(20),
     borderRadius: 16,
-    opacity: 0.5,
   },
-  Whatawaits: { color: COLORS.greyMedium },
+
   itemscontainer: {
-    marginTop: verticalScale(10),
     flexDirection: "row",
     alignItems: "center",
     gap: horizontalScale(10),
+    paddingVertical: verticalScale(15),
   },
+
   bottomline: {
-    borderBottomWidth: 0.7,
-    borderColor: COLORS.primaryPink,
-    marginTop: verticalScale(10),
-  },
-  buttonstyle: {
-    width: wp(90),
-    alignSelf: "center",
-    marginBottom: verticalScale(10),
-    borderRadius: 25,
-    position: "absolute",
-    bottom: 50,
-    backgroundColor: COLORS.primaryPink,
+    height: 0.5,
+    backgroundColor: COLORS.darkPink,
   },
 });
 

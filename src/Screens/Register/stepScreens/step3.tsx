@@ -1,24 +1,25 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import CountryPicker, {
+  Country,
+  CountryCode,
+} from "react-native-country-picker-modal";
+import CustomInput from "../../../Components/CustomInput";
 import { CustomText } from "../../../Components/CustomText";
+import COLORS from "../../../Utilities/Colors";
 import {
   horizontalScale,
   responsiveFontSize,
   verticalScale,
 } from "../../../Utilities/Metrics";
-import CountryPicker from "react-native-country-picker-modal";
-import COLORS from "../../../Utilities/Colors";
-import CustomInput from "../../../Components/CustomInput";
 
 const Step3 = () => {
   const [visible, setVisible] = useState(false);
-  const [countryCode, setCountryCode] = useState("US");
+  const [countryCode, setCountryCode] = useState<CountryCode>("US");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [country, setCountry] = useState(null);
 
-  const onSelect = (country) => {
+  const onSelect = (country: Country) => {
     setCountryCode(country.cca2);
-    setCountry(country);
     setVisible(false);
   };
 
@@ -26,7 +27,7 @@ const Step3 = () => {
     setVisible(false);
   };
 
-  const handlePhoneNumberChange = (text) => {
+  const handlePhoneNumberChange = (text: string) => {
     if (text.length <= 10) {
       setPhoneNumber(text);
     }
@@ -60,6 +61,7 @@ const Step3 = () => {
           onChangeText={handlePhoneNumberChange}
           keyboardType="numeric"
           style={styles.phoneinput}
+          backgroundColor="transparent"
         />
       </View>
     </View>
@@ -71,8 +73,7 @@ export default Step3;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: verticalScale(40),
-    paddingHorizontal: horizontalScale(20),
+    gap: verticalScale(20),
   },
   pickerContainer: {
     paddingHorizontal: horizontalScale(10),
@@ -81,18 +82,12 @@ const styles = StyleSheet.create({
   },
   textInput: {
     backgroundColor: COLORS.inputColor,
-    marginTop: verticalScale(20),
-    borderRadius: 10,
-    borderWidth: 0.5,
+    borderRadius: 12,
     borderColor: COLORS.primaryPink,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-start",
-    height: verticalScale(50),
   },
   phoneinput: {
-    borderRadius: 10,
-    width: "70%",
-    paddingLeft: horizontalScale(10),
+    width: "100%",
   },
 });

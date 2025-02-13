@@ -1,43 +1,37 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { CustomText } from "../../../Components/CustomText";
-import {
-  horizontalScale,
-  responsiveFontSize,
-  verticalScale,
-} from "../../../Utilities/Metrics";
-import COLORS from "../../../Utilities/Colors";
-import CustomIcon from "../../../Components/CustomIcon";
+import { StyleSheet, View } from "react-native";
 import ICONS from "../../../Assets/Icons";
+import CustomIcon from "../../../Components/CustomIcon";
+import { CustomText } from "../../../Components/CustomText";
+import COLORS from "../../../Utilities/Colors";
+import { horizontalScale, verticalScale } from "../../../Utilities/Metrics";
 
 const Step6 = () => {
   const renderItem = (icon: any, text: string) => (
     <View style={styles.itemscontainer}>
       <CustomIcon Icon={ICONS.RightTick} height={10.02} width={14.14} />
-      <CustomText
-        fontSize={responsiveFontSize(12)}
-        fontFamily="regular"
-        style={styles.Whatawaits}
-      >
+      <CustomText fontSize={12} fontFamily="regular">
         {text}
       </CustomText>
     </View>
   );
+
   return (
     <View style={styles.container}>
-      <CustomText fontSize={responsiveFontSize(24)} fontFamily="bold">
+      <CustomText fontSize={24} fontFamily="bold">
         What’s your date of birth?
       </CustomText>
 
-      <CustomText
-        fontSize={responsiveFontSize(12)}
-        fontFamily="regular"
-        style={{ color: COLORS.greyMedium, marginTop: verticalScale(10) }}
-      >
+      <CustomText fontSize={12} fontFamily="regular" color={COLORS.greyMedium}>
         Your age will be public
       </CustomText>
-      <View style={styles.publicage}>
-        <CustomText fontSize={responsiveFontSize(16)} fontFamily="medium">
+
+      <View style={styles.listCont}>
+        <CustomText
+          fontSize={16}
+          fontFamily="medium"
+          style={{ marginBottom: verticalScale(10) }}
+        >
           Why your age will be public?
         </CustomText>
         {renderItem(
@@ -62,22 +56,19 @@ export default Step6;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: verticalScale(40),
-    paddingHorizontal: horizontalScale(20),
+    gap: verticalScale(15),
   },
-  Whatawaits: { color: COLORS.greyMedium },
+
+  listCont: {
+    backgroundColor: COLORS.darkVoilet,
+    padding: verticalScale(15),
+    borderRadius: 16,
+  },
+
   itemscontainer: {
-    marginTop: verticalScale(10),
     flexDirection: "row",
     alignItems: "center",
     gap: horizontalScale(10),
-  },
-
-  publicage: {
-    backgroundColor: COLORS.inputColor,
-    padding: 20,
-    marginTop: verticalScale(30),
-    borderRadius: 16,
-    opacity: 0.5,
+    paddingVertical: verticalScale(15),
   },
 });
