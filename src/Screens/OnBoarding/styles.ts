@@ -24,31 +24,15 @@ const styles = StyleSheet.create({
   slideContainer: {
     alignItems: "center",
     width: wp(100),
-    paddingHorizontal: wp(8),
   },
+
   slideTextCont: {
     gap: verticalScale(15),
-    paddingHorizontal: horizontalScale(12),
+    width: wp(70),
+    alignSelf: "center",
+    paddingVertical: verticalScale(20),
   },
 
-  subtitle: {
-    color: COLORS.white,
-    fontSize: responsiveFontSize(14),
-    textAlign: "center",
-    lineHeight: responsiveFontSize(24),
-    width: "80%",
-    alignSelf: "center",
-  },
-
-  title: {
-    color: COLORS.white,
-    fontSize: responsiveFontSize(22),
-    fontWeight: "bold",
-    marginTop: 20,
-    textAlign: "center",
-    width: "70%",
-    alignSelf: "center",
-  },
   image: {
     height: "100%",
     width: "100%",
@@ -59,13 +43,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     paddingVertical: verticalScale(10),
+    gap: horizontalScale(5),
   },
 
   indicator: {
     height: verticalScale(7),
     width: verticalScale(7),
-    backgroundColor: COLORS.darkVoilet,
-    marginHorizontal: horizontalScale(5),
+    backgroundColor: COLORS.voilet,
     borderRadius: 100,
   },
 
@@ -76,13 +60,6 @@ const styles = StyleSheet.create({
 
   text: {
     textAlign: "center",
-    marginTop: 10,
-  },
-  buttonstyle: {
-    width: wp(90),
-    alignSelf: "center",
-    marginBottom: 10,
-    borderRadius: 25,
   },
 });
 
