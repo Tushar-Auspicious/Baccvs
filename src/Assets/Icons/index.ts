@@ -56,6 +56,8 @@ import VIPPremiumIcon from "./vip-crown.svg";
 import WhiteCrossIcon from "./whiteCrossIcon.svg";
 import YellowPlus from "./yellowPlus.svg";
 import ClockTransParentIcon from "./clock-transparent.svg";
+import PlusIcon from "./plusicon.svg";
+import EnableLocation from "./enableLocation.svg";
 
 const ICONS = {
   HomeIcon,
@@ -114,6 +116,8 @@ const ICONS = {
   BarTagICon,
   DJTagICon,
   ClockTransParentIcon,
+  PlusIcon,
+  EnableLocation,
 };
 
 export default ICONS;
