@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { useState } from "react";
 import DatePicker from "react-native-date-picker";
 import COLORS from "../../../Utilities/Colors";

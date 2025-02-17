@@ -10,6 +10,7 @@ import COLORS from "../../Utilities/Colors";
 import { responsiveFontSize, verticalScale } from "../../Utilities/Metrics";
 import styles from "./style";
 import { SafeAreaView } from "react-native-safe-area-context";
+import SignInHeader from "./SignInHeader/HeaderSignIn";
 
 const Referral: FC<ReferralProps> = ({ navigation }) => {
   const [referralCode, setReferralCode] = useState("");
@@ -25,21 +26,7 @@ const Referral: FC<ReferralProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaCont}>
-        <View style={styles.innercontainer}>
-          <CustomIcon
-            Icon={ICONS.backArrow}
-            height={24}
-            width={24}
-            onPress={() => navigation.goBack()}
-          />
-          <CustomText
-            fontFamily="bold"
-            fontSize={14}
-            color={COLORS.mediuumPink}
-          >
-            Sign in
-          </CustomText>
-        </View>
+        <SignInHeader onBackPress={() => navigation.goBack()} />
         <View style={{ gap: verticalScale(10), flex: 1 }}>
           <CustomText fontSize={24} fontFamily="bold">
             Referral code

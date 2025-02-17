@@ -11,6 +11,7 @@ export type AuthStackParams = {
   referral: undefined;
   welcome: undefined;
   register: undefined;
+  StartExploring: undefined;
   signIn: undefined;
 };
 
@@ -98,11 +99,22 @@ export type StepsIndicatorProps = NativeStackScreenProps<
   AuthStackParams,
   "register"
 >;
-
+export type StartExploringIndicatorProps = NativeStackScreenProps<
+  AuthStackParams,
+  "StartExploring"
+>;
+export type SignInIndicatorProps = NativeStackScreenProps<
+  AuthStackParams,
+  "signIn"
+>;
 
 export type HomeScreenProps = NativeStackScreenProps<
   MainStackParams & BottomTabParams,
   "homeTab"
+>;
+export type DatingScreenProps = NativeStackScreenProps<
+  MainStackParams & BottomTabParams,
+  "datingTab"
 >;
 
 export type NotificationScreenProps = NativeStackScreenProps<

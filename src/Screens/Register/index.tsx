@@ -39,6 +39,8 @@ const Register: FC<StepsIndicatorProps> = ({ navigation }: any) => {
   const handleContinue = () => {
     if (currentIndex < steps.length - 1) {
       setCurrentIndex(currentIndex + 1);
+    } else {
+      navigation.navigate("StartExploring");
     }
   };
 
@@ -180,7 +182,10 @@ const Register: FC<StepsIndicatorProps> = ({ navigation }: any) => {
         </View>
         {renderCurrentStep}
 
-        <CustomButton title="Continue" onPress={handleContinue} />
+        <CustomButton
+          title={currentIndex === 9 ? "Enable location" : "Continue"}
+          onPress={handleContinue}
+        />
         {currentIndex === 0 && renderSignInButtons()}
       </SafeAreaView>
     </View>

@@ -45,7 +45,7 @@ const Step3 = () => {
           onClose={onClose}
           theme={{
             onBackgroundTextColor: COLORS.white,
-            backgroundColor: COLORS.lightPink,
+            backgroundColor: COLORS.appBackground,
           }}
           withCallingCode={true}
           withCallingCodeButton
@@ -76,9 +76,9 @@ const styles = StyleSheet.create({
     gap: verticalScale(20),
   },
   pickerContainer: {
-    paddingHorizontal: horizontalScale(10),
     borderRightWidth: 2,
     borderColor: COLORS.greyMedium,
+    paddingHorizontal: 15,
   },
   textInput: {
     backgroundColor: COLORS.inputColor,

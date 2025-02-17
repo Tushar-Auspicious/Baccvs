@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
 
   listCont: {
     backgroundColor: COLORS.darkVoilet,
-    padding: verticalScale(10),
+    padding: verticalScale(20),
     borderRadius: 16,
   },
 

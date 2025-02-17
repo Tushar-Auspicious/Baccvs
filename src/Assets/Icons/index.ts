@@ -58,6 +58,11 @@ import YellowPlus from "./yellowPlus.svg";
 import ClockTransParentIcon from "./clock-transparent.svg";
 import PlusIcon from "./plusicon.svg";
 import EnableLocation from "./enableLocation.svg";
+import filtericon from "./filtericon.svg";
+import PurpleIcon from "./purpleheart.svg";
+import Fire from "./firelogo.svg";
+import HurtIcon from "./hurtIcon.svg";
+import StarIcon from "./StarIcon.svg";
 
 const ICONS = {
   HomeIcon,
@@ -118,6 +123,11 @@ const ICONS = {
   ClockTransParentIcon,
   PlusIcon,
   EnableLocation,
+  filtericon,
+  PurpleIcon,
+  Fire,
+  HurtIcon,
+  StarIcon,
 };
 
 export default ICONS;

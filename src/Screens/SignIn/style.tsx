@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import COLORS from "../../Utilities/Colors";
-import { horizontalScale, verticalScale, wp } from "../../Utilities/Metrics";
+import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,33 +13,14 @@ const styles = StyleSheet.create({
     gap: verticalScale(30),
     paddingHorizontal: horizontalScale(20),
   },
-
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: horizontalScale(15),
-    justifyContent: "space-between",
+  textstyle: {
+    marginTop: verticalScale(10),
   },
-
-  stepCont: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-
-  stepscount: {
-    width: wp(6),
-    height: 3,
-    borderRadius: 100,
-  },
-
   orContent: {
     flexDirection: "row",
     alignItems: "center",
-    gap: horizontalScale(15),
+    gap: horizontalScale(10),
   },
-
   linebar: {
     borderBottomWidth: 1,
     borderColor: COLORS.voilet,
@@ -59,4 +40,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
 export default styles;

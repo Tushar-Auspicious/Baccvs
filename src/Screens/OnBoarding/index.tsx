@@ -35,7 +35,7 @@ const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
   const goToNextSlide = async () => {
     const nextSlideIndex = currentSlideIndex + 1;
     if (nextSlideIndex === OnBoardingSlides.length) {
-      navigation.navigate("register");
+      navigation.navigate("referral");
     } else {
       const offset = nextSlideIndex * deviceWidth;
 

@@ -20,6 +20,8 @@ import {
 import Notifications from "../Screens/Notifications";
 import SearchHome from "../Screens/SearchHome";
 import Maps from "../Screens/Maps";
+import StartExploring from "../Screens/StartExploring";
+import SignIn from "../Screens/SignIn";
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
 const Auth = createNativeStackNavigator<AuthStackParams>();
@@ -38,7 +40,8 @@ const Routing = () => {
         <Auth.Screen name="referral" component={Referral} />
         <Auth.Screen name="welcome" component={Welcome} />
         <Auth.Screen name="register" component={Register} />
-        <Auth.Screen name="signIn" component={OnBoarding} />
+        <Auth.Screen name="StartExploring" component={StartExploring} />
+        <Auth.Screen name="signIn" component={SignIn} />
       </Auth.Navigator>
     );
   }
@@ -111,8 +114,8 @@ const Routing = () => {
         headerShown: false,
       }}
     >
-      <RootStack.Screen name="mainStack" component={MainStack} />
       <RootStack.Screen name="authStack" component={AuthStack} />
+      <RootStack.Screen name="mainStack" component={MainStack} />
     </RootStack.Navigator>
   );
 };
