@@ -3,12 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Define a type for the slice state
 interface ModalSlice {
-    isMainMenuVisible: boolean
+  isMainMenuVisible: boolean;
+  isGalleryModalVisible: boolean;
 }
 
 // Define the initial state using that type
 const initialState: ModalSlice = {
-    isMainMenuVisible: false
+  isMainMenuVisible: false,
+  isGalleryModalVisible: false,
 };
 
 export const modalSlice = createSlice({
@@ -18,9 +20,13 @@ export const modalSlice = createSlice({
     setIsMainMenuVisible: (state, action: PayloadAction<boolean>) => {
       state.isMainMenuVisible = action.payload;
     },
+    setIsGalleryModalVisible: (state, action: PayloadAction<boolean>) => {
+      state.isGalleryModalVisible = action.payload;
+    },
   },
 });
 
-export const { setIsMainMenuVisible } = modalSlice.actions;
+export const { setIsMainMenuVisible, setIsGalleryModalVisible } =
+  modalSlice.actions;
 
 export default modalSlice.reducer;

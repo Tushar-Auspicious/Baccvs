@@ -77,11 +77,11 @@ const CustomInput = forwardRef<TextInput, CustomInputProps>(
         <View
           style={[
             styles.container, // Base container style
-            baseStyle,
             {
               backgroundColor,
             },
             (type === "search" || isBackArrow) && { gap: horizontalScale(10) }, // Add gap for search type
+            baseStyle,
           ]}
         >
           {/* Render a search icon for search type */}

@@ -2,14 +2,28 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import BottomTabBar from "../Components/BottomTabBar";
+import AccountScreen from "../Screens/AccountScreen";
+import ChangeEmail from "../Screens/ChangeEmail";
+import ChangePhoneNumber from "../Screens/ChangePhoneNumber";
+import CreatePost from "../Screens/CreatePost";
 import Dating from "../Screens/Dating";
 import Events from "../Screens/Events";
 import Home from "../Screens/Home";
+import Maps from "../Screens/Maps";
 import Messages from "../Screens/Messages";
+import Notifications from "../Screens/Notifications";
 import OnBoarding from "../Screens/OnBoarding";
+import PhoneVerifyOtp from "../Screens/PhoneVerifyOtp";
 import Profile from "../Screens/Profile";
+import ProfileInformation from "../Screens/ProfileInformation";
 import Referral from "../Screens/Referral";
 import Register from "../Screens/Register";
+import SearchHome from "../Screens/SearchHome";
+import SettingsScreen from "../Screens/SettingsScreen";
+import SignIn from "../Screens/SignIn";
+import StartExploring from "../Screens/StartExploring";
+import VerifyOtp from "../Screens/VerifyOtp";
+import VerifyPassword from "../Screens/VerifyPassword";
 import Welcome from "../Screens/Welcome";
 import {
   AuthStackParams,
@@ -17,21 +31,6 @@ import {
   MainStackParams,
   RootStackParams,
 } from "../Typings/route";
-import Notifications from "../Screens/Notifications";
-import SearchHome from "../Screens/SearchHome";
-import Maps from "../Screens/Maps";
-import StartExploring from "../Screens/StartExploring";
-import SignIn from "../Screens/SignIn";
-import SettingsScreen from "../Screens/SettingsScreen";
-import AccountScreen from "../Screens/AccountScreen";
-import ProfileInformation from "../Screens/ProfileInformation";
-import ChangePassword from "../Screens/ChangePasword";
-import ForgotPassword from "../Screens/VerifyPassword";
-import VerifyPassword from "../Screens/VerifyPassword";
-import ChangeEmail from "../Screens/ChangeEmail";
-import VerifyOtp from "../Screens/VerifyOtp";
-import ChangePhoneNumber from "../Screens/ChangePhoneNumber";
-import PhoneVerifyOtp from "../Screens/PhoneVerifyOtp";
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
 const Auth = createNativeStackNavigator<AuthStackParams>();
@@ -122,6 +121,7 @@ const Routing = () => {
         <Main.Screen name="verifyOtp" component={VerifyOtp} />
         <Main.Screen name="changePhoneNumber" component={ChangePhoneNumber} />
         <Main.Screen name="phoneVerifyOtp" component={PhoneVerifyOtp} />
+        <Main.Screen name="createPost" component={CreatePost} />
       </Main.Navigator>
     );
   }

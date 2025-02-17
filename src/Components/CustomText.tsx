@@ -27,6 +27,7 @@ export function CustomText({
           fontFamily: FONTS[fontFamily],
           fontSize: responsiveFontSize(fontSize),
           lineHeight: calculateLineHeight(responsiveFontSize(fontSize)),
+          opacity: rest.disabled ? 0.7 : 1,
         },
         style,
       ]}
