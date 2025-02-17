@@ -9,8 +9,20 @@ import COLORS from "../../Utilities/Colors";
 import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
 import CustomIcon from "../CustomIcon";
 import { CustomText } from "../CustomText";
+import { useNavigation } from "@react-navigation/native";
+import { BottomTabParams, MainStackParams } from "../../Typings/route";
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
+
+type HomeScreenModalParams = NativeStackNavigationProp<
+  MainStackParams & BottomTabParams,
+  "homeTab"
+>;
 
 const MainMenuModal = () => {
+  const navigation = useNavigation<HomeScreenModalParams>();
   const dispatch = useAppDispatch();
   const { isMainMenuVisible } = useAppSelector((state) => state.modals);
   const insets = useSafeAreaInsets();
@@ -74,7 +86,10 @@ const MainMenuModal = () => {
         <CustomIcon onPress={closeModal} Icon={ICONS.WhiteCrossIcon} />
 
         <View style={styles.topButtonsContainer}>
-          {renderTopButtons(ICONS.YellowPlus, "Make a post", () => {})}
+          {renderTopButtons(ICONS.YellowPlus, "Make a post", () => {
+            closeModal();
+            navigation.navigate("createPost");
+          })}
           {renderTopButtons(ICONS.CalendarWithPlus, "Crearte event", () => {})}
         </View>
 

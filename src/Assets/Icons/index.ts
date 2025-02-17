@@ -12,6 +12,7 @@ import {
   default as SolidProfileIcon,
 } from "./Profile.svg";
 import ReferIcon from "./ReferIcon.svg";
+import StarIcon from "./StarIcon.svg";
 import AppLogo from "./appLogo.svg";
 import Apple from "./appleicon.svg";
 import backArrow from "./backarrow.svg";
@@ -21,27 +22,34 @@ import EventTagIcon from "./calendar-schedule-fill.svg";
 import CalendarIcon from "./calendarIcon.svg";
 import Chatsicon from "./chat.svg";
 import ChatIcon from "./chatIcon.svg";
+import ClockTransParentIcon from "./clock-transparent.svg";
 import ClockIcon from "./clockIcon.svg";
 import CouponIcon from "./coupon-fill.svg";
 import DJTagICon from "./disc-fill.svg";
 import DotMenu from "./dotMenu.svg";
 import BarTagICon from "./drinks-2-fill.svg";
+import EnableLocation from "./enableLocation.svg";
 import FilterIcon from "./equalizer.svg";
 import facebook from "./facebookicon.svg";
 import FeedbackIcon from "./feedback.svg";
+import filtericon from "./filtericon.svg";
 import SuperLikeIcon from "./fireIcon.svg";
+import Fire from "./firelogo.svg";
 import GiftIcon from "./gift.svg";
 import Google from "./googleicon.svg";
+import HurtIcon from "./hurtIcon.svg";
 import LikeIcon from "./likeIcon.svg";
 import LogoutBoxIcon from "./logout-box.svg";
 import MapPinIcon from "./mapPinIcon.svg";
 import MenuIcon from "./menuIcon.svg";
 import NightClubTagIcon from "./music-2-fill.svg";
 import NotificationIcon from "./notificationIcon.svg";
+import PlusIcon from "./plusicon.svg";
 import PostComment from "./postComment.svg";
 import PostLike from "./postLike.svg";
 import PostRepost from "./postRepost.svg";
 import PostShare from "./postShare.svg";
+import PurpleIcon from "./purpleheart.svg";
 import QRScannerIcon from "./qr-scan.svg";
 import RedCrossIcon from "./redCrossIcon.svg";
 import RightArrowIcon from "./rightArrow.svg";
@@ -55,14 +63,15 @@ import PeopleTagIcon from "./userfill.svg";
 import VIPPremiumIcon from "./vip-crown.svg";
 import WhiteCrossIcon from "./whiteCrossIcon.svg";
 import YellowPlus from "./yellowPlus.svg";
-import ClockTransParentIcon from "./clock-transparent.svg";
-import PlusIcon from "./plusicon.svg";
-import EnableLocation from "./enableLocation.svg";
-import filtericon from "./filtericon.svg";
-import PurpleIcon from "./purpleheart.svg";
-import Fire from "./firelogo.svg";
-import HurtIcon from "./hurtIcon.svg";
-import StarIcon from "./StarIcon.svg";
+
+import CameraIcon from "./cameraIcon.svg";
+import CheckedRadioIcon from "./checkedRadioIcon.svg";
+import CreatePOstEyeIcon from "./createPostEyeIcon.svg";
+import GalleryIcon from "./galleryIcon.svg";
+import UnCheckedRadioIcon from "./unCheckedRadioIcon.svg";
+import WhiteMapPinIcon from "./whiteMapPinIcon.svg";
+import WhiteTickIcon from "./whiteTick.svg";
+import FillTickIcon from "./fillTickIcon.svg";
 
 const ICONS = {
   HomeIcon,
@@ -128,6 +137,14 @@ const ICONS = {
   Fire,
   HurtIcon,
   StarIcon,
+  CreatePOstEyeIcon,
+  GalleryIcon,
+  CameraIcon,
+  WhiteMapPinIcon,
+  CheckedRadioIcon,
+  UnCheckedRadioIcon,
+  WhiteTickIcon,
+  FillTickIcon,
 };
 
 export default ICONS;

@@ -1,16 +1,21 @@
-import { View } from "react-native";
 import React, { FC } from "react";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import styles from "./style";
-import { CustomText } from "../../Components/CustomText";
-import { verticalScale } from "../../Utilities/Metrics";
 import CustomButton from "../../Components/Buttons/CustomButton";
+import { CustomText } from "../../Components/CustomText";
 import { StartExploringIndicatorProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
+import { verticalScale } from "../../Utilities/Metrics";
+import styles from "./style";
 
 const StartExploring: FC<StartExploringIndicatorProps> = ({ navigation }) => {
   const onContinue = () => {
-    navigation.navigate("signIn");
+    navigation.replace("mainStack", {
+      screen: "tabs",
+      params: {
+        screen: "homeTab",
+      },
+    });
   };
 
   return (

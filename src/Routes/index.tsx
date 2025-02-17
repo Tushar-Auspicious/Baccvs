@@ -5,11 +5,16 @@ import BottomTabBar from "../Components/BottomTabBar";
 import Dating from "../Screens/Dating";
 import Events from "../Screens/Events";
 import Home from "../Screens/Home";
+import Maps from "../Screens/Maps";
 import Messages from "../Screens/Messages";
+import Notifications from "../Screens/Notifications";
 import OnBoarding from "../Screens/OnBoarding";
 import Profile from "../Screens/Profile";
 import Referral from "../Screens/Referral";
 import Register from "../Screens/Register";
+import SearchHome from "../Screens/SearchHome";
+import SignIn from "../Screens/SignIn";
+import StartExploring from "../Screens/StartExploring";
 import Welcome from "../Screens/Welcome";
 import {
   AuthStackParams,
@@ -17,11 +22,7 @@ import {
   MainStackParams,
   RootStackParams,
 } from "../Typings/route";
-import Notifications from "../Screens/Notifications";
-import SearchHome from "../Screens/SearchHome";
-import Maps from "../Screens/Maps";
-import StartExploring from "../Screens/StartExploring";
-import SignIn from "../Screens/SignIn";
+import CreatePost from "../Screens/CreatePost";
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
 const Auth = createNativeStackNavigator<AuthStackParams>();
@@ -104,6 +105,7 @@ const Routing = () => {
         <Main.Screen name="notification" component={Notifications} />
         <Main.Screen name="searchHome" component={SearchHome} />
         <Main.Screen name="maps" component={Maps} />
+        <Main.Screen name="createPost" component={CreatePost} />
       </Main.Navigator>
     );
   }
@@ -114,8 +116,8 @@ const Routing = () => {
         headerShown: false,
       }}
     >
-      <RootStack.Screen name="authStack" component={AuthStack} />
       <RootStack.Screen name="mainStack" component={MainStack} />
+      <RootStack.Screen name="authStack" component={AuthStack} />
     </RootStack.Navigator>
   );
 };

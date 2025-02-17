@@ -100,7 +100,7 @@ export type StepsIndicatorProps = NativeStackScreenProps<
   "register"
 >;
 export type StartExploringIndicatorProps = NativeStackScreenProps<
-  AuthStackParams,
+  AuthStackParams & BottomTabParams & RootStackParams,
   "StartExploring"
 >;
 export type SignInIndicatorProps = NativeStackScreenProps<
@@ -130,4 +130,9 @@ export type SearchHomeScreenProps = NativeStackScreenProps<
 export type MapsScreenProps = NativeStackScreenProps<
   MainStackParams & BottomTabParams,
   "maps"
+>;
+
+export type CreatePostScreenProps = NativeStackScreenProps<
+  MainStackParams & BottomTabParams,
+  "createPost"
 >;
