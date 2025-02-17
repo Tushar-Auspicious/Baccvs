@@ -26,7 +26,14 @@ const Referral: FC<ReferralProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaCont}>
-        <SignInHeader onBackPress={() => navigation.goBack()} />
+        <SignInHeader
+          title={
+            <Text onPress={() => navigation.navigate("signIn")}>
+              {"Sign in"}
+            </Text>
+          }
+          onBackPress={() => navigation.goBack()}
+        />
         <View style={{ gap: verticalScale(10), flex: 1 }}>
           <CustomText fontSize={24} fontFamily="bold">
             Referral code

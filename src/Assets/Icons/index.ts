@@ -63,6 +63,11 @@ import PurpleIcon from "./purpleheart.svg";
 import Fire from "./firelogo.svg";
 import HurtIcon from "./hurtIcon.svg";
 import StarIcon from "./StarIcon.svg";
+import SettingsPaymentIcon from "./settingPaymentIcon.svg";
+import SettingSupportIcon from "./settingSupportIcon.svg";
+import SettingUserIcon from "./settingUserIcon.svg";
+import EyeIcon from "./eyeIcon.svg";
+import EyeoffIcon from "./eyeoffIcon.svg";
 
 const ICONS = {
   HomeIcon,
@@ -128,6 +133,11 @@ const ICONS = {
   Fire,
   HurtIcon,
   StarIcon,
+  SettingsPaymentIcon,
+  SettingSupportIcon,
+  SettingUserIcon,
+  EyeIcon,
+  EyeoffIcon,
 };
 
 export default ICONS;

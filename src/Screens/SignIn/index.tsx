@@ -30,7 +30,14 @@ const SignIn: FC<SignInIndicatorProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaCont}>
-        <SignInHeader onBackPress={() => navigation.goBack()} />
+        <SignInHeader
+          title={
+            <Text onPress={() => navigation.navigate("referral")}>
+              {"Create account"}
+            </Text>
+          }
+          onBackPress={() => navigation.goBack()}
+        />
         <CustomText fontSize={24} fontFamily="bold" style={styles.textstyle}>
           Sign in
         </CustomText>

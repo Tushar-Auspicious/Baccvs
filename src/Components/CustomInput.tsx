@@ -118,7 +118,11 @@ const CustomInput = forwardRef<TextInput, CustomInputProps>(
               style={styles.iconContainer} // Style for the icon container
               onPress={togglePasswordVisibility} // Toggle visibility on icon press
             >
-              {/* <CustomIcon Icon={ICONS.eyeoffIcon} height={20} width={20} /> */}
+              <CustomIcon
+                Icon={isPasswordVisible ? ICONS.Apple : ICONS.EyeIcon}
+                height={20}
+                width={20}
+              />
             </TouchableOpacity>
           )}
 

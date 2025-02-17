@@ -22,6 +22,16 @@ import SearchHome from "../Screens/SearchHome";
 import Maps from "../Screens/Maps";
 import StartExploring from "../Screens/StartExploring";
 import SignIn from "../Screens/SignIn";
+import SettingsScreen from "../Screens/SettingsScreen";
+import AccountScreen from "../Screens/AccountScreen";
+import ProfileInformation from "../Screens/ProfileInformation";
+import ChangePassword from "../Screens/ChangePasword";
+import ForgotPassword from "../Screens/VerifyPassword";
+import VerifyPassword from "../Screens/VerifyPassword";
+import ChangeEmail from "../Screens/ChangeEmail";
+import VerifyOtp from "../Screens/VerifyOtp";
+import ChangePhoneNumber from "../Screens/ChangePhoneNumber";
+import PhoneVerifyOtp from "../Screens/PhoneVerifyOtp";
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
 const Auth = createNativeStackNavigator<AuthStackParams>();
@@ -104,6 +114,14 @@ const Routing = () => {
         <Main.Screen name="notification" component={Notifications} />
         <Main.Screen name="searchHome" component={SearchHome} />
         <Main.Screen name="maps" component={Maps} />
+        <Main.Screen name="settingsScreen" component={SettingsScreen} />
+        <Main.Screen name="account" component={AccountScreen} />
+        <Main.Screen name="profileInfo" component={ProfileInformation} />
+        <Main.Screen name="verifyPassword" component={VerifyPassword} />
+        <Main.Screen name="changeEmail" component={ChangeEmail} />
+        <Main.Screen name="verifyOtp" component={VerifyOtp} />
+        <Main.Screen name="changePhoneNumber" component={ChangePhoneNumber} />
+        <Main.Screen name="phoneVerifyOtp" component={PhoneVerifyOtp} />
       </Main.Navigator>
     );
   }
@@ -114,8 +132,8 @@ const Routing = () => {
         headerShown: false,
       }}
     >
-      <RootStack.Screen name="authStack" component={AuthStack} />
       <RootStack.Screen name="mainStack" component={MainStack} />
+      <RootStack.Screen name="authStack" component={AuthStack} />
     </RootStack.Navigator>
   );
 };

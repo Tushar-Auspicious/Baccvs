@@ -67,7 +67,7 @@ export type ChangeEmail = {
 // Setting Account > Profile Information > Change Phone Number
 export type ChangePhoneNumber = {
   changePhoneNumber: undefined;
-  verifyOtp: undefined;
+  phoneVerifyOtp: undefined;
 };
 
 // Setting Payment
@@ -130,4 +130,44 @@ export type SearchHomeScreenProps = NativeStackScreenProps<
 export type MapsScreenProps = NativeStackScreenProps<
   MainStackParams & BottomTabParams,
   "maps"
+>;
+
+export type SettingsScreenProps = NativeStackScreenProps<
+  SettingsStackParams & MainStackParams & BottomTabParams,
+  "settings"
+>;
+
+export type AccountScreenProps = NativeStackScreenProps<
+  SettingsStackParams & BottomTabParams,
+  "account"
+>;
+
+export type ProfileInformationProps = NativeStackScreenProps<
+  SettingsAccountStackParams & BottomTabParams,
+  "profileInfo"
+>;
+
+export type VerifyPasswordProps = NativeStackScreenProps<
+  ChangeEmail & BottomTabParams,
+  "verifyPassword"
+>;
+
+export type ChangeEmailProps = NativeStackScreenProps<
+  ChangeEmail & BottomTabParams,
+  "changeEmail"
+>;
+
+export type VerifyOtpProps = NativeStackScreenProps<
+  ChangeEmail & BottomTabParams,
+  "verifyOtp"
+>;
+
+export type ChangePhoneNumberProps = NativeStackScreenProps<
+  ChangePhoneNumber & BottomTabParams,
+  "changePhoneNumber"
+>;
+
+export type PhoneVerifyOtpProps = NativeStackScreenProps<
+  ChangePhoneNumber & BottomTabParams,
+  "phoneVerifyOtp"
 >;
