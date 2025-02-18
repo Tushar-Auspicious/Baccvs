@@ -102,7 +102,7 @@ const MainMenuModal = () => {
           {renderBars(ICONS.FeedbackIcon, "Feedback", () => {})}
           {renderBars(ICONS.YellowSettingsIcon, "Settings", () => {
             closeModal();
-            navigation.navigate("settingsScreen");
+            navigation.navigate("settingsStack", { screen: "settings" });
           })}
           {renderBars(ICONS.QRScannerIcon, "Scan ticket", () => {})}
         </View>

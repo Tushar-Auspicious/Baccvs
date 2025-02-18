@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ICONS from "../../Assets/Icons";
 import CustomIcon from "../../Components/CustomIcon";
 import { CustomText } from "../../Components/CustomText";
-import { SettingsScreenProps, SettingsStackParams } from "../../Typings/route";
+import { SettingsScreenProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
 import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
 import styles from "./style";
@@ -14,32 +14,33 @@ const SettingsScreen: FC<SettingsScreenProps> = ({ navigation }) => {
     icon: any;
     title: string;
     description: string;
-    screen: keyof SettingsStackParams | any;
+    onPress: () => void;
   }[] = [
     {
       icon: ICONS.SettingUserIcon,
       title: "Account",
       description:
         "Manage your profile, security, and privacy all in one place.",
-      screen: "account",
+      onPress: () => navigation.navigate("accountStack", { screen: "account" }),
     },
     {
       icon: ICONS.NotificationIcon,
       title: "Notifications",
       description: "Stay updated on what matters most.",
-      screen: "settingNotification",
+      onPress: () => navigation.navigate("settingNotification"),
     },
     {
       icon: ICONS.SettingsPaymentIcon,
       title: "Payment",
       description: "Easily manage your payment methods and subscriptions.",
-      screen: "payments",
+      onPress: () =>
+        navigation.navigate("payments", { screen: "subscriptionManagement" }),
     },
     {
       icon: ICONS.SettingSupportIcon,
       title: "Help and Support",
       description: "Need assistance? We’ve got you covered.",
-      screen: "helpSupport",
+      onPress: () => navigation.navigate("helpSupport"),
     },
   ];
 
@@ -66,7 +67,7 @@ const SettingsScreen: FC<SettingsScreenProps> = ({ navigation }) => {
               gap: horizontalScale(20),
               marginTop: 10,
             }}
-            onPress={() => navigation.navigate(item.screen)}
+            onPress={item.onPress}
             activeOpacity={0.8}
           >
             <CustomIcon Icon={item.icon} height={20} width={20} />

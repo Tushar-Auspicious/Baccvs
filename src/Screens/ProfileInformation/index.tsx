@@ -1,29 +1,40 @@
-import { View, TouchableOpacity } from "react-native";
 import React, { FC } from "react";
+import { TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import styles from "./styles";
-import CustomIcon from "../../Components/CustomIcon";
 import ICONS from "../../Assets/Icons";
-import { ProfileInformationProps } from "../../Typings/route";
+import CustomIcon from "../../Components/CustomIcon";
 import { CustomText } from "../../Components/CustomText";
+import { ProfileInformationProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
-import { verticalScale } from "../../Utilities/Metrics";
+import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
+import styles from "./styles";
 
 const ProfileInformation: FC<ProfileInformationProps> = ({ navigation }) => {
-  const renderInfo = (label: string, value: string) => (
-    <View style={{ marginTop: verticalScale(20) }}>
-      <CustomText fontFamily="medium" fontSize={16} style={{ lineHeight: 24 }}>
-        {label}
-      </CustomText>
-      <CustomText
-        fontFamily="regular"
-        fontSize={12}
-        style={{ lineHeight: 24, color: COLORS.greyMedium }}
-      >
-        {value}
-      </CustomText>
-    </View>
-  );
+  const data: {
+    title: string;
+    description: string;
+    onPress: () => void;
+  }[] = [
+    {
+      title: "Email Address",
+      description: "wilsonmark@mail.com",
+      onPress: () =>
+        navigation.navigate("changeEmailStack", { screen: "verifyPassword" }),
+    },
+    {
+      title: "Phone Number",
+      description: "+62 21 1234 5678",
+      onPress: () =>
+        navigation.navigate("changePhoneNumber", {
+          screen: "changePhoneNumber",
+        }),
+    },
+    {
+      title: "Forgot Password",
+      description: "Change your password.",
+      onPress: () => navigation.navigate("forgotPassword"),
+    },
+  ];
 
   return (
     <View style={styles.container}>
@@ -36,53 +47,37 @@ const ProfileInformation: FC<ProfileInformationProps> = ({ navigation }) => {
             onPress={() => navigation.goBack()}
           />
           <CustomText fontFamily="medium" fontSize={16}>
-            Profile information Email Address
+            Profile information
           </CustomText>
         </View>
-        <View>
-          {renderInfo("Email Address", "wilsonmark@mail.com")}
-          {/* {renderInfo("Phone Number", "+62 21 1234 5678")} */}
+        {data.map((item, index) => (
           <TouchableOpacity
-            style={{ marginTop: verticalScale(20) }}
+            key={index}
+            style={{
+              flexDirection: "row",
+              gap: horizontalScale(20),
+              marginTop: 10,
+            }}
+            onPress={item.onPress}
             activeOpacity={0.8}
-            onPress={() => navigation.navigate("changePhoneNumber")}
           >
-            <CustomText
-              fontFamily="medium"
-              fontSize={16}
-              style={{ lineHeight: 24 }}
-            >
-              Phone Number
-            </CustomText>
-            <CustomText
-              fontFamily="regular"
-              fontSize={12}
-              style={{ lineHeight: 24, color: COLORS.greyMedium }}
-            >
-              +62 21 1234 5678
-            </CustomText>
+            <View>
+              <CustomText fontFamily="medium" fontSize={16}>
+                {item.title}
+              </CustomText>
+              <CustomText
+                fontFamily="regular"
+                fontSize={12}
+                color={COLORS.greyMedium}
+                style={{
+                  marginTop: verticalScale(5),
+                }}
+              >
+                {item.description}
+              </CustomText>
+            </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={{ marginTop: verticalScale(20) }}
-            activeOpacity={0.8}
-            onPress={() => navigation.navigate("verifyPassword")}
-          >
-            <CustomText
-              fontFamily="medium"
-              fontSize={16}
-              style={{ lineHeight: 24 }}
-            >
-              Forgot Password
-            </CustomText>
-            <CustomText
-              fontFamily="regular"
-              fontSize={12}
-              style={{ lineHeight: 24, color: COLORS.greyMedium }}
-            >
-              Change your password
-            </CustomText>
-          </TouchableOpacity>
-        </View>
+        ))}
       </SafeAreaView>
     </View>
   );

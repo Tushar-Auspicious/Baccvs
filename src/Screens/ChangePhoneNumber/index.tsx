@@ -135,7 +135,7 @@ const ChangePhoneNumber: FC<ChangePhoneNumberProps> = ({ navigation }) => {
         <CustomButton
           title="Change Phone Number"
           onPress={() => {
-            navigation.replace("verifyOtp");
+            navigation.replace("phoneVerifyOtp");
           }}
           style={{
             width: "auto",

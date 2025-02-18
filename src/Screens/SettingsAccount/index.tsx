@@ -4,40 +4,37 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ICONS from "../../Assets/Icons";
 import CustomIcon from "../../Components/CustomIcon";
 import { CustomText } from "../../Components/CustomText";
-import {
-  AccountScreenProps,
-  SettingsScreenProps,
-  SettingsStackParams,
-} from "../../Typings/route";
+import { SettingsAccountProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
 import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
 import styles from "./styles";
 
-const AccountScreen: FC<AccountScreenProps> = ({ navigation }) => {
+const SettingsAccount: FC<SettingsAccountProps> = ({ navigation }) => {
   const accounts: {
     icon: any;
     title: string;
     description: string;
-    screen: keyof SettingsStackParams | any;
+    onPress: () => void;
   }[] = [
     {
       icon: ICONS.SettingUserIcon,
       title: "Profile Information",
       description:
         "See your profile information like your phone number and email address",
-      screen: "profileInfo",
+      onPress: () =>
+        navigation.navigate("profileInfoStack", { screen: "profileInfo" }),
     },
     {
       icon: ICONS.NotificationIcon,
       title: "Password and Security",
       description: "Change your password and enable extra security features.",
-      screen: "settingNotification",
+      onPress: () => navigation.navigate("passAndSecurity"),
     },
     {
       icon: ICONS.SettingsPaymentIcon,
       title: "Privacy Preferences",
       description: "Control who can see your profile, age, and activity.",
-      screen: "payments",
+      onPress: () => navigation.navigate("privacyPrefrences"),
     },
   ];
 
@@ -64,7 +61,7 @@ const AccountScreen: FC<AccountScreenProps> = ({ navigation }) => {
               gap: horizontalScale(20),
               marginTop: 10,
             }}
-            onPress={() => navigation.navigate(item.screen)}
+            onPress={item.onPress}
             activeOpacity={0.8}
           >
             <CustomIcon Icon={item.icon} height={20} width={20} />
@@ -92,4 +89,4 @@ const AccountScreen: FC<AccountScreenProps> = ({ navigation }) => {
   );
 };
 
-export default AccountScreen;
+export default SettingsAccount;

@@ -37,7 +37,7 @@ export type BottomTabParams = {
 // Setting Stack
 export type SettingsStackParams = {
   settings: undefined;
-  account: NavigatorScreenParams<SettingsAccountStackParams>;
+  accountStack: NavigatorScreenParams<SettingsAccountStackParams>;
   settingNotification: undefined;
   payments: NavigatorScreenParams<SettingsPaymentStackParams>;
   helpSupport: undefined;
@@ -45,27 +45,29 @@ export type SettingsStackParams = {
 
 // Settings Stack > Account
 export type SettingsAccountStackParams = {
-  profileInfo: NavigatorScreenParams<SettingsProfileInfoStackParams>;
+  account: undefined;
+  profileInfoStack: NavigatorScreenParams<SettingsProfileInfoStackParams>;
   passAndSecurity: undefined;
   privacyPrefrences: undefined;
 };
 
 // Setting Account > Profile Information
 export type SettingsProfileInfoStackParams = {
-  changeEmailStack: NavigatorScreenParams<ChangeEmail>;
-  changePhoneNumber: NavigatorScreenParams<ChangePhoneNumber>;
+  profileInfo: undefined;
+  changeEmailStack: NavigatorScreenParams<ChangeEmailStackParams>;
+  changePhoneNumber: NavigatorScreenParams<ChangePhoneNumberStackParams>;
   forgotPassword: undefined;
 };
 
 // Setting Account > Profile Information > Change Email
-export type ChangeEmail = {
+export type ChangeEmailStackParams = {
   verifyPassword: undefined;
   changeEmail: undefined;
   verifyOtp: undefined;
 };
 
 // Setting Account > Profile Information > Change Phone Number
-export type ChangePhoneNumber = {
+export type ChangePhoneNumberStackParams = {
   changePhoneNumber: undefined;
   phoneVerifyOtp: undefined;
 };
@@ -132,45 +134,62 @@ export type MapsScreenProps = NativeStackScreenProps<
   "maps"
 >;
 
+// Setting Stack
 export type SettingsScreenProps = NativeStackScreenProps<
-  SettingsStackParams & MainStackParams & BottomTabParams,
+  SettingsStackParams,
   "settings"
 >;
-
-export type AccountScreenProps = NativeStackScreenProps<
-  SettingsStackParams & BottomTabParams,
+export type SettingsAccountProps = NativeStackScreenProps<
+  SettingsStackParams & SettingsAccountStackParams,
   "account"
 >;
+export type SettingsHelpSupportProps = NativeStackScreenProps<
+  SettingsStackParams & BottomTabParams,
+  "helpSupport"
+>;
+export type SettingsNotificaitonProps = NativeStackScreenProps<
+  SettingsStackParams & BottomTabParams,
+  "settingNotification"
+>;
+export type SettingsPaymentProps = NativeStackScreenProps<
+  SettingsStackParams & BottomTabParams,
+  "payments"
+>;
 
+// Setting Stack > Account
 export type ProfileInformationProps = NativeStackScreenProps<
-  SettingsAccountStackParams & BottomTabParams,
+  SettingsProfileInfoStackParams,
   "profileInfo"
 >;
 
 export type VerifyPasswordProps = NativeStackScreenProps<
-  ChangeEmail & BottomTabParams,
+  ChangeEmailStackParams,
   "verifyPassword"
 >;
 
 export type ChangeEmailProps = NativeStackScreenProps<
-  ChangeEmail & BottomTabParams,
+  ChangeEmailStackParams,
   "changeEmail"
 >;
 
-export type VerifyOtpProps = NativeStackScreenProps<
-  ChangeEmail & BottomTabParams,
+export type VerifyEmailOtpProps = NativeStackScreenProps<
+  ChangeEmailStackParams,
   "verifyOtp"
 >;
 
+// ------------------------------------------------------------------------
+
 export type ChangePhoneNumberProps = NativeStackScreenProps<
-  ChangePhoneNumber & BottomTabParams,
+  ChangePhoneNumberStackParams,
   "changePhoneNumber"
 >;
 
 export type PhoneVerifyOtpProps = NativeStackScreenProps<
-  ChangePhoneNumber & BottomTabParams,
-  "phoneVerifyOtp">
+  ChangePhoneNumberStackParams,
+  "phoneVerifyOtp"
+>;
 
+// ------------------------------------------------------------------------
 
 export type CreatePostScreenProps = NativeStackScreenProps<
   MainStackParams & BottomTabParams,

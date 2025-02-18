@@ -1,17 +1,17 @@
-import { View, Text, TextInput } from "react-native";
 import React, { FC, useRef, useState } from "react";
+import { TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import styles from "./style";
-import CustomIcon from "../../Components/CustomIcon";
 import ICONS from "../../Assets/Icons";
-import { VerifyOtpProps } from "../../Typings/route";
-import { CustomText } from "../../Components/CustomText";
+import CustomButton from "../../Components/Buttons/CustomButton";
+import CustomIcon from "../../Components/CustomIcon";
 import CustomInput from "../../Components/CustomInput";
+import { CustomText } from "../../Components/CustomText";
+import { VerifyEmailOtpProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
 import { verticalScale } from "../../Utilities/Metrics";
-import CustomButton from "../../Components/Buttons/CustomButton";
+import styles from "./styles";
 
-const VerifyOtp: FC<VerifyOtpProps> = ({ navigation }) => {
+const SettingsVerifyEmailOTP: FC<VerifyEmailOtpProps> = ({ navigation }) => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const inputs = useRef<(TextInput | null)[]>([]);
 
@@ -92,10 +92,11 @@ const VerifyOtp: FC<VerifyOtpProps> = ({ navigation }) => {
             </CustomText>
           </View>
         </View>
+        Ò
         <CustomButton
           title="Verify"
           onPress={() => {
-            navigation.replace("profileInfo");
+            navigation.goBack();
           }}
           style={{
             width: "auto",
@@ -108,4 +109,4 @@ const VerifyOtp: FC<VerifyOtpProps> = ({ navigation }) => {
   );
 };
 
-export default VerifyOtp;
+export default SettingsVerifyEmailOTP;
