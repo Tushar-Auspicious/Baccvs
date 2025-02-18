@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 import COLORS from "../../Utilities/Colors";
 import {
+  deviceHeight,
+  deviceWidth,
   horizontalScale,
   hp,
   responsiveFontSize,
@@ -12,54 +14,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.appBackground,
-    paddingTop: verticalScale(10),
+  },
+  slideImage: {
+    height: deviceHeight * 0.8,
+    width: deviceWidth,
+    justifyContent: "flex-end",
   },
 
   slideContainer: {
     alignItems: "center",
-    paddingVertical: verticalScale(10),
     width: wp(100),
-    paddingHorizontal: wp(10),
-  },
-
-  slideImage: {
-    height: hp(52),
-    resizeMode: "cover",
-    width: wp(90),
-    borderRadius: verticalScale(10),
   },
 
   slideTextCont: {
-    gap: verticalScale(10),
-  },
-
-  subtitle: {
-    color: COLORS.white,
-    fontSize: responsiveFontSize(14),
-    textAlign: "center",
-    lineHeight: responsiveFontSize(19.6),
-    maxWidth: wp(60),
-  },
-
-  title: {
-    color: COLORS.white,
-    fontSize: 22,
-    fontWeight: "bold",
-    marginTop: 20,
-    textAlign: "center",
-  },
-
-  buttonCont: {
-    paddingVertical: verticalScale(10),
-    width: wp(100),
-    alignItems: "center",
-    gap: verticalScale(10),
-  },
-
-  skipText: {
-    textDecorationLine: "underline",
-    color: COLORS.white,
-    fontWeight: "800",
+    gap: verticalScale(15),
+    width: wp(70),
+    alignSelf: "center",
+    paddingVertical: verticalScale(20),
   },
 
   image: {
@@ -72,14 +43,23 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     paddingVertical: verticalScale(10),
+    gap: horizontalScale(5),
   },
 
   indicator: {
-    height: verticalScale(9),
-    width: verticalScale(9),
-    backgroundColor: COLORS.primaryPink,
-    marginHorizontal: horizontalScale(5),
+    height: verticalScale(7),
+    width: verticalScale(7),
+    backgroundColor: COLORS.voilet,
     borderRadius: 100,
+  },
+
+  indicatorActive: {
+    backgroundColor: COLORS.primaryPink,
+    width: horizontalScale(25),
+  },
+
+  text: {
+    textAlign: "center",
   },
 });
 

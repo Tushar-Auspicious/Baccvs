@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { StyleSheet, TouchableOpacity, ViewStyle } from "react-native";
 import COLORS from "../../Utilities/Colors";
-import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
+import { horizontalScale, verticalScale, wp } from "../../Utilities/Metrics";
 import { CustomText } from "../CustomText";
 
 type CustomButtonProps = {
@@ -11,37 +11,35 @@ type CustomButtonProps = {
   textColor?: string;
   style?: ViewStyle;
   disabled?: boolean;
-  textSize?:
-    | "heading"
-    | "subHeading"
-    | "title"
-    | "subTitle"
-    | "default"
-    | "small"
-    | "extraSmall";
+  textSize?: number;
+  isFullWidth?: boolean;
 };
 
 const CustomButton: FC<CustomButtonProps> = ({
   title,
   onPress,
-  backgroundColor = COLORS.darkVoilet,
+  backgroundColor = COLORS.primaryPink,
   textColor = COLORS.white,
   style,
-  textSize = "subTitle",
+  textSize = 16,
   disabled = false,
+  isFullWidth = true,
 }) => {
   return (
     <TouchableOpacity
       disabled={disabled}
       activeOpacity={0.7}
       style={[
-        styles.button,
-        { backgroundColor: backgroundColor, opacity: disabled ? 0.5 : 1 },
+        isFullWidth && styles.button,
+        {
+          backgroundColor: disabled ? COLORS.inputColor : backgroundColor,
+          opacity: disabled ? 0.8 : 1,
+        },
         style,
       ]}
       onPress={onPress}
     >
-      <CustomText type={textSize} color={textColor} fontFamily="bold">
+      <CustomText fontSize={textSize} color={textColor} fontFamily="bold">
         {title}
       </CustomText>
     </TouchableOpacity>
@@ -52,11 +50,13 @@ export default CustomButton;
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: verticalScale(16),
+    paddingVertical: verticalScale(12),
     paddingHorizontal: horizontalScale(20),
-    borderRadius: verticalScale(12),
+    borderRadius: verticalScale(20),
     alignItems: "center",
     justifyContent: "center",
     marginVertical: verticalScale(5),
+    width: wp(90),
+    alignSelf: "center",
   },
 });

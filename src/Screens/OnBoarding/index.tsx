@@ -1,24 +1,28 @@
-import React, { FC } from "react";
+import React, { FC, useMemo, useState } from "react";
 import {
   FlatList,
-  Image,
+  ImageBackground,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  Text,
-  TouchableOpacity,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../../Components/Buttons/CustomButton";
+import { CustomText } from "../../Components/CustomText";
+import OnBoardingSlides, { SlideType } from "../../Seeds/OnBoardingSeeds";
 import { OnBoardingProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
-import { deviceWidth, horizontalScale, wp } from "../../Utilities/Metrics";
+import {
+  deviceWidth,
+  responsiveFontSize,
+  verticalScale,
+} from "../../Utilities/Metrics";
 import styles from "./styles";
-import OnBoardingSlides, { SlideType } from "../../Seeds/OnBoardingSeeds";
 
 const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
   const flatListRef = React.useRef<FlatList>(null);
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
+
+  const [layout, setLayout] = useState<null | { height: number }>();
 
   const updateCurrentSlideIndex = (
     e: NativeSyntheticEvent<NativeScrollEvent>
@@ -30,20 +34,16 @@ const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
 
   const goToNextSlide = async () => {
     const nextSlideIndex = currentSlideIndex + 1;
-    if (nextSlideIndex != OnBoardingSlides.length) {
+    if (nextSlideIndex === OnBoardingSlides.length) {
+      navigation.navigate("referral");
+    } else {
       const offset = nextSlideIndex * deviceWidth;
 
       if (flatListRef.current) {
         flatListRef?.current.scrollToOffset({ offset });
-        setCurrentSlideIndex(currentSlideIndex + 1);
+        setCurrentSlideIndex(nextSlideIndex);
       }
-    } else {
-      navigation.navigate("referral");
     }
-  };
-
-  const handleSkip = () => {
-    navigation.navigate("referral");
   };
 
   const renderSlides = ({
@@ -55,57 +55,103 @@ const OnBoarding: FC<OnBoardingProps> = ({ navigation }) => {
   }) => {
     return (
       <View key={item.id + index} style={styles.slideContainer}>
-        <Image source={item?.image} style={styles.slideImage} />
-        <View style={styles.slideTextCont}>
-          <Text style={styles.title}>{item?.title}</Text>
-          <Text style={styles.subtitle}>{item?.subtitle}</Text>
-        </View>
+        <ImageBackground
+          source={item?.image}
+          style={styles.slideImage}
+          resizeMode="cover"
+        >
+          <View
+            onLayout={(e) => {
+              setLayout({
+                height: e.nativeEvent.layout.y,
+              });
+            }}
+            style={styles.slideTextCont}
+          >
+            <CustomText
+              fontFamily="bold"
+              fontSize={24}
+              style={{
+                textAlign: "center",
+              }}
+            >
+              {item?.title}
+            </CustomText>
+            <CustomText
+              fontFamily="regular"
+              color={COLORS.greyMedium}
+              style={{
+                textAlign: "center",
+              }}
+              fontSize={14}
+            >
+              {item?.subtitle}
+            </CustomText>
+          </View>
+        </ImageBackground>
       </View>
     );
   };
 
-  const renderIndicators = () => {
+  const renderIndicators = useMemo(() => {
     return (
-      <View style={styles.indicatorCont}>
-        {OnBoardingSlides.map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.indicator,
-              currentSlideIndex == index && {
-                backgroundColor: COLORS.primaryPink,
-                width: horizontalScale(25),
-              },
-            ]}
-          />
-        ))}
-      </View>
+      layout?.height && (
+        <View
+          style={[
+            styles.indicatorCont,
+            {
+              position: "absolute",
+              alignSelf: "center",
+              top: layout?.height - verticalScale(20),
+            },
+          ]}
+        >
+          {OnBoardingSlides.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.indicator,
+                currentSlideIndex === index && styles.indicatorActive,
+              ]}
+            />
+          ))}
+        </View>
+      )
     );
-  };
+  }, [layout, currentSlideIndex]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        ref={flatListRef}
-        data={OnBoardingSlides}
-        onMomentumScrollEnd={updateCurrentSlideIndex}
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        pagingEnabled
-        renderItem={renderSlides}
-      />
-      {renderIndicators()}
-      <View style={styles.buttonCont}>
-        <CustomButton
-          title="Next"
-          onPress={goToNextSlide}
-          style={{ width: wp(90) }}
+    <View style={styles.container}>
+      <View>
+        <FlatList
+          ref={flatListRef}
+          data={OnBoardingSlides}
+          onMomentumScrollEnd={updateCurrentSlideIndex}
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          pagingEnabled
+          renderItem={renderSlides}
         />
-        <TouchableOpacity onPress={handleSkip}>
-          <Text style={styles.skipText}>Skip</Text>
-        </TouchableOpacity>
       </View>
-    </SafeAreaView>
+      {renderIndicators}
+      <View style={{ gap: verticalScale(10) }}>
+        <CustomButton title="Get Started" onPress={goToNextSlide} isFullWidth />
+        <CustomText
+          fontSize={responsiveFontSize(14)}
+          fontFamily="bold"
+          style={styles.text}
+        >
+          Already have an account?{` `}
+          <CustomText
+            fontFamily="bold"
+            fontSize={14}
+            color={COLORS.primaryPink}
+          >
+            Sign in
+          </CustomText>
+        </CustomText>
+      </View>
+    </View>
   );
 };
 
