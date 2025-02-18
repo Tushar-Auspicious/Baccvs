@@ -19,10 +19,12 @@ export type MainStackParams = {
   tabs: NavigatorScreenParams<BottomTabParams>;
   notification: undefined;
   searchHome: undefined;
+  maps: undefined;
   createPost: undefined;
   postDetails: undefined;
-  maps: undefined;
   createStory: undefined;
+  createEvent: undefined;
+  eventDetail: { isFromCreateEvent?: boolean };
   settingsStack: NavigatorScreenParams<SettingsStackParams>;
 };
 
@@ -33,6 +35,8 @@ export type BottomTabParams = {
   messagesTab: undefined;
   profileTab: undefined;
 };
+
+// --------------------------------------------------------------------------------------
 
 // Setting Stack
 export type SettingsStackParams = {
@@ -91,6 +95,10 @@ export type BillinhHistoryStackParams = {
   billingHistory: undefined;
   recieptDetail: undefined;
 };
+
+// --------------------------------------------------------------------------------------
+
+// Create Event
 
 export type OnBoardingProps = NativeStackScreenProps<
   AuthStackParams,
@@ -206,7 +214,15 @@ export type ForgotPasswordProps = NativeStackScreenProps<
 //   ""
 // >;
 
+// Create Post Screen Props
 export type CreatePostScreenProps = NativeStackScreenProps<
   MainStackParams & BottomTabParams,
   "createPost"
 >;
+
+// Create Event Screen Props
+export type CreateEventScreenProps = NativeStackScreenProps<
+  MainStackParams & BottomTabParams,
+  "createEvent"
+>;
+

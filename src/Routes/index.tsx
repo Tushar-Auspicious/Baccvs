@@ -48,6 +48,7 @@ import {
   SettingsProfileInfoStackParams,
   SettingsStackParams,
 } from "../Typings/route";
+import CreateEvent from "../Screens/CreateEvent";
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
 const Auth = createNativeStackNavigator<AuthStackParams>();
@@ -63,7 +64,6 @@ const ChangeEmailAddressStack =
   createNativeStackNavigator<ChangeEmailStackParams>();
 const ChangePhoneNumberStack =
   createNativeStackNavigator<ChangePhoneNumberStackParams>();
-
 const PaymentStack = createNativeStackNavigator<SettingsPaymentStackParams>();
 const PaymentMethodStack =
   createNativeStackNavigator<PaymentMethodStackParams>();
@@ -319,6 +319,7 @@ const Routing = () => {
         <Main.Screen name="maps" component={Maps} />
         <Main.Screen name="settingsStack" component={SettingStack} />
         <Main.Screen name="createPost" component={CreatePost} />
+        <Main.Screen name="createEvent" component={CreateEvent} />
       </Main.Navigator>
     );
   }

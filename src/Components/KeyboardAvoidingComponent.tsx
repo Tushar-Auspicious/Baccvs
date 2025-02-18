@@ -2,18 +2,14 @@ import React from "react";
 import {
   KeyboardAvoidingView,
   Platform,
-  StyleSheet,
-  ViewStyle,
   ScrollView,
   StatusBar,
+  StyleSheet,
   View,
+  ViewStyle,
 } from "react-native";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import COLORS from "../Utilities/Colors";
-import { verticalScale } from "../Utilities/Metrics";
 
 interface KeyboardAvoidingContainerProps {
   children: React.ReactNode;
@@ -30,11 +26,8 @@ export function KeyboardAvoidingContainer({
   const Insets = useSafeAreaInsets();
   return (
     <KeyboardAvoidingView
-      style={[
-        styles.container,
-       
-      ]}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={[styles.container]}
+      behavior={Platform.OS === "ios" ? "padding" : "padding"}
       keyboardVerticalOffset={
         Platform.OS === "ios" ? 0 : StatusBar.currentHeight
       }

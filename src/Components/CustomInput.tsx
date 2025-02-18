@@ -1,4 +1,5 @@
-import React, { FC, forwardRef, useState } from "react";
+import dayjs from "dayjs";
+import React, { forwardRef, useState } from "react";
 import {
   StyleProp,
   StyleSheet,
@@ -9,19 +10,20 @@ import {
   View,
   ViewStyle,
 } from "react-native";
+import DatePicker from "react-native-date-picker";
+import ICONS from "../Assets/Icons";
 import COLORS from "../Utilities/Colors";
 import {
   horizontalScale,
   responsiveFontSize,
   verticalScale,
 } from "../Utilities/Metrics";
-import { CustomText } from "./CustomText";
 import CustomIcon from "./CustomIcon";
-import ICONS from "../Assets/Icons";
+import { CustomText } from "./CustomText";
 
 type CustomInputProps = TextInputProps & {
   placeholder?: string;
-  type?: "text" | "password" | "search";
+  type?: "text" | "password" | "search" | "textArea" | "date" | "time";
   isBackArrow?: boolean;
   onChangeText: (text: string) => void;
   value: string;
@@ -49,7 +51,7 @@ const CustomInput = forwardRef<TextInput, CustomInputProps>(
       isFilterIcon = false,
       onFilterPress,
       onBackPress,
-      height = 56,
+      height = type === "textArea" ? 120 : 56,
       backgroundColor = COLORS.inputColor,
       inputStyle,
       baseStyle,
@@ -64,16 +66,41 @@ const CustomInput = forwardRef<TextInput, CustomInputProps>(
       setIsPasswordVisible(!isPasswordVisible);
     };
 
+    // Date Picker
+    const [isPickerVisible, setPickerVisible] = useState(false);
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+    // Handle date selection
+    const handleConfirm = (date: Date) => {
+      setPickerVisible(false);
+      setSelectedDate(date);
+      if (type === "date") {
+        const formattedDate = dayjs(date).format("D[th] MMM YYYY");
+        onChangeText(formattedDate);
+      } else if (type === "time") {
+        const formattedTime = dayjs(date).format("hh:mm A");
+        onChangeText(formattedTime);
+      }
+    };
+
+    const handleCancel = () => {
+      setPickerVisible(false);
+    };
+
     return (
       <View
         style={[
           style,
           {
-            gap: verticalScale(5),
+            gap: verticalScale(10),
           },
         ]}
       >
-        {label && <CustomText fontFamily="medium">{label}</CustomText>}
+        {label && (
+          <CustomText fontFamily="medium" fontSize={14}>
+            {label}
+          </CustomText>
+        )}
         <View
           style={[
             styles.container, // Base container style
@@ -109,6 +136,11 @@ const CustomInput = forwardRef<TextInput, CustomInputProps>(
             secureTextEntry={type === "password" && !isPasswordVisible} // Hide input text for password type if visibility is off
             onChangeText={onChangeText} // Handle text change
             value={value} // Display current value
+            editable={type !== "date" && type !== "time"}
+            onPress={() => {
+              type === "time" && setPickerVisible(!isPickerVisible);
+              type === "date" && setPickerVisible(!isPickerVisible);
+            }}
             {...rest}
           />
 
@@ -126,15 +158,28 @@ const CustomInput = forwardRef<TextInput, CustomInputProps>(
             </TouchableOpacity>
           )}
 
-          {/* Render filter icon for search type */}
-          {/* {type === "search" && isFilterIcon && (
-          <CustomIcon
-            onPress={onFilterPress} // Trigger filter press callback
-            Icon={ICONS.Filter}
-            height={20}
-            width={20}
-          />
-        )} */}
+          {(type === "date" || type === "time") && (
+            <>
+              <TouchableOpacity
+                activeOpacity={0.6}
+                onPress={() => setPickerVisible(true)}
+              >
+                <CustomIcon
+                  Icon={type === "date" ? ICONS.CalendarIcon : ICONS.ClockIcon}
+                  height={20}
+                  width={20}
+                />
+              </TouchableOpacity>
+              <DatePicker
+                modal
+                open={isPickerVisible}
+                date={selectedDate || new Date()}
+                mode={type}
+                onConfirm={handleConfirm}
+                onCancel={handleCancel}
+              />
+            </>
+          )}
         </View>
       </View>
     );

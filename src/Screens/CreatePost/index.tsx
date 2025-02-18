@@ -72,7 +72,6 @@ const CreatePost: FC<CreatePostScreenProps> = ({ navigation }) => {
     });
   };
 
-  console.log(selectedTagPeople);
   return (
     <KeyboardAvoidingContainer>
       <View

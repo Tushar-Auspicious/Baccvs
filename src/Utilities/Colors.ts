@@ -13,6 +13,7 @@ const COLORS = {
   greyMedium: "#A4A7AE",
   greyLight: "#D5D7DA",
   inputColor: "rgba(255, 255, 255, 0.1)",
+  orange: "#792E0D",
 };
 
 export default COLORS;

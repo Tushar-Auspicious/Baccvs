@@ -90,7 +90,10 @@ const MainMenuModal = () => {
             closeModal();
             navigation.navigate("createPost");
           })}
-          {renderTopButtons(ICONS.CalendarWithPlus, "Crearte event", () => {})}
+          {renderTopButtons(ICONS.CalendarWithPlus, "Crearte event", () => {
+            closeModal();
+            navigation.navigate("createEvent");
+          })}
         </View>
 
         <View style={styles.barsContainer}>
