@@ -76,6 +76,7 @@ import WhiteCrossIcon from "./whiteCrossIcon.svg";
 import WhiteMapPinIcon from "./whiteMapPinIcon.svg";
 import WhiteTickIcon from "./whiteTick.svg";
 import YellowPlus from "./yellowPlus.svg";
+import SearchIconWhite from "./searchIconWhite.svg";
 
 const ICONS = {
   HomeIcon,
@@ -154,6 +155,7 @@ const ICONS = {
   UnCheckedRadioIcon,
   WhiteTickIcon,
   FillTickIcon,
+  SearchIconWhite,
 };
 
 export default ICONS;

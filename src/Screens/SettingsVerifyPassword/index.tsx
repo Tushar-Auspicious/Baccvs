@@ -11,7 +11,7 @@ import { verticalScale } from "../../Utilities/Metrics";
 import CustomButton from "../../Components/Buttons/CustomButton";
 import { VerifyPasswordProps } from "../../Typings/route";
 
-const VerifyPassword: FC<VerifyPasswordProps> = ({ navigation }) => {
+const SettingsVerifyPassword: FC<VerifyPasswordProps> = ({ navigation }) => {
   const [enterPassword, setEnterPassword] = useState<string>("");
 
   return (
@@ -65,4 +65,4 @@ const VerifyPassword: FC<VerifyPasswordProps> = ({ navigation }) => {
   );
 };
 
-export default VerifyPassword;
+export default SettingsVerifyPassword;

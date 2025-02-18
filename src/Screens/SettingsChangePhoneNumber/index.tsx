@@ -15,7 +15,9 @@ import CustomInput from "../../Components/CustomInput";
 import CustomButton from "../../Components/Buttons/CustomButton";
 import { verticalScale } from "../../Utilities/Metrics";
 
-const ChangePhoneNumber: FC<ChangePhoneNumberProps> = ({ navigation }) => {
+const SettingsChangePhoneNumber: FC<ChangePhoneNumberProps> = ({
+  navigation,
+}) => {
   const [visibleCurrent, setVisibleCurrent] = useState(false);
   const [visibleNew, setVisibleNew] = useState(false);
   const [currentCountryCode, setCurrentCountryCode] =
@@ -148,4 +150,4 @@ const ChangePhoneNumber: FC<ChangePhoneNumberProps> = ({ navigation }) => {
   );
 };
 
-export default ChangePhoneNumber;
+export default SettingsChangePhoneNumber;

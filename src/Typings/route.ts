@@ -39,7 +39,7 @@ export type SettingsStackParams = {
   settings: undefined;
   accountStack: NavigatorScreenParams<SettingsAccountStackParams>;
   settingNotification: undefined;
-  payments: NavigatorScreenParams<SettingsPaymentStackParams>;
+  paymentsStack: NavigatorScreenParams<SettingsPaymentStackParams>;
   helpSupport: undefined;
 };
 
@@ -74,6 +74,7 @@ export type ChangePhoneNumberStackParams = {
 
 // Setting Payment
 export type SettingsPaymentStackParams = {
+  payment: undefined;
   paymentMethodStack: NavigatorScreenParams<PaymentMethodStackParams>;
   billingHistoryStack: NavigatorScreenParams<BillinhHistoryStackParams>;
   subscriptionManagement: undefined;
@@ -152,15 +153,17 @@ export type SettingsNotificaitonProps = NativeStackScreenProps<
   "settingNotification"
 >;
 export type SettingsPaymentProps = NativeStackScreenProps<
-  SettingsStackParams & BottomTabParams,
-  "payments"
+  SettingsStackParams & SettingsPaymentStackParams,
+  "payment"
 >;
 
-// Setting Stack > Account
+// Setting Stack > Account > Profile Informtaion
 export type ProfileInformationProps = NativeStackScreenProps<
   SettingsProfileInfoStackParams,
   "profileInfo"
 >;
+
+// Setting Stack > Account > Profile Info > Email address ------------------------------------------------------------------------
 
 export type VerifyPasswordProps = NativeStackScreenProps<
   ChangeEmailStackParams,
@@ -177,7 +180,7 @@ export type VerifyEmailOtpProps = NativeStackScreenProps<
   "verifyOtp"
 >;
 
-// ------------------------------------------------------------------------
+// Setting Stack > Account > Profile Info > Phone Number ------------------------------------------------------------------------
 
 export type ChangePhoneNumberProps = NativeStackScreenProps<
   ChangePhoneNumberStackParams,
@@ -189,7 +192,19 @@ export type PhoneVerifyOtpProps = NativeStackScreenProps<
   "phoneVerifyOtp"
 >;
 
-// ------------------------------------------------------------------------
+// Setting Stack > Account > Profile Info > Forgot Password ------------------------------------------------------------------------
+
+export type ForgotPasswordProps = NativeStackScreenProps<
+  SettingsProfileInfoStackParams,
+  "forgotPassword"
+>;
+
+// Setting Stack > Payment >
+
+// export type  = NativeStackScreenProps<
+//   SettingsPaymentStackParams,
+//   ""
+// >;
 
 export type CreatePostScreenProps = NativeStackScreenProps<
   MainStackParams & BottomTabParams,

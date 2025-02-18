@@ -19,7 +19,11 @@ import CustomInput from "../../Components/CustomInput";
 import { CustomText } from "../../Components/CustomText";
 import { KeyboardAvoidingContainer } from "../../Components/KeyboardAvoidingComponent";
 import GalleryModal from "../../Components/Modals/GalleryModal";
-import { setIsGalleryModalVisible } from "../../Redux/slices/modalSlice";
+import TagPeopleModal from "../../Components/Modals/TagPeopleModal";
+import {
+  setIsGalleryModalVisible,
+  setIsTagPeopleModalVisible,
+} from "../../Redux/slices/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
 import { CreatePostScreenProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
@@ -34,20 +38,28 @@ const CreatePost: FC<CreatePostScreenProps> = ({ navigation }) => {
   const refRBSheet = useRef<RBSheetRef>(null);
 
   const dispatch = useAppDispatch();
-  const { isGalleryModalVisible } = useAppSelector((state) => state.modals);
+  const { isGalleryModalVisible, isTagPeopleModalVisible } = useAppSelector(
+    (state) => state.modals
+  );
 
   const insets = useSafeAreaInsets();
 
   const [postDesc, setPostDesc] = useState("");
-  const [selectedPostVisibility, setSelectedPostVisibility] =
-    useState("My followers");
+  const [selectedPostVisibility, setSelectedPostVisibility] = useState<
+    string | null
+  >(null);
 
   const [selectedMediaFiles, setSelectedMediaFiles] = useState<
     PhotoIdentifier[]
   >([]);
 
+  const [selectedTagPeople, setSelectedTagPeople] = useState<any>([]);
+
   const toggleGalleryModal = () =>
     dispatch(setIsGalleryModalVisible(!isGalleryModalVisible));
+
+  const toggleTagPeopleModal = () =>
+    dispatch(setIsTagPeopleModalVisible(!isTagPeopleModalVisible));
 
   const toggleSelection = (item: any) => {
     setSelectedMediaFiles((prev) => {
@@ -60,6 +72,7 @@ const CreatePost: FC<CreatePostScreenProps> = ({ navigation }) => {
     });
   };
 
+  console.log(selectedTagPeople);
   return (
     <KeyboardAvoidingContainer>
       <View
@@ -87,7 +100,7 @@ const CreatePost: FC<CreatePostScreenProps> = ({ navigation }) => {
           />
           <CustomButton
             title="Post"
-            onPress={() => {}}
+            onPress={() => navigation.goBack()}
             style={{ width: "auto", paddingVertical: verticalScale(8) }}
           />
         </View>
@@ -119,7 +132,13 @@ const CreatePost: FC<CreatePostScreenProps> = ({ navigation }) => {
               contentContainerStyle={{ gap: horizontalScale(5) }}
               renderItem={({ item, index }) => {
                 return (
-                  <View style={{ position: "relative" }}>
+                  <View
+                    style={{
+                      position: "relative",
+                      borderRadius: 10,
+                      overflow: "hidden",
+                    }}
+                  >
                     <Image
                       source={{ uri: item.node.image.uri }}
                       style={{ height: hp(23), width: wp(45) }}
@@ -148,6 +167,53 @@ const CreatePost: FC<CreatePostScreenProps> = ({ navigation }) => {
               }}
             />
           </View>
+
+          <View>
+            {selectedMediaFiles.length > 0 && (
+              <TouchableOpacity
+                onPress={toggleTagPeopleModal}
+                style={{ paddingVertical: verticalScale(10) }}
+              >
+                <CustomText
+                  fontFamily="bold"
+                  fontSize={14}
+                  color={COLORS.mediuumPink}
+                >
+                  Tag People
+                </CustomText>
+              </TouchableOpacity>
+            )}
+
+            {selectedTagPeople.length > 0 && (
+              <View>
+                <FlatList
+                  data={selectedTagPeople}
+                  horizontal
+                  contentContainerStyle={{ gap: horizontalScale(5) }}
+                  renderItem={({ item, index }) => {
+                    return (
+                      <View
+                        style={{
+                          paddingHorizontal: horizontalScale(10),
+                          paddingVertical: verticalScale(5),
+                          backgroundColor: COLORS.inputColor,
+                          borderRadius: 10,
+                        }}
+                      >
+                        <CustomText
+                          fontFamily="bold"
+                          fontSize={14}
+                          color={COLORS.white}
+                        >
+                          @ {item.name}
+                        </CustomText>
+                      </View>
+                    );
+                  }}
+                />
+              </View>
+            )}
+          </View>
         </View>
 
         {/* Bottom Buttons*/}
@@ -173,7 +239,9 @@ const CreatePost: FC<CreatePostScreenProps> = ({ navigation }) => {
               width={16}
             />
             <CustomText fontFamily="medium" fontSize={14}>
-              Who can see this
+              {selectedPostVisibility
+                ? selectedPostVisibility
+                : "Who can see this"}
             </CustomText>
           </TouchableOpacity>
           <View
@@ -214,6 +282,10 @@ const CreatePost: FC<CreatePostScreenProps> = ({ navigation }) => {
         selectedItems={selectedMediaFiles}
         setSelectedItems={setSelectedMediaFiles}
       />
+      <TagPeopleModal
+        selectedItems={selectedTagPeople}
+        setSelectedItems={setSelectedTagPeople}
+      />
     </KeyboardAvoidingContainer>
   );
 };
@@ -234,5 +306,6 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
+    gap: verticalScale(10),
   },
 });

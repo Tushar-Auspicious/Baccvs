@@ -9,7 +9,7 @@ import COLORS from "../../Utilities/Colors";
 import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
 import styles from "./styles";
 
-const ProfileInformation: FC<ProfileInformationProps> = ({ navigation }) => {
+const SettingsProfileInfo: FC<ProfileInformationProps> = ({ navigation }) => {
   const data: {
     title: string;
     description: string;
@@ -83,4 +83,4 @@ const ProfileInformation: FC<ProfileInformationProps> = ({ navigation }) => {
   );
 };
 
-export default ProfileInformation;
+export default SettingsProfileInfo;

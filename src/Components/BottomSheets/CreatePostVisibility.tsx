@@ -13,8 +13,8 @@ export interface RBSheetRef {
 }
 
 interface CreatePostVisibilityProps {
-  selectedOption: string;
-  setSelectedOption: (option: string) => void;
+  selectedOption: string | null;
+  setSelectedOption: (option: string | null) => void;
 }
 
 const CreatePostVisibility = forwardRef<RBSheetRef, CreatePostVisibilityProps>(

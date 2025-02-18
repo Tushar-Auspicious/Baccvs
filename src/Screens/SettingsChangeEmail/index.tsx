@@ -10,7 +10,7 @@ import CustomInput from "../../Components/CustomInput";
 import CustomButton from "../../Components/Buttons/CustomButton";
 import { verticalScale } from "../../Utilities/Metrics";
 
-const ChangeEmail: FC<ChangeEmailProps> = ({ navigation }) => {
+const SettingsChangeEmail: FC<ChangeEmailProps> = ({ navigation }) => {
   const [currentEmail, setCurrentEmail] = useState("");
   const [enterNewMail, setEnterNewMail] = useState("");
 
@@ -68,4 +68,4 @@ const ChangeEmail: FC<ChangeEmailProps> = ({ navigation }) => {
   );
 };
 
-export default ChangeEmail;
+export default SettingsChangeEmail;

@@ -2,8 +2,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import BottomTabBar from "../Components/BottomTabBar";
-import ChangeEmail from "../Screens/ChangeEmail";
-import ChangePhoneNumber from "../Screens/ChangePhoneNumber";
 import CreatePost from "../Screens/CreatePost";
 import Dating from "../Screens/Dating";
 import Events from "../Screens/Events";
@@ -13,30 +11,40 @@ import Messages from "../Screens/Messages";
 import Notifications from "../Screens/Notifications";
 import OnBoarding from "../Screens/OnBoarding";
 import Profile from "../Screens/Profile";
-import ProfileInformation from "../Screens/ProfileInformation";
 import Referral from "../Screens/Referral";
 import Register from "../Screens/Register";
 import SearchHome from "../Screens/SearchHome";
 import SettingsAccount from "../Screens/SettingsAccount";
+import SettingsAddPaymentMethod from "../Screens/SettingsAddPaymentMethod";
+import SettingsBillingHistory from "../Screens/SettingsBillingHistory";
+import SettingsChangeEmail from "../Screens/SettingsChangeEmail";
+import SettingsChangePhoneNumber from "../Screens/SettingsChangePhoneNumber";
 import SettingsForgotPassword from "../Screens/SettingsForgotPassword";
 import SettingsHelpSupport from "../Screens/SettingsHelpSupport";
 import SettingsNotification from "../Screens/SettingsNotification";
 import SettingsPayment from "../Screens/SettingsPayment";
+import SettingsPaymentMethod from "../Screens/SettingsPaymentMethod";
+import SettingsProfileInfo from "../Screens/SettingsProfileInfo";
+import SettingsRecieptDetail from "../Screens/SettingsRecieptDetail";
 import SettingsScreen from "../Screens/SettingsScreen";
+import SettingsSubscriptions from "../Screens/SettingsSubscriptions";
 import { default as SettingsVerifyOtp } from "../Screens/SettingsVerifyEmailOTP";
+import SettingsVerifyPassword from "../Screens/SettingsVerifyPassword";
 import SettingsVerifyPhoneOtp from "../Screens/SettingsVerifyPhoneOtp";
 import SignIn from "../Screens/SignIn";
 import StartExploring from "../Screens/StartExploring";
-import VerifyPassword from "../Screens/VerifyPassword";
 import Welcome from "../Screens/Welcome";
 import {
   AuthStackParams,
+  BillinhHistoryStackParams,
   BottomTabParams,
   ChangeEmailStackParams,
   ChangePhoneNumberStackParams,
   MainStackParams,
+  PaymentMethodStackParams,
   RootStackParams,
   SettingsAccountStackParams,
+  SettingsPaymentStackParams,
   SettingsProfileInfoStackParams,
   SettingsStackParams,
 } from "../Typings/route";
@@ -55,6 +63,11 @@ const ChangeEmailAddressStack =
   createNativeStackNavigator<ChangeEmailStackParams>();
 const ChangePhoneNumberStack =
   createNativeStackNavigator<ChangePhoneNumberStackParams>();
+
+const PaymentStack = createNativeStackNavigator<SettingsPaymentStackParams>();
+const PaymentMethodStack =
+  createNativeStackNavigator<PaymentMethodStackParams>();
+const BillingStack = createNativeStackNavigator<BillinhHistoryStackParams>();
 
 const Routing = () => {
   function AuthStack() {
@@ -133,7 +146,7 @@ const Routing = () => {
             >
               <ChangeEmailAddressStack.Screen
                 name="changeEmail"
-                component={ChangeEmail}
+                component={SettingsChangeEmail}
               />
               <ChangeEmailAddressStack.Screen
                 name="verifyOtp"
@@ -141,7 +154,7 @@ const Routing = () => {
               />
               <ChangeEmailAddressStack.Screen
                 name="verifyPassword"
-                component={VerifyPassword}
+                component={SettingsVerifyPassword}
               />
             </ChangeEmailAddressStack.Navigator>
           );
@@ -156,7 +169,7 @@ const Routing = () => {
             >
               <ChangePhoneNumberStack.Screen
                 name="changePhoneNumber"
-                component={ChangePhoneNumber}
+                component={SettingsChangePhoneNumber}
               />
               <ChangePhoneNumberStack.Screen
                 name="phoneVerifyOtp"
@@ -174,7 +187,7 @@ const Routing = () => {
           >
             <AccountProfileInfo.Screen
               name="profileInfo"
-              component={ProfileInformation}
+              component={SettingsProfileInfo}
             />
 
             <AccountProfileInfo.Screen
@@ -209,14 +222,69 @@ const Routing = () => {
           />
           {/* <SettingsAccountStack.Screen name="privacyPrefrences" component={SettingsAccountStack} /> */}
           {/* <SettingsAccountStack.Screen name="passAndSecurity" component={SettingsPayment} /> */}
-
-          {/* <Main.Screen name="profileInfo" component={ProfileInformation} />
-          <Main.Screen name="verifyPassword" component={VerifyPassword} />
-          <Main.Screen name="changeEmail" component={ChangeEmail} />
-          <Main.Screen name="verifyOtp" component={VerifyOtp} />
-          <Main.Screen name="changePhoneNumber" component={ChangePhoneNumber} />
-          <Main.Screen name="phoneVerifyOtp" component={PhoneVerifyOtp} /> */}
         </SettingsAccountStack.Navigator>
+      );
+    }
+
+    function PaymentsStack() {
+      function PaymentMethodstack() {
+        return (
+          <PaymentMethodStack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <PaymentMethodStack.Screen
+              name="paymentMethod"
+              component={SettingsPaymentMethod}
+            />
+            <PaymentMethodStack.Screen
+              name="addPaymentMethod"
+              component={SettingsAddPaymentMethod}
+            />
+          </PaymentMethodStack.Navigator>
+        );
+      }
+
+      function BillingHistoryStack() {
+        return (
+          <BillingStack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <BillingStack.Screen
+              name="billingHistory"
+              component={SettingsBillingHistory}
+            />
+            <BillingStack.Screen
+              name="recieptDetail"
+              component={SettingsRecieptDetail}
+            />
+          </BillingStack.Navigator>
+        );
+      }
+
+      return (
+        <PaymentStack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <PaymentStack.Screen name="payment" component={SettingsPayment} />
+          <PaymentStack.Screen
+            name="paymentMethodStack"
+            component={PaymentMethodstack}
+          />
+          <PaymentStack.Screen
+            name="billingHistoryStack"
+            component={BillingHistoryStack}
+          />
+          <PaymentStack.Screen
+            name="subscriptionManagement"
+            component={SettingsSubscriptions}
+          />
+        </PaymentStack.Navigator>
       );
     }
 
@@ -228,7 +296,7 @@ const Routing = () => {
       >
         <Settings.Screen name="settings" component={SettingsScreen} />
         <Settings.Screen name="accountStack" component={SettingAccountStack} />
-        <Settings.Screen name="payments" component={SettingsPayment} />
+        <Settings.Screen name="paymentsStack" component={PaymentsStack} />
         <Settings.Screen name="helpSupport" component={SettingsHelpSupport} />
         <Settings.Screen
           name="settingNotification"

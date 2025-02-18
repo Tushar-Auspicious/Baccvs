@@ -34,7 +34,7 @@ const SettingsScreen: FC<SettingsScreenProps> = ({ navigation }) => {
       title: "Payment",
       description: "Easily manage your payment methods and subscriptions.",
       onPress: () =>
-        navigation.navigate("payments", { screen: "subscriptionManagement" }),
+        navigation.navigate("paymentsStack", { screen: "payment" }),
     },
     {
       icon: ICONS.SettingSupportIcon,
