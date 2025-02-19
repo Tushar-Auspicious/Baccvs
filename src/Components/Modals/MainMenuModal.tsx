@@ -58,7 +58,6 @@ const MainMenuModal = () => {
 
   return (
     <Modal
-      useNativeDriver={true}
       hideModalContentWhileAnimating={true}
       animationIn="slideInRight"
       animationOut="slideOutRight"

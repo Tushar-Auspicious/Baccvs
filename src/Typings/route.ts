@@ -115,7 +115,7 @@ export type StartExploringIndicatorProps = NativeStackScreenProps<
   "StartExploring"
 >;
 export type SignInIndicatorProps = NativeStackScreenProps<
-  AuthStackParams,
+  AuthStackParams & BottomTabParams & RootStackParams,
   "signIn"
 >;
 
@@ -226,3 +226,8 @@ export type CreateEventScreenProps = NativeStackScreenProps<
   "createEvent"
 >;
 
+// Event Detail Screen Props
+export type EventDetailScreenProps = NativeStackScreenProps<
+  MainStackParams & BottomTabParams,
+  "eventDetail"
+>;

@@ -1,7 +1,16 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
-import { Pressable, StyleSheet, TouchableOpacity, View } from "react-native";
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import ICONS from "../../../Assets/Icons";
 import CustomButton from "../../../Components/Buttons/CustomButton";
+import CustomIcon from "../../../Components/CustomIcon";
 import { CustomText } from "../../../Components/CustomText";
+import AddEventTicket from "../../../Components/Modals/AddEventTicket";
 import COLORS from "../../../Utilities/Colors";
 import { horizontalScale, verticalScale } from "../../../Utilities/Metrics";
 
@@ -11,11 +20,110 @@ type EventTicketingProps = {
   handleNext: () => void;
 };
 
+export type TicketData = {
+  ticketID: string;
+  ticketName: string;
+  ticketPrice: string;
+  ticketQuantity: string;
+  ticketBenefit: {
+    id: string;
+    label: string;
+  }[];
+};
+
 const EventTicketing: FC<EventTicketingProps> = ({
   acitveTab,
   setActiveTab,
   handleNext,
 }) => {
+  const [isAddTicketModal, setIsAddTicketModal] = useState(false);
+  const [tickets, setTickets] = useState<TicketData[]>([]);
+
+  const [selectedTicket, setSelectedTicket] = useState<TicketData | null>(null);
+
+  const renderSavedTicketList = () => {
+    const handleEditTicket = (ticket: TicketData) => {
+      setSelectedTicket(ticket);
+      setIsAddTicketModal(true);
+    };
+
+    const handleDeleteTicket = (ticketID: string) => {
+      setTickets((prev) =>
+        prev.filter((ticket) => ticket.ticketID !== ticketID)
+      );
+    };
+
+    return (
+      <View style={{ marginVertical: verticalScale(10), flex: 1 }}>
+        <FlatList
+          data={tickets}
+          renderItem={({ item, index }) => {
+            return (
+              <View
+                key={item.ticketName + index.toString()}
+                style={{
+                  paddingVertical: verticalScale(16),
+                  paddingHorizontal: horizontalScale(16),
+                  backgroundColor: COLORS.darkVoilet,
+                  borderRadius: 10,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <View style={{ gap: verticalScale(6) }}>
+                    <CustomText fontFamily="bold">{item.ticketName}</CustomText>
+                    <CustomText
+                      fontFamily="medium"
+                      fontSize={12}
+                      color={COLORS.greyMedium}
+                    >
+                      {item.ticketQuantity} available
+                    </CustomText>
+                  </View>
+                  <CustomText fontFamily="bold">
+                    $ {item.ticketPrice}
+                  </CustomText>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                    gap: horizontalScale(10),
+                  }}
+                >
+                  {tickets.length > 1 && (
+                    <TouchableOpacity
+                      onPress={() => handleDeleteTicket(item.ticketID)}
+                      activeOpacity={0.7}
+                    >
+                      <CustomIcon
+                        Icon={ICONS.DeleteIcon}
+                        height={36}
+                        width={36}
+                      />
+                    </TouchableOpacity>
+                  )}
+                  <TouchableOpacity
+                    onPress={() => handleEditTicket(item)}
+                    activeOpacity={0.7}
+                  >
+                    <CustomIcon Icon={ICONS.EditIcon} height={36} width={36} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            );
+          }}
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.container}>
@@ -45,19 +153,28 @@ const EventTicketing: FC<EventTicketingProps> = ({
               </CustomText>
             </Pressable>
           </View>
-
           {!acitveTab && (
-            <View style={styles.privateTabWrapper}>
-              <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
-                <CustomText color={COLORS.mediuumPink} fontFamily="bold">
-                  Add a ticket
-                </CustomText>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => setIsAddTicketModal(true)}
+            >
+              <CustomText color={COLORS.mediuumPink} fontFamily="bold">
+                Add a ticket
+              </CustomText>
+            </TouchableOpacity>
           )}
+          {tickets.length > 0 && renderSavedTicketList()}
         </View>
         <CustomButton title="Next" isFullWidth onPress={handleNext} />
       </View>
+      <AddEventTicket
+        isModalVisible={isAddTicketModal}
+        setIsModalVisible={setIsAddTicketModal}
+        ticketData={tickets}
+        setTicketData={setTickets}
+        editTicket={selectedTicket}
+        setEditTicket={setSelectedTicket}
+      />
     </View>
   );
 };
@@ -105,23 +222,6 @@ const styles = StyleSheet.create({
   },
   privateTabWrapper: {
     gap: verticalScale(20),
-    flex: 1,
-  },
-  flatListContent: {
-    rowGap: verticalScale(20),
-  },
-  listCont: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "100%",
-    gap: horizontalScale(15),
-  },
-  avatar: {
-    height: 40,
-    width: 40,
-    borderRadius: 100,
-  },
-  personName: {
     flex: 1,
   },
 });

@@ -18,7 +18,7 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const steps = new Array(5).fill(null);
 
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(5);
 
   const [eventDetails, setEventDetails] = useState({
     eventTitle: "",
@@ -43,13 +43,20 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
 
   const [isFreeEvent, setIsFreeEvent] = useState(false);
 
+  const [coverPhoto, setCoverPhoto] = useState<any>(null);
+
+  const [selectedVideos, setSelectedVideos] = useState<any[]>([]);
+  const [editingVideoIndex, setEditingVideoIndex] = useState<number | null>(
+    null
+  );
+
   // Function to update state dynamically
   const updateEventDetails = (key: string, value: any) => {
     setEventDetails((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleNext = () => {
-    if (currentIndex < steps.length - 1) {
+    if (currentIndex < steps.length) {
       setCurrentIndex(currentIndex + 1);
     } else {
       navigation.navigate("eventDetail", { isFromCreateEvent: true });
@@ -57,7 +64,7 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
   };
 
   const handleBack = () => {
-    if (currentIndex > 0) {
+    if (currentIndex > 1) {
       setCurrentIndex(currentIndex - 1);
     } else {
       navigation.goBack();
@@ -101,7 +108,17 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
           />
         );
       case 5:
-        return <EventAssets />;
+        return (
+          <EventAssets
+            coverPhoto={coverPhoto}
+            setCoverPhoto={setCoverPhoto}
+            selectedVideos={selectedVideos}
+            setSelectedVideos={setSelectedVideos}
+            handleNext={handleNext}
+            editingVideoIndex={editingVideoIndex}
+            setEditingVideoIndex={setEditingVideoIndex}
+          />
+        );
     }
   }, [
     currentIndex,
@@ -110,6 +127,9 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
     activeTab,
     addedPeoples,
     isFreeEvent,
+    coverPhoto,
+    selectedVideos,
+    editingVideoIndex,
   ]);
 
   const renderStepper = useMemo(() => {

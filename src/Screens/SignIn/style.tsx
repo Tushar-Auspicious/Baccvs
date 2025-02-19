@@ -13,6 +13,11 @@ const styles = StyleSheet.create({
     gap: verticalScale(30),
     paddingHorizontal: horizontalScale(20),
   },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   textstyle: {
     marginTop: verticalScale(10),
   },

@@ -3206,9 +3206,11 @@ __metadata:
     react: 18.3.1
     react-native: 0.76.7
     react-native-country-picker-modal: ^2.0.0
+    react-native-create-thumbnail: ^2.0.1
     react-native-date-picker: ^5.0.10
     react-native-gesture-handler: ^2.23.1
     react-native-image-picker: ^8.1.0
+    react-native-linear-gradient: ^2.8.3
     react-native-modal: ^13.0.1
     react-native-modal-datetime-picker: ^18.0.0
     react-native-phone-number-input: ^2.1.0
@@ -8624,6 +8626,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-create-thumbnail@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "react-native-create-thumbnail@npm:2.0.1"
+  peerDependencies:
+    react-native: ">=0.59.0"
+  checksum: 2feb7d36fa02620b0e3f8a4d2275ddface6126f4788d62637fcac9d285caedcb1e967f769d4daf901f4085282e5afee75176d35209870842ea941efea5c77377
+  languageName: node
+  linkType: hard
+
 "react-native-date-picker@npm:^5.0.10":
   version: 5.0.10
   resolution: "react-native-date-picker@npm:5.0.10"
@@ -8655,6 +8666,16 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: a6258c06d18bdfe989576bac174ae97f657ffffca75448becbc916f8237b08e27cb604f8d83200a9130a33cc5491b720a1d54cc8d91d500f75f9d7208264c140
+  languageName: node
+  linkType: hard
+
+"react-native-linear-gradient@npm:^2.8.3":
+  version: 2.8.3
+  resolution: "react-native-linear-gradient@npm:2.8.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: f980d324e551bbc475c6406bdc5250a08242020cbe653412fa169bbdf51e28a502e225de105b4d696d6a1a1b733d44782469020f4936d8b3ce0e2c78e51cf58f
   languageName: node
   linkType: hard
 

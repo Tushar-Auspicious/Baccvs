@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
-import { Alert, Text, View } from "react-native";
+import { Alert, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import ICONS from "../../Assets/Icons";
 import CustomButton from "../../Components/Buttons/CustomButton";
 import CustomIcon from "../../Components/CustomIcon";
@@ -7,10 +8,8 @@ import CustomInput from "../../Components/CustomInput";
 import { CustomText } from "../../Components/CustomText";
 import { ReferralProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
-import { responsiveFontSize, verticalScale } from "../../Utilities/Metrics";
+import { verticalScale } from "../../Utilities/Metrics";
 import styles from "./style";
-import { SafeAreaView } from "react-native-safe-area-context";
-import SignInHeader from "./SignInHeader/HeaderSignIn";
 
 const Referral: FC<ReferralProps> = ({ navigation }) => {
   const [referralCode, setReferralCode] = useState("");
@@ -26,14 +25,22 @@ const Referral: FC<ReferralProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaCont}>
-        <SignInHeader
-          title={
-            <Text onPress={() => navigation.navigate("signIn")}>
-              {"Sign in"}
-            </Text>
-          }
-          onBackPress={() => navigation.goBack()}
-        />
+        <View style={styles.header}>
+          <CustomIcon
+            Icon={ICONS.backArrow}
+            height={24}
+            width={24}
+            onPress={() => navigation.goBack()}
+          />
+          <CustomText
+            onPress={() => navigation.navigate("signIn")}
+            fontFamily="bold"
+            fontSize={14}
+            color={COLORS.mediuumPink}
+          >
+            Sign in
+          </CustomText>
+        </View>
         <View style={{ gap: verticalScale(10), flex: 1 }}>
           <CustomText fontSize={24} fontFamily="bold">
             Referral code

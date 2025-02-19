@@ -55,4 +55,15 @@ const eventFilters: Record<FilterCategory, EventFilter> = {
   },
 };
 
-export { eventFilters };
+const TicketBenefits = [
+  { id: "1", label: "Entry to the event." },
+  { id: "2", label: "Access to all general areas." },
+  { id: "3", label: "VIP lounge access." },
+  { id: "4", label: "Complimentary drink/snack." },
+  { id: "5", label: "Photo opportunities and autographs." },
+  { id: "6", label: "Get in before the crowds." },
+  { id: "7", label: "Covers entry, food, drinks, and premium perks." },
+  { id: "8", label: "Guarantees the best views and comfort." },
+];
+
+export { eventFilters, TicketBenefits };

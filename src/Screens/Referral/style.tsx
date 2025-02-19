@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import COLORS from "../../Utilities/Colors";
-import { horizontalScale, verticalScale, wp } from "../../Utilities/Metrics";
+import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: horizontalScale(20),
   },
 
-  innercontainer: {
+  header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
