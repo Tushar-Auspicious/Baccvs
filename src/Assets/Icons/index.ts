@@ -80,6 +80,14 @@ import WhiteCrossIcon from "./whiteCrossIcon.svg";
 import WhiteMapPinIcon from "./whiteMapPinIcon.svg";
 import WhiteTickIcon from "./whiteTick.svg";
 import YellowPlus from "./yellowPlus.svg";
+import SettingsmailIcon from "./SettingsmailIcon.svg";
+import SettingwhatsappIcon from "./SettingwhatsappIcon.svg";
+import SettingcallIcon from "./SettingcallIcon.svg";
+import UprightArrowIcon from "./UprightArrow.svg";
+import PaymentMethodIcon from "./PaymentMethodIcon.svg";
+import BillingHostoryIcon from "./BillingHistoryIcon.svg";
+import SubscriptionIcon from "./SubscriptionIcon.svg";
+import PaymentplusIcon from "./paymentplusIcon.svg";
 
 const ICONS = {
   HomeIcon,
@@ -162,6 +170,14 @@ const ICONS = {
   DeleteIcon,
   EditIcon,
   BorderedEditIcon,
+  SettingsmailIcon,
+  SettingwhatsappIcon,
+  SettingcallIcon,
+  UprightArrowIcon,
+  PaymentMethodIcon,
+  SubscriptionIcon,
+  BillingHostoryIcon,
+  PaymentplusIcon,
 };
 
 export default ICONS;

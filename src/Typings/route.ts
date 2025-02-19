@@ -164,6 +164,10 @@ export type SettingsPaymentProps = NativeStackScreenProps<
   SettingsStackParams & SettingsPaymentStackParams,
   "payment"
 >;
+export type SettingsAddPaymentMethodProps = NativeStackScreenProps<
+  SettingsStackParams & SettingsPaymentStackParams & SettingsPaymentStackParams,
+  "payment"
+>;
 
 // Setting Stack > Account > Profile Informtaion
 export type ProfileInformationProps = NativeStackScreenProps<

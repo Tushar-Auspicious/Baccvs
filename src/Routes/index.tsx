@@ -237,7 +237,7 @@ const Routing = () => {
           >
             <PaymentMethodStack.Screen
               name="paymentMethod"
-              component={SettingsPaymentMethod}
+              component={SettingsPayment}
             />
             <PaymentMethodStack.Screen
               name="addPaymentMethod"

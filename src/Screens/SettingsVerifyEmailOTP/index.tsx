@@ -92,7 +92,7 @@ const SettingsVerifyEmailOTP: FC<VerifyEmailOtpProps> = ({ navigation }) => {
             </CustomText>
           </View>
         </View>
-        Ò
+
         <CustomButton
           title="Verify"
           onPress={() => {
