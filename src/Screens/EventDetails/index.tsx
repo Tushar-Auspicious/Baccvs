@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
+import { ImageBackground, ScrollView, StyleSheet, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import IMAGES from "../../Assets/Images";
@@ -17,7 +17,7 @@ const EventDetails: FC<EventDetailScreenProps> = ({ navigation, route }) => {
   const { isFromCreateEvent } = route.params;
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <ImageBackground
         source={IMAGES.dummyEventImage}
         style={styles.imageBackground}
@@ -69,7 +69,7 @@ const EventDetails: FC<EventDetailScreenProps> = ({ navigation, route }) => {
           Speed Dating & Trivia Night
         </CustomText>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
