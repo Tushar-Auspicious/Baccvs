@@ -9,14 +9,13 @@ import {
 } from "react-native";
 import { createThumbnail } from "react-native-create-thumbnail";
 import ICONS from "../../../Assets/Icons";
-import ImagePickerOptionSheet, {
-  RBSheetRef,
-} from "../../../Components/BottomSheets/ImagePickerOptionSheet";
+import ImagePickerOptionSheet from "../../../Components/BottomSheets/ImagePickerOptionSheet";
 import CustomButton from "../../../Components/Buttons/CustomButton";
 import CustomIcon from "../../../Components/CustomIcon";
 import { CustomText } from "../../../Components/CustomText";
 import COLORS from "../../../Utilities/Colors";
 import { hp, verticalScale, wp } from "../../../Utilities/Metrics";
+import { RBSheetRef } from "../../../Typings/type";
 
 type EventAssetsProps = {
   coverPhoto: any;

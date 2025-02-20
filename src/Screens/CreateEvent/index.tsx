@@ -6,6 +6,7 @@ import CustomIcon from "../../Components/CustomIcon";
 import { CustomText } from "../../Components/CustomText";
 import { FilterCategory } from "../../Seeds/EventCreation";
 import { CreateEventScreenProps } from "../../Typings/route";
+import { TicketData } from "../../Typings/type";
 import COLORS from "../../Utilities/Colors";
 import { horizontalScale, verticalScale, wp } from "../../Utilities/Metrics";
 import BasicEventDetails from "./Steps/BasicEventDetails";
@@ -18,7 +19,7 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const steps = new Array(5).fill(null);
 
-  const [currentIndex, setCurrentIndex] = useState(5);
+  const [currentIndex, setCurrentIndex] = useState(1);
 
   const [eventDetails, setEventDetails] = useState({
     eventTitle: "",
@@ -30,7 +31,7 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
     eventCapacity: null,
   });
 
-  const [eventPrefrences, setEventPreferences] = useState<
+  const [eventPreference, setEventPreferences] = useState<
     Record<FilterCategory, string[]>
   >({
     musicTypes: [],
@@ -42,6 +43,7 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
   const [addedPeoples, setAddedPeoples] = useState<any>([]);
 
   const [isFreeEvent, setIsFreeEvent] = useState(false);
+  const [tickets, setTickets] = useState<TicketData[]>([]);
 
   const [coverPhoto, setCoverPhoto] = useState<any>(null);
 
@@ -59,7 +61,18 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
     if (currentIndex < steps.length) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      navigation.navigate("eventDetail", { isFromCreateEvent: true });
+      navigation.navigate("eventDetail", {
+        isFromCreateEvent: true,
+        data: {
+          addedPeoples,
+          coverPhoto,
+          eventDetails,
+          eventPreference,
+          eventVideos: selectedVideos,
+          isFreeEvent,
+          eventTickets: tickets,
+        },
+      });
     }
   };
 
@@ -84,7 +97,7 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
       case 2:
         return (
           <EventPreference
-            selectedItems={eventPrefrences}
+            selectedItems={eventPreference}
             setSelectedItems={setEventPreferences}
             handleNext={handleNext}
           />
@@ -105,6 +118,8 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
             handleNext={handleNext}
             acitveTab={isFreeEvent}
             setActiveTab={setIsFreeEvent}
+            tickets={tickets}
+            setTickets={setTickets}
           />
         );
       case 5:
@@ -123,13 +138,14 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
   }, [
     currentIndex,
     eventDetails,
-    eventPrefrences,
+    eventPreference,
     activeTab,
     addedPeoples,
     isFreeEvent,
     coverPhoto,
     selectedVideos,
     editingVideoIndex,
+    tickets,
   ]);
 
   const renderStepper = useMemo(() => {

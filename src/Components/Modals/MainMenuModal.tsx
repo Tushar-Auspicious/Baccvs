@@ -87,7 +87,7 @@ const MainMenuModal = () => {
         <View style={styles.topButtonsContainer}>
           {renderTopButtons(ICONS.YellowPlus, "Make a post", () => {
             closeModal();
-            navigation.navigate("createPost");
+            navigation.navigate("createPost", { isFromRepost: false });
           })}
           {renderTopButtons(ICONS.CalendarWithPlus, "Crearte event", () => {
             closeModal();

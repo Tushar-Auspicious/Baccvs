@@ -1,22 +1,18 @@
 import React, { forwardRef } from "react";
 import { StyleSheet, View } from "react-native";
 import {
-    CameraOptions,
-    ImageLibraryOptions,
-    launchCamera,
-    launchImageLibrary,
-    MediaType,
+  CameraOptions,
+  ImageLibraryOptions,
+  launchCamera,
+  launchImageLibrary,
+  MediaType,
 } from "react-native-image-picker";
 import RBSheet from "react-native-raw-bottom-sheet";
+import { RBSheetRef } from "../../Typings/type";
 import COLORS from "../../Utilities/Colors";
 import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
 import CustomButton from "../Buttons/CustomButton";
 import { CustomText } from "../CustomText";
-
-export interface RBSheetRef {
-  open: () => void;
-  close: () => void;
-}
 
 interface ImagePickerOptionSheetProps {
   onImageSelected?: (source: any) => void;

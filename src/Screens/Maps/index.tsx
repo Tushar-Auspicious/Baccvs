@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     paddingVertical: verticalScale(16),
     paddingHorizontal: horizontalScale(16),
     gap: verticalScale(20),
-    position:'relative'
+    position: "relative",
   },
   headerContainer: {
     flexDirection: "row",
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
-    backgroundColor: COLORS.primaryPink,
+    backgroundColor: COLORS.blackPink,
     borderRadius: 100,
   },
   searchButton: {
@@ -121,12 +121,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: horizontalScale(10),
     padding: 10,
-    backgroundColor: COLORS.primaryPink,
+    backgroundColor: COLORS.blackPink,
     borderRadius: 100,
     flex: 1,
   },
   bottomListContainer: {
-    backgroundColor: COLORS.primaryPink,
+    backgroundColor: COLORS.blackPink,
     width: wp(100),
     paddingHorizontal: horizontalScale(16),
     paddingTop: verticalScale(10),
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 15,
     position: "absolute",
     bottom: 0,
-    gap: verticalScale(10)
+    gap: verticalScale(10),
   },
   tabsContainer: {
     flexDirection: "row",
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
   selectedTab: {
     borderBottomColor: COLORS.white,
-    borderBottomWidth: 2
+    borderBottomWidth: 2,
   },
   contentContainer: {
     paddingTop: verticalScale(10),

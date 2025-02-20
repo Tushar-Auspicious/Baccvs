@@ -1,5 +1,6 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { EventDetailData } from "./type";
 
 export type RootStackParams = {
   authStack: NavigatorScreenParams<AuthStackParams>;
@@ -20,11 +21,11 @@ export type MainStackParams = {
   notification: undefined;
   searchHome: undefined;
   maps: undefined;
-  createPost: undefined;
-  postDetails: undefined;
+  createPost: { isFromRepost?: boolean; repostId?: string };
+  postDetails: { postId: string };
   createStory: undefined;
   createEvent: undefined;
-  eventDetail: { isFromCreateEvent?: boolean };
+  eventDetail: { isFromCreateEvent?: boolean; data?: EventDetailData };
   settingsStack: NavigatorScreenParams<SettingsStackParams>;
 };
 
@@ -249,4 +250,10 @@ export type CreateEventScreenProps = NativeStackScreenProps<
 export type EventDetailScreenProps = NativeStackScreenProps<
   MainStackParams & BottomTabParams,
   "eventDetail"
+>;
+
+// Post Detail Screen Props
+export type PostDetailScreenProps = NativeStackScreenProps<
+  MainStackParams & BottomTabParams,
+  "postDetails"
 >;

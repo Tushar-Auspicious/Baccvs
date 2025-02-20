@@ -1,10 +1,11 @@
-import React, { FC, useMemo } from "react";
+import React, { FC, useMemo, useRef, useState } from "react";
 import { FlatList, ScrollView, StyleSheet, View } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import ICONS from "../../Assets/Icons";
+import HomeScreenPostOption from "../../Components/BottomSheets/HomeScreenPostOption";
 import CustomButton from "../../Components/Buttons/CustomButton";
 import EventListCard from "../../Components/Cards/EventListCard";
 import PostCard, { PostCardProps } from "../../Components/Cards/PostCard";
@@ -12,19 +13,26 @@ import CardSwiper from "../../Components/CardSwiper";
 import { data } from "../../Components/CardSwiper/data";
 import CustomIcon from "../../Components/CustomIcon";
 import { CustomText } from "../../Components/CustomText";
+import MainMenuModal from "../../Components/Modals/MainMenuModal";
+import { setIsMainMenuVisible } from "../../Redux/slices/modalSlice";
+import { useAppDispatch, useAppSelector } from "../../Redux/store";
 import dummyPosts from "../../Seeds/POstData";
+import { HomeScreenProps } from "../../Typings/route";
+import { RBSheetRef } from "../../Typings/type";
 import COLORS from "../../Utilities/Colors";
 import { horizontalScale, verticalScale, wp } from "../../Utilities/Metrics";
-import { useAppDispatch, useAppSelector } from "../../Redux/store";
-import { setIsMainMenuVisible } from "../../Redux/slices/modalSlice";
-import MainMenuModal from "../../Components/Modals/MainMenuModal";
-import { HomeScreenProps } from "../../Typings/route";
 
 const Home: FC<HomeScreenProps> = ({ navigation }) => {
   const isNewUSer = true;
   const insets = useSafeAreaInsets();
   const dispatch = useAppDispatch();
   const { isMainMenuVisible } = useAppSelector((state) => state.modals);
+
+  const refRBSheet = useRef<RBSheetRef>(null);
+
+  const [selectedPostforRepost, setSelectedPostforRepost] = useState<
+    null | string
+  >(null);
 
   const renderFirstPostCard = () => {
     return (
@@ -258,7 +266,19 @@ const Home: FC<HomeScreenProps> = ({ navigation }) => {
         if ("component" in item) {
           return <View key={item.type}>{item.component}</View>;
         }
-        return <PostCard {...item} key={(item as PostCardProps).id} />;
+        return (
+          <PostCard
+            {...item}
+            key={(item as PostCardProps).id}
+            onPress={() => {
+              navigation.navigate("postDetails", { postId: item.id });
+            }}
+            onMenuPress={() => {
+              setSelectedPostforRepost(item.id);
+              refRBSheet.current?.open();
+            }}
+          />
+        );
       };
 
       return (
@@ -278,6 +298,17 @@ const Home: FC<HomeScreenProps> = ({ navigation }) => {
         </View>
       );
     }, [dummyPosts]);
+  };
+
+  const handleRepost = () => {};
+  const handleRepostWithYourTake = () => {
+    refRBSheet.current?.close();
+    if (selectedPostforRepost) {
+      navigation.navigate("createPost", {
+        isFromRepost: true,
+        repostId: selectedPostforRepost,
+      });
+    }
   };
 
   return (
@@ -304,6 +335,11 @@ const Home: FC<HomeScreenProps> = ({ navigation }) => {
           {renderPeopleYouMightKnow()} */}
         </ScrollView>
         <MainMenuModal />
+        <HomeScreenPostOption
+          ref={refRBSheet}
+          handleRepost={handleRepost}
+          handleRepostWithYourTake={handleRepostWithYourTake}
+        />
       </SafeAreaView>
     </View>
   );

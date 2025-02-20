@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import {
   FlatList,
   Pressable,
@@ -11,34 +11,26 @@ import CustomButton from "../../../Components/Buttons/CustomButton";
 import CustomIcon from "../../../Components/CustomIcon";
 import { CustomText } from "../../../Components/CustomText";
 import AddEventTicket from "../../../Components/Modals/AddEventTicket";
+import { TicketData } from "../../../Typings/type";
 import COLORS from "../../../Utilities/Colors";
 import { horizontalScale, verticalScale } from "../../../Utilities/Metrics";
 
 type EventTicketingProps = {
   acitveTab: boolean;
   setActiveTab: Dispatch<SetStateAction<boolean>>;
+  tickets: TicketData[];
+  setTickets: Dispatch<SetStateAction<TicketData[]>>;
   handleNext: () => void;
 };
 
-export type TicketData = {
-  ticketID: string;
-  ticketName: string;
-  ticketPrice: string;
-  ticketQuantity: string;
-  ticketBenefit: {
-    id: string;
-    label: string;
-  }[];
-};
-
-const EventTicketing: FC<EventTicketingProps> = ({
+const EventTicketing: React.FC<EventTicketingProps> = ({
   acitveTab,
   setActiveTab,
+  tickets,
+  setTickets,
   handleNext,
 }) => {
   const [isAddTicketModal, setIsAddTicketModal] = useState(false);
-  const [tickets, setTickets] = useState<TicketData[]>([]);
-
   const [selectedTicket, setSelectedTicket] = useState<TicketData | null>(null);
 
   const renderSavedTicketList = () => {
@@ -54,28 +46,17 @@ const EventTicketing: FC<EventTicketingProps> = ({
     };
 
     return (
-      <View style={{ marginVertical: verticalScale(10), flex: 1 }}>
+      <View style={styles.savedTicketListContainer}>
         <FlatList
           data={tickets}
           renderItem={({ item, index }) => {
             return (
               <View
                 key={item.ticketName + index.toString()}
-                style={{
-                  paddingVertical: verticalScale(16),
-                  paddingHorizontal: horizontalScale(16),
-                  backgroundColor: COLORS.darkVoilet,
-                  borderRadius: 10,
-                }}
+                style={styles.ticketItem}
               >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <View style={{ gap: verticalScale(6) }}>
+                <View style={styles.ticketInfo}>
+                  <View style={styles.ticketNameContainer}>
                     <CustomText fontFamily="bold">{item.ticketName}</CustomText>
                     <CustomText
                       fontFamily="medium"
@@ -89,14 +70,7 @@ const EventTicketing: FC<EventTicketingProps> = ({
                     $ {item.ticketPrice}
                   </CustomText>
                 </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "flex-end",
-                    gap: horizontalScale(10),
-                  }}
-                >
+                <View style={styles.ticketActions}>
                   {tickets.length > 1 && (
                     <TouchableOpacity
                       onPress={() => handleDeleteTicket(item.ticketID)}
@@ -163,7 +137,7 @@ const EventTicketing: FC<EventTicketingProps> = ({
               </CustomText>
             </TouchableOpacity>
           )}
-          {tickets.length > 0 && renderSavedTicketList()}
+          {!acitveTab && tickets.length > 0 && renderSavedTicketList()}
         </View>
         <CustomButton title="Next" isFullWidth onPress={handleNext} />
       </View>
@@ -223,5 +197,30 @@ const styles = StyleSheet.create({
   privateTabWrapper: {
     gap: verticalScale(20),
     flex: 1,
+  },
+  savedTicketListContainer: {
+    marginVertical: verticalScale(10),
+    flex: 1,
+  },
+  ticketItem: {
+    paddingVertical: verticalScale(16),
+    paddingHorizontal: horizontalScale(16),
+    backgroundColor: COLORS.darkVoilet,
+    borderRadius: 10,
+  },
+  ticketInfo: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  ticketNameContainer: {
+    gap: verticalScale(6),
+  },
+  ticketActions: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    gap: horizontalScale(10),
+    marginTop: verticalScale(10), // Adjust this value to space out actions from the ticket info
   },
 });

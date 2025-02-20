@@ -88,6 +88,8 @@ import PaymentMethodIcon from "./PaymentMethodIcon.svg";
 import BillingHostoryIcon from "./BillingHistoryIcon.svg";
 import SubscriptionIcon from "./SubscriptionIcon.svg";
 import PaymentplusIcon from "./paymentplusIcon.svg";
+import RepostWithTakeIcon from "./rePostWithTakeIcon.svg";
+import RepostIcon from "./RepostIcon.svg";
 
 const ICONS = {
   HomeIcon,
@@ -178,6 +180,8 @@ const ICONS = {
   SubscriptionIcon,
   BillingHostoryIcon,
   PaymentplusIcon,
+  RepostIcon,
+  RepostWithTakeIcon,
 };
 
 export default ICONS;

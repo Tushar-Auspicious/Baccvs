@@ -50,6 +50,7 @@ import {
   SettingsProfileInfoStackParams,
   SettingsStackParams,
 } from "../Typings/route";
+import PostDetail from "../Screens/PostDetail";
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
 const Auth = createNativeStackNavigator<AuthStackParams>();
@@ -320,6 +321,7 @@ const Routing = () => {
         <Main.Screen name="maps" component={Maps} />
         <Main.Screen name="settingsStack" component={SettingStack} />
         <Main.Screen name="createPost" component={CreatePost} />
+        <Main.Screen name="postDetails" component={PostDetail} />
         <Main.Screen name="createEvent" component={CreateEvent} />
         <Main.Screen name="eventDetail" component={EventDetails} />
       </Main.Navigator>

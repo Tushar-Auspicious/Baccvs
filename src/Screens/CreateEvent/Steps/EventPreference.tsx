@@ -38,80 +38,81 @@ const EventPreference: FC<EventPreferenceProps> = ({
   };
 
   return (
-    <KeyboardAvoidingContainer>
-      <View style={styles.container}>
-        <CustomText fontFamily="bold" fontSize={20}>
-          Select event preferences
-        </CustomText>
+    <>
+      <KeyboardAvoidingContainer>
+        <View style={styles.container}>
+          <CustomText fontFamily="bold" fontSize={20}>
+            Select event preferences
+          </CustomText>
 
-        <View style={styles.filterContainer}>
-          {Object.keys(filters).map((category) => {
-            const filterCategory = category as FilterCategory;
-            const { title, maxSelection, options } = filters[filterCategory];
-            const selectedCategoryItems = selectedItems[filterCategory];
+          <View style={styles.filterContainer}>
+            {Object.keys(filters).map((category) => {
+              const filterCategory = category as FilterCategory;
+              const { title, maxSelection, options } = filters[filterCategory];
+              const selectedCategoryItems = selectedItems[filterCategory];
 
-            return (
-              <View key={filterCategory} style={styles.section}>
-                <View style={styles.titleHeader}>
-                  <CustomText fontFamily="bold">{title}</CustomText>
-                  <CustomText fontSize={14}>{maxSelection} max</CustomText>
-                </View>
-                <FlatList
-                  data={options}
-                  keyExtractor={(item) => item}
-                  columnWrapperStyle={styles.columnWrapper}
-                  numColumns={3}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity
-                      style={[
-                        styles.option,
-                        selectedCategoryItems.includes(item) &&
-                          styles.selectedOption,
-                      ]}
-                      onPress={() => toggleSelection(filterCategory, item)}
-                    >
-                      {selectedItems[filterCategory].includes(item) ? (
-                        <CustomIcon
-                          Icon={ICONS.FillTickIcon}
-                          height={14}
-                          width={14}
-                        />
-                      ) : (
-                        <View
-                          style={{
-                            height: 14,
-                            width: 14,
-                            borderRadius: 100,
-                            borderWidth: 0.6,
-                            borderColor: COLORS.white,
-                          }}
-                        />
-                      )}
-                      <CustomText
-                        fontFamily={
-                          selectedCategoryItems.includes(item)
-                            ? "bold"
-                            : "medium"
-                        }
-                        color={
-                          selectedCategoryItems.includes(item)
-                            ? COLORS.white
-                            : COLORS.greyLight
-                        }
+              return (
+                <View key={filterCategory} style={styles.section}>
+                  <View style={styles.titleHeader}>
+                    <CustomText fontFamily="bold">{title}</CustomText>
+                    <CustomText fontSize={14}>{maxSelection} max</CustomText>
+                  </View>
+                  <FlatList
+                    data={options}
+                    keyExtractor={(item) => item}
+                    columnWrapperStyle={styles.columnWrapper}
+                    numColumns={3}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity
+                        style={[
+                          styles.option,
+                          selectedCategoryItems.includes(item) &&
+                            styles.selectedOption,
+                        ]}
+                        onPress={() => toggleSelection(filterCategory, item)}
                       >
-                        {item}
-                      </CustomText>
-                    </TouchableOpacity>
-                  )}
-                />
-              </View>
-            );
-          })}
+                        {selectedItems[filterCategory].includes(item) ? (
+                          <CustomIcon
+                            Icon={ICONS.FillTickIcon}
+                            height={14}
+                            width={14}
+                          />
+                        ) : (
+                          <View
+                            style={{
+                              height: 14,
+                              width: 14,
+                              borderRadius: 100,
+                              borderWidth: 0.6,
+                              borderColor: COLORS.white,
+                            }}
+                          />
+                        )}
+                        <CustomText
+                          fontFamily={
+                            selectedCategoryItems.includes(item)
+                              ? "bold"
+                              : "medium"
+                          }
+                          color={
+                            selectedCategoryItems.includes(item)
+                              ? COLORS.white
+                              : COLORS.greyLight
+                          }
+                        >
+                          {item}
+                        </CustomText>
+                      </TouchableOpacity>
+                    )}
+                  />
+                </View>
+              );
+            })}
+          </View>
         </View>
-
-        <CustomButton title="Next" isFullWidth onPress={handleNext} />
-      </View>
-    </KeyboardAvoidingContainer>
+      </KeyboardAvoidingContainer>
+      <CustomButton title="Next" isFullWidth onPress={handleNext} />
+    </>
   );
 };
 

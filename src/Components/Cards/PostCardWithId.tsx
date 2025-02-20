@@ -1,34 +1,16 @@
 import React, { FC } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import ICONS from "../../Assets/Icons";
+import dummyPosts from "../../Seeds/POstData";
 import COLORS from "../../Utilities/Colors";
 import {
-    horizontalScale,
-    hp,
-    verticalScale,
-    wp,
+  horizontalScale,
+  hp,
+  verticalScale,
+  wp,
 } from "../../Utilities/Metrics";
 import CustomIcon from "../CustomIcon";
 import { CustomText } from "../CustomText";
-
-export type PostCardProps = {
-  id: string;
-  userName: string;
-  userProfilePic: any;
-  createdAt: string;
-  description: string;
-  videos: any;
-  photos: any;
-  likesCount: number;
-  commentsCount: number;
-  repostCount: number;
-  onLikePress?: () => void;
-  onCommentPress?: () => void;
-  onRepostPRess?: () => void;
-  onSharePress?: () => void;
-  onPress?: () => void;
-  onMenuPress?: () => void;
-};
 
 const InteractionItem = ({
   icon,
@@ -51,78 +33,85 @@ const InteractionItem = ({
   </TouchableOpacity>
 );
 
-const PostCard: FC<PostCardProps> = ({
+export type PostCardWithIdProps = {
+  id: string;
+  isFromRepost?: boolean;
+  onPress?: () => void;
+};
+
+const PostCardWithId: FC<PostCardWithIdProps> = ({
   id,
-  userName,
-  userProfilePic,
-  createdAt,
-  description,
-  videos,
-  photos,
-  likesCount,
-  commentsCount,
-  repostCount,
-  onLikePress,
-  onCommentPress,
-  onRepostPRess,
-  onSharePress,
+  isFromRepost,
   onPress,
-  onMenuPress,
 }) => {
+  const data = dummyPosts.find((item) => item.id === id)!;
+
   return (
     <TouchableOpacity
-      onPress={onPress}
-      activeOpacity={0.8}
+      onPress={() => {
+        !isFromRepost && onPress ? onPress() : null;
+      }}
+      activeOpacity={isFromRepost ? 1 : 0.8}
       style={styles.container}
     >
       <View style={styles.header}>
         <View style={styles.userInfo}>
           <Image
-            source={userProfilePic}
+            source={data?.userProfilePic}
             style={styles.profilePic}
             resizeMode="contain"
           />
           <CustomText fontFamily="bold" fontSize={14}>
-            {userName}
+            {data?.userName}
           </CustomText>
           <View style={styles.onlineDot} />
-          <CustomText fontSize={12}>{createdAt}</CustomText>
+          <CustomText fontSize={12}>{data?.createdAt}</CustomText>
         </View>
-        <TouchableOpacity onPress={onMenuPress} style={styles.menuButton}>
-          <CustomIcon Icon={ICONS.DotMenu} />
-        </TouchableOpacity>
+        {!isFromRepost && (
+          <TouchableOpacity
+            onPress={data?.onMenuPress}
+            style={styles.menuButton}
+          >
+            <CustomIcon Icon={ICONS.DotMenu} />
+          </TouchableOpacity>
+        )}
       </View>
 
       <CustomText fontFamily="medium" fontSize={12} color={COLORS.greyLight}>
-        {description}
+        {data?.description}
       </CustomText>
-      <Image source={{ uri: photos[0] }} style={styles.postImage} />
+      <Image source={{ uri: data?.photos[0] }} style={styles.postImage} />
 
-      <View style={styles.footer}>
-        <InteractionItem
-          icon={ICONS.PostComment}
-          count={commentsCount}
-          onPress={onCommentPress!}
-        />
-        <InteractionItem
-          icon={ICONS.PostLike}
-          count={likesCount}
-          onPress={onLikePress!}
-        />
-        <InteractionItem
-          icon={ICONS.PostRepost}
-          count={repostCount}
-          onPress={onRepostPRess!}
-        />
-        <TouchableOpacity onPress={onSharePress} style={styles.shareButton}>
-          <CustomIcon Icon={ICONS.PostShare} height={20} width={20} />
-        </TouchableOpacity>
-      </View>
+      {!isFromRepost && (
+        <View style={styles.footer}>
+          <InteractionItem
+            icon={ICONS.PostComment}
+            count={data?.commentsCount}
+            onPress={data?.onCommentPress!}
+          />
+          <InteractionItem
+            icon={ICONS.PostLike}
+            count={data?.likesCount}
+            onPress={data?.onLikePress!}
+          />
+          <InteractionItem
+            icon={ICONS.PostRepost}
+            count={data?.repostCount}
+            onPress={data?.onRepostPRess!}
+          />
+          <TouchableOpacity
+            onPress={data?.onSharePress}
+            style={styles.shareButton}
+          >
+            <CustomIcon Icon={ICONS.PostShare} height={20} width={20} />
+          </TouchableOpacity>
+        </View>
+      )}
     </TouchableOpacity>
   );
 };
 
-export default PostCard;
+export default PostCardWithId;
 
 const styles = StyleSheet.create({
   container: {
