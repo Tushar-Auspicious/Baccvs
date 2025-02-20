@@ -1,14 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from "react-native";
+import React, { FC } from "react";
+import { SettingsBillingHistoryProps } from "../../Typings/route";
 
-const SettingsBillingHistory = () => {
+const SettingsBillingHistory: FC<SettingsBillingHistoryProps> = ({
+  navigation,
+}) => {
   return (
     <View>
       <Text>SettingsBillingHistory</Text>
     </View>
-  )
-}
+  );
+};
 
-export default SettingsBillingHistory
+export default SettingsBillingHistory;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

@@ -2,8 +2,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import BottomTabBar from "../Components/BottomTabBar";
+import CreateEvent from "../Screens/CreateEvent";
 import CreatePost from "../Screens/CreatePost";
 import Dating from "../Screens/Dating";
+import EventDetails from "../Screens/EventDetails";
 import Events from "../Screens/Events";
 import Home from "../Screens/Home";
 import Maps from "../Screens/Maps";
@@ -48,8 +50,6 @@ import {
   SettingsProfileInfoStackParams,
   SettingsStackParams,
 } from "../Typings/route";
-import CreateEvent from "../Screens/CreateEvent";
-import EventDetails from "../Screens/EventDetails";
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
 const Auth = createNativeStackNavigator<AuthStackParams>();
@@ -237,7 +237,7 @@ const Routing = () => {
           >
             <PaymentMethodStack.Screen
               name="paymentMethod"
-              component={SettingsPayment}
+              component={SettingsPaymentMethod}
             />
             <PaymentMethodStack.Screen
               name="addPaymentMethod"

@@ -1,13 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React, { FC } from "react";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CustomIcon from "../../Components/CustomIcon";
 import ICONS from "../../Assets/Icons";
+import CustomIcon from "../../Components/CustomIcon";
 import { CustomText } from "../../Components/CustomText";
-import { SettingsPaymentProps } from "../../Typings/route";
+import { SettingsPaymentMethodProps } from "../../Typings/route";
 import styles from "./styles";
 
-const SettingsPaymentMethod: FC<SettingsPaymentProps> = ({ navigation }) => {
+const SettingsPaymentMethod: FC<SettingsPaymentMethodProps> = ({
+  navigation,
+}) => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaCont}>

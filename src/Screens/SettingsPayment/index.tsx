@@ -1,10 +1,10 @@
 import React, { FC } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { SettingsPaymentProps } from "../../Typings/route";
+import { TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CustomIcon from "../../Components/CustomIcon";
 import ICONS from "../../Assets/Icons";
+import CustomIcon from "../../Components/CustomIcon";
 import { CustomText } from "../../Components/CustomText";
+import { SettingsPaymentProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
 import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
 import styles from "./styles";
@@ -29,13 +29,19 @@ const SettingsPayment: FC<SettingsPaymentProps> = ({ navigation }) => {
       title: "Billing History",
       description:
         "View past transactions (e.g., ticket purchases, premium upgrades)",
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate("billingHistoryStack", {
+          screen: "billingHistory",
+        });
+      },
     },
     {
       icon: ICONS.SubscriptionIcon,
       title: "Subscription Management",
       description: "View/Upgrade/Cancel Premium Plans.",
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate("subscriptionManagement");
+      },
     },
   ];
 
@@ -90,5 +96,3 @@ const SettingsPayment: FC<SettingsPaymentProps> = ({ navigation }) => {
 };
 
 export default SettingsPayment;
-
-

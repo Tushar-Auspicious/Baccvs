@@ -164,10 +164,6 @@ export type SettingsPaymentProps = NativeStackScreenProps<
   SettingsStackParams & SettingsPaymentStackParams,
   "payment"
 >;
-export type SettingsAddPaymentMethodProps = NativeStackScreenProps<
-  SettingsStackParams & SettingsPaymentStackParams & SettingsPaymentStackParams,
-  "payment"
->;
 
 // Setting Stack > Account > Profile Informtaion
 export type ProfileInformationProps = NativeStackScreenProps<
@@ -211,12 +207,31 @@ export type ForgotPasswordProps = NativeStackScreenProps<
   "forgotPassword"
 >;
 
-// Setting Stack > Payment >
+// Setting Stack > Payment > Payment Method
 
-// export type  = NativeStackScreenProps<
-//   SettingsPaymentStackParams,
-//   ""
-// >;
+export type SettingsPaymentMethodProps = NativeStackScreenProps<
+  PaymentMethodStackParams,
+  "paymentMethod"
+>;
+
+export type SettingsAddPaymentMethodProps = NativeStackScreenProps<
+  PaymentMethodStackParams,
+  "addPaymentMethod"
+>;
+
+// Setting Stack > Payment > Billing History
+
+export type SettingsBillingHistoryProps = NativeStackScreenProps<
+  BillinhHistoryStackParams,
+  "billingHistory"
+>;
+
+// Setting Stack > Payment > Billing History > Revciept Detail
+
+export type SettingsRecieptDetailProps = NativeStackScreenProps<
+  BillinhHistoryStackParams,
+  "recieptDetail"
+>;
 
 // Create Post Screen Props
 export type CreatePostScreenProps = NativeStackScreenProps<

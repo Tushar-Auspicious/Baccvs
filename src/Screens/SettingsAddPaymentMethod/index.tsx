@@ -1,16 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
 import React, { FC, useState } from "react";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CustomIcon from "../../Components/CustomIcon";
 import ICONS from "../../Assets/Icons";
-import { SettingsPaymentProps } from "../../Typings/route";
-import { CustomText } from "../../Components/CustomText";
-import styles from "./styles";
-import { verticalScale } from "../../Utilities/Metrics";
-import CustomInput from "../../Components/CustomInput";
 import CustomButton from "../../Components/Buttons/CustomButton";
+import CustomIcon from "../../Components/CustomIcon";
+import CustomInput from "../../Components/CustomInput";
+import { CustomText } from "../../Components/CustomText";
+import { SettingsAddPaymentMethodProps } from "../../Typings/route";
+import { verticalScale } from "../../Utilities/Metrics";
+import styles from "./styles";
 
-const SettingsAddPaymentMethod: FC<SettingsPaymentProps> = ({ navigation }) => {
+const SettingsAddPaymentMethod: FC<SettingsAddPaymentMethodProps> = ({
+  navigation,
+}) => {
   const [cardNumber, setCardNumber] = useState("");
   const [monthDays, setMonthDays] = useState("");
   const [cvvNumber, setCvvNumber] = useState("");
