@@ -6,6 +6,7 @@ import CustomIcon from "../../Components/CustomIcon";
 import { CustomText } from "../../Components/CustomText";
 import { FilterCategory } from "../../Seeds/EventCreation";
 import { CreateEventScreenProps } from "../../Typings/route";
+import { TicketData } from "../../Typings/type";
 import COLORS from "../../Utilities/Colors";
 import { horizontalScale, verticalScale, wp } from "../../Utilities/Metrics";
 import BasicEventDetails from "./Steps/BasicEventDetails";
@@ -30,7 +31,7 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
     eventCapacity: null,
   });
 
-  const [eventPrefrences, setEventPreferences] = useState<
+  const [eventPreference, setEventPreferences] = useState<
     Record<FilterCategory, string[]>
   >({
     musicTypes: [],
@@ -42,6 +43,14 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
   const [addedPeoples, setAddedPeoples] = useState<any>([]);
 
   const [isFreeEvent, setIsFreeEvent] = useState(false);
+  const [tickets, setTickets] = useState<TicketData[]>([]);
+
+  const [coverPhoto, setCoverPhoto] = useState<any>(null);
+
+  const [selectedVideos, setSelectedVideos] = useState<any[]>([]);
+  const [editingVideoIndex, setEditingVideoIndex] = useState<number | null>(
+    null
+  );
 
   // Function to update state dynamically
   const updateEventDetails = (key: string, value: any) => {
@@ -49,15 +58,26 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
   };
 
   const handleNext = () => {
-    if (currentIndex < steps.length - 1) {
+    if (currentIndex < steps.length) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      navigation.navigate("eventDetail", { isFromCreateEvent: true });
+      navigation.navigate("eventDetail", {
+        isFromCreateEvent: true,
+        data: {
+          addedPeoples,
+          coverPhoto,
+          eventDetails,
+          eventPreference,
+          eventVideos: selectedVideos,
+          isFreeEvent,
+          eventTickets: tickets,
+        },
+      });
     }
   };
 
   const handleBack = () => {
-    if (currentIndex > 0) {
+    if (currentIndex > 1) {
       setCurrentIndex(currentIndex - 1);
     } else {
       navigation.goBack();
@@ -77,7 +97,7 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
       case 2:
         return (
           <EventPreference
-            selectedItems={eventPrefrences}
+            selectedItems={eventPreference}
             setSelectedItems={setEventPreferences}
             handleNext={handleNext}
           />
@@ -98,18 +118,34 @@ const CreateEvent: FC<CreateEventScreenProps> = ({ navigation }) => {
             handleNext={handleNext}
             acitveTab={isFreeEvent}
             setActiveTab={setIsFreeEvent}
+            tickets={tickets}
+            setTickets={setTickets}
           />
         );
       case 5:
-        return <EventAssets />;
+        return (
+          <EventAssets
+            coverPhoto={coverPhoto}
+            setCoverPhoto={setCoverPhoto}
+            selectedVideos={selectedVideos}
+            setSelectedVideos={setSelectedVideos}
+            handleNext={handleNext}
+            editingVideoIndex={editingVideoIndex}
+            setEditingVideoIndex={setEditingVideoIndex}
+          />
+        );
     }
   }, [
     currentIndex,
     eventDetails,
-    eventPrefrences,
+    eventPreference,
     activeTab,
     addedPeoples,
     isFreeEvent,
+    coverPhoto,
+    selectedVideos,
+    editingVideoIndex,
+    tickets,
   ]);
 
   const renderStepper = useMemo(() => {

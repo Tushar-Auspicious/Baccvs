@@ -6,11 +6,8 @@ import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
 import CustomButton from "../Buttons/CustomButton";
 import { CustomRadio } from "../CustomRadioButton";
 import { CustomText } from "../CustomText";
+import { RBSheetRef } from "../../Typings/type";
 
-export interface RBSheetRef {
-  open: () => void;
-  close: () => void;
-}
 
 interface CreatePostVisibilityProps {
   selectedOption: string | null;

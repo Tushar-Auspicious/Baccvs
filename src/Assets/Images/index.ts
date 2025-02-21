@@ -4,6 +4,7 @@ const IMAGES = {
   applogo: require("./applogo.png"),
   randomUser1: require("./randomUser1.png"),
   randomUser2: require("./randomUser2.png"),
+  dummyEventImage: require("./dummyEventImage.png"),
 };
 
 export default IMAGES;

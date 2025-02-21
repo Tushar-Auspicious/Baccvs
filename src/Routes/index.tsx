@@ -2,8 +2,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import BottomTabBar from "../Components/BottomTabBar";
+import CreateEvent from "../Screens/CreateEvent";
 import CreatePost from "../Screens/CreatePost";
 import Dating from "../Screens/Dating";
+import EventDetails from "../Screens/EventDetails";
 import Events from "../Screens/Events";
 import Home from "../Screens/Home";
 import Maps from "../Screens/Maps";
@@ -48,7 +50,7 @@ import {
   SettingsProfileInfoStackParams,
   SettingsStackParams,
 } from "../Typings/route";
-import CreateEvent from "../Screens/CreateEvent";
+import PostDetail from "../Screens/PostDetail";
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
 const Auth = createNativeStackNavigator<AuthStackParams>();
@@ -319,7 +321,9 @@ const Routing = () => {
         <Main.Screen name="maps" component={Maps} />
         <Main.Screen name="settingsStack" component={SettingStack} />
         <Main.Screen name="createPost" component={CreatePost} />
+        <Main.Screen name="postDetails" component={PostDetail} />
         <Main.Screen name="createEvent" component={CreateEvent} />
+        <Main.Screen name="eventDetail" component={EventDetails} />
       </Main.Navigator>
     );
   }
@@ -330,8 +334,8 @@ const Routing = () => {
         headerShown: false,
       }}
     >
-      <RootStack.Screen name="mainStack" component={MainStack} />
       <RootStack.Screen name="authStack" component={AuthStack} />
+      <RootStack.Screen name="mainStack" component={MainStack} />
     </RootStack.Navigator>
   );
 };

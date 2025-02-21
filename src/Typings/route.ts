@@ -1,5 +1,6 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { EventDetailData } from "./type";
 
 export type RootStackParams = {
   authStack: NavigatorScreenParams<AuthStackParams>;
@@ -18,13 +19,13 @@ export type AuthStackParams = {
 export type MainStackParams = {
   tabs: NavigatorScreenParams<BottomTabParams>;
   notification: undefined;
-  searchHome: undefined;
+  searchHome: { isFromMap?: boolean };
   maps: undefined;
-  createPost: undefined;
-  postDetails: undefined;
+  createPost: { isFromRepost?: boolean; repostId?: string };
+  postDetails: { postId: string };
   createStory: undefined;
   createEvent: undefined;
-  eventDetail: { isFromCreateEvent?: boolean };
+  eventDetail: { isFromCreateEvent?: boolean; data?: EventDetailData };
   settingsStack: NavigatorScreenParams<SettingsStackParams>;
 };
 
@@ -115,7 +116,7 @@ export type StartExploringIndicatorProps = NativeStackScreenProps<
   "StartExploring"
 >;
 export type SignInIndicatorProps = NativeStackScreenProps<
-  AuthStackParams,
+  AuthStackParams & BottomTabParams & RootStackParams,
   "signIn"
 >;
 
@@ -207,12 +208,31 @@ export type ForgotPasswordProps = NativeStackScreenProps<
   "forgotPassword"
 >;
 
-// Setting Stack > Payment >
+// Setting Stack > Payment > Payment Method
 
-// export type  = NativeStackScreenProps<
-//   SettingsPaymentStackParams,
-//   ""
-// >;
+export type SettingsPaymentMethodProps = NativeStackScreenProps<
+  PaymentMethodStackParams,
+  "paymentMethod"
+>;
+
+export type SettingsAddPaymentMethodProps = NativeStackScreenProps<
+  PaymentMethodStackParams,
+  "addPaymentMethod"
+>;
+
+// Setting Stack > Payment > Billing History
+
+export type SettingsBillingHistoryProps = NativeStackScreenProps<
+  BillinhHistoryStackParams,
+  "billingHistory"
+>;
+
+// Setting Stack > Payment > Billing History > Revciept Detail
+
+export type SettingsRecieptDetailProps = NativeStackScreenProps<
+  BillinhHistoryStackParams,
+  "recieptDetail"
+>;
 
 // Create Post Screen Props
 export type CreatePostScreenProps = NativeStackScreenProps<
@@ -226,3 +246,14 @@ export type CreateEventScreenProps = NativeStackScreenProps<
   "createEvent"
 >;
 
+// Event Detail Screen Props
+export type EventDetailScreenProps = NativeStackScreenProps<
+  MainStackParams & BottomTabParams,
+  "eventDetail"
+>;
+
+// Post Detail Screen Props
+export type PostDetailScreenProps = NativeStackScreenProps<
+  MainStackParams & BottomTabParams,
+  "postDetails"
+>;

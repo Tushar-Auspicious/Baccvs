@@ -11,15 +11,13 @@ import {
 import Modal from "react-native-modal";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import ICONS from "../../Assets/Icons";
-import { setIsTagPeopleModalVisible } from "../../Redux/slices/modalSlice";
-import { useAppDispatch, useAppSelector } from "../../Redux/store";
 import TagPeople from "../../Seeds/TagPeople";
 import COLORS from "../../Utilities/Colors";
 import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
+import CustomButton from "../Buttons/CustomButton";
 import CustomIcon from "../CustomIcon";
 import CustomInput from "../CustomInput";
 import { CustomText } from "../CustomText";
-import CustomButton from "../Buttons/CustomButton";
 
 type TagPeopleModalProps = {
   isModalVisible: boolean;

@@ -1,3 +1,4 @@
+import BorderedEditIcon from "./BorderedEditIcon.svg";
 import CalendarWithPlus from "./CalendarPlus.svg";
 import DatingIcon from "./Dating.svg";
 import SolidDatingIcon from "./Dating_Solid.svg";
@@ -28,9 +29,11 @@ import ClockTransParentIcon from "./clock-transparent.svg";
 import ClockIcon from "./clockIcon.svg";
 import CouponIcon from "./coupon-fill.svg";
 import CreatePOstEyeIcon from "./createPostEyeIcon.svg";
+import DeleteIcon from "./deleteIcon.svg";
 import DJTagICon from "./disc-fill.svg";
 import DotMenu from "./dotMenu.svg";
 import BarTagICon from "./drinks-2-fill.svg";
+import EditIcon from "./editICon.svg";
 import EnableLocation from "./enableLocation.svg";
 import FilterIcon from "./equalizer.svg";
 import EyeIcon from "./eyeIcon.svg";
@@ -62,6 +65,7 @@ import RedCrossIcon from "./redCrossIcon.svg";
 import RightArrowIcon from "./rightArrow.svg";
 import RightTick from "./righttick.svg";
 import SearchIcon from "./searchIcon.svg";
+import SearchIconWhite from "./searchIconWhite.svg";
 import SettingsPaymentIcon from "./settingPaymentIcon.svg";
 import SettingSupportIcon from "./settingSupportIcon.svg";
 import SettingUserIcon from "./settingUserIcon.svg";
@@ -76,7 +80,17 @@ import WhiteCrossIcon from "./whiteCrossIcon.svg";
 import WhiteMapPinIcon from "./whiteMapPinIcon.svg";
 import WhiteTickIcon from "./whiteTick.svg";
 import YellowPlus from "./yellowPlus.svg";
-import SearchIconWhite from "./searchIconWhite.svg";
+import SettingsmailIcon from "./SettingsmailIcon.svg";
+import SettingwhatsappIcon from "./SettingwhatsappIcon.svg";
+import SettingcallIcon from "./SettingcallIcon.svg";
+import UprightArrowIcon from "./UprightArrow.svg";
+import PaymentMethodIcon from "./PaymentMethodIcon.svg";
+import BillingHostoryIcon from "./BillingHistoryIcon.svg";
+import SubscriptionIcon from "./SubscriptionIcon.svg";
+import PaymentplusIcon from "./paymentplusIcon.svg";
+import RepostWithTakeIcon from "./rePostWithTakeIcon.svg";
+import RepostIcon from "./RepostIcon.svg";
+import MapMarkerIcon from "./MapMarkerIcon.svg";
 
 const ICONS = {
   HomeIcon,
@@ -156,6 +170,20 @@ const ICONS = {
   WhiteTickIcon,
   FillTickIcon,
   SearchIconWhite,
+  DeleteIcon,
+  EditIcon,
+  BorderedEditIcon,
+  SettingsmailIcon,
+  SettingwhatsappIcon,
+  SettingcallIcon,
+  UprightArrowIcon,
+  PaymentMethodIcon,
+  SubscriptionIcon,
+  BillingHostoryIcon,
+  PaymentplusIcon,
+  RepostIcon,
+  RepostWithTakeIcon,
+  MapMarkerIcon,
 };
 
 export default ICONS;

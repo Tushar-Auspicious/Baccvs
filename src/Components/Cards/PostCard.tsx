@@ -22,12 +22,12 @@ export type PostCardProps = {
   likesCount: number;
   commentsCount: number;
   repostCount: number;
-  onLikePress?: () => {};
-  onCommentPress?: () => {};
-  onRepostPRess?: () => {};
-  onSharePress?: () => {};
-  onPress?: () => {};
-  onMenuPress?: () => {};
+  onLikePress?: () => void;
+  onCommentPress?: () => void;
+  onRepostPRess?: () => void;
+  onSharePress?: () => void;
+  onPress?: () => void;
+  onMenuPress?: () => void;
 };
 
 const InteractionItem = ({
@@ -37,7 +37,7 @@ const InteractionItem = ({
 }: {
   icon: any;
   count: number;
-  onPress: () => {};
+  onPress: () => void;
 }) => (
   <TouchableOpacity
     activeOpacity={0.7}

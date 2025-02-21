@@ -36,7 +36,7 @@ const App = () => {
           </NavigationContainer>
         </SafeAreaProvider>
       </Provider>
-      <Toast />
+      <Toast position="top" topOffset={100} />
     </>
   );
 };

@@ -1,16 +1,15 @@
-import { View, Text, TouchableOpacity } from "react-native";
 import React, { FC, useState } from "react";
+import { TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import styles from "./style";
-import SignInHeader from "../Referral/SignInHeader/HeaderSignIn";
-import { SignInIndicatorProps } from "../../Typings/route";
-import CustomIcon from "../../Components/CustomIcon";
-import { CustomText } from "../../Components/CustomText";
-import { responsiveFontSize, verticalScale } from "../../Utilities/Metrics";
 import ICONS from "../../Assets/Icons";
-import COLORS from "../../Utilities/Colors";
 import CustomButton from "../../Components/Buttons/CustomButton";
+import CustomIcon from "../../Components/CustomIcon";
 import CustomInput from "../../Components/CustomInput";
+import { CustomText } from "../../Components/CustomText";
+import { SignInIndicatorProps } from "../../Typings/route";
+import COLORS from "../../Utilities/Colors";
+import { verticalScale } from "../../Utilities/Metrics";
+import styles from "./style";
 
 const SOCIAL_BUTTONS = [
   { id: "google", icon: ICONS.Google, text: "Continue with Google" },
@@ -24,20 +23,34 @@ const SignIn: FC<SignInIndicatorProps> = ({ navigation }) => {
   const [enterPassword, setEnterPassword] = useState("");
 
   const onContinue = () => {
-    navigation.navigate("mainStack");
+    navigation.replace("mainStack", {
+      screen: "tabs",
+      params: {
+        screen: "homeTab",
+      },
+    });
   };
 
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaCont}>
-        <SignInHeader
-          title={
-            <Text onPress={() => navigation.navigate("referral")}>
-              {"Create account"}
-            </Text>
-          }
-          onBackPress={() => navigation.goBack()}
-        />
+        <View style={styles.header}>
+          <CustomIcon
+            Icon={ICONS.backArrow}
+            height={24}
+            width={24}
+            onPress={() => navigation.goBack()}
+          />
+          <CustomText
+            fontFamily="bold"
+            fontSize={14}
+            color={COLORS.mediuumPink}
+            onPress={() => navigation.navigate("referral")}
+          >
+            Create account
+          </CustomText>
+        </View>
+
         <CustomText fontSize={24} fontFamily="bold" style={styles.textstyle}>
           Sign in
         </CustomText>
@@ -57,11 +70,7 @@ const SignIn: FC<SignInIndicatorProps> = ({ navigation }) => {
           title="Continue"
           onPress={onContinue}
           isFullWidth
-          style={{
-            backgroundColor: COLORS.inputColor,
-            borderWidth: 0.5,
-            borderColor: COLORS.greyMedium,
-          }}
+          disabled={inputValue.length === 0 || enterPassword.length === 0}
         />
         <View style={styles.orContent}>
           <View style={styles.linebar} />
