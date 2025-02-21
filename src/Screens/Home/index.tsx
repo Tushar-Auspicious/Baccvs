@@ -15,18 +15,25 @@ import CustomIcon from "../../Components/CustomIcon";
 import { CustomText } from "../../Components/CustomText";
 import MainMenuModal from "../../Components/Modals/MainMenuModal";
 import { setIsMainMenuVisible } from "../../Redux/slices/modalSlice";
-import { useAppDispatch, useAppSelector } from "../../Redux/store";
+import { useAppDispatch } from "../../Redux/store";
+import dummyEvents from "../../Seeds/EventData";
 import dummyPosts from "../../Seeds/POstData";
 import { HomeScreenProps } from "../../Typings/route";
 import { RBSheetRef } from "../../Typings/type";
 import COLORS from "../../Utilities/Colors";
+import { getDistance } from "../../Utilities/Helpers";
 import { horizontalScale, verticalScale, wp } from "../../Utilities/Metrics";
+
+// Static user location
+export const USER_LOCATION = {
+  latitude: 37.7749,
+  longitude: -122.4194,
+};
 
 const Home: FC<HomeScreenProps> = ({ navigation }) => {
   const isNewUSer = true;
   const insets = useSafeAreaInsets();
   const dispatch = useAppDispatch();
-  const { isMainMenuVisible } = useAppSelector((state) => state.modals);
 
   const refRBSheet = useRef<RBSheetRef>(null);
 
@@ -59,7 +66,11 @@ const Home: FC<HomeScreenProps> = ({ navigation }) => {
         </CustomText>
         <CustomButton
           title="Create a Post"
-          onPress={() => {}}
+          onPress={() =>
+            navigation.navigate("createPost", {
+              isFromRepost: false,
+            })
+          }
           textSize={14}
           textColor={COLORS.darkPink}
           isFullWidth={false}
@@ -135,7 +146,9 @@ const Home: FC<HomeScreenProps> = ({ navigation }) => {
         <View style={{ flexDirection: "row", gap: horizontalScale(20) }}>
           <CustomIcon
             Icon={ICONS.SearchIcon}
-            onPress={() => navigation.navigate("searchHome")}
+            onPress={() =>
+              navigation.navigate("searchHome", { isFromMap: false })
+            }
           />
           <CustomIcon
             Icon={ICONS.NotificationIcon}
@@ -176,22 +189,25 @@ const Home: FC<HomeScreenProps> = ({ navigation }) => {
           </CustomText>
         </View>
         <FlatList
-          data={Array.from({ length: 10 })}
+          data={dummyEvents}
           horizontal
           contentContainerStyle={{
             gap: horizontalScale(20),
             paddingHorizontal: horizontalScale(20),
           }}
           renderItem={({ item, index }) => {
+            let distance = getDistance(
+              USER_LOCATION.latitude,
+              USER_LOCATION.longitude,
+              item.latitude,
+              item.longitude
+            ).toFixed(0);
+
             return (
               <EventListCard
-                imageUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bXVzaWN8ZW58MHx8MHx8fDA%3D"
-                title="Speed Dating & Trivia Ni..."
-                distance="2km away"
-                date="10 Feb 2025"
-                time="7: 00 PM"
-                address="Quizzy Café, 22 Knowledge Lane, Town..."
+                eventData={item}
                 onPress={() => {}}
+                distance={distance}
               />
             );
           }}
@@ -237,7 +253,7 @@ const Home: FC<HomeScreenProps> = ({ navigation }) => {
       // Generate unique random indices between 5 and 20
       const specialIndices = new Set<number>();
       while (specialIndices.size < specialComponents.length) {
-        const randomIndex = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
+        const randomIndex = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
         specialIndices.add(randomIndex);
       }
 
@@ -301,6 +317,7 @@ const Home: FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   const handleRepost = () => {};
+
   const handleRepostWithYourTake = () => {
     refRBSheet.current?.close();
     if (selectedPostforRepost) {

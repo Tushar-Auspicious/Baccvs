@@ -29,6 +29,26 @@ export type TicketData = {
   }[];
 };
 
+export type ITagPeople = {
+  id: number;
+  name: string;
+  age: number;
+  avatar: string;
+  latitude: number;
+  longitude: number;
+  distance?: string;
+};
+
+export type IEvents = {
+  id: string;
+  imageUrl: string;
+  title: string;
+  latitude: number;
+  longitude: number;
+  date: string;
+  time: string;
+  address: string;
+};
 
 export interface RBSheetRef {
   open: () => void;

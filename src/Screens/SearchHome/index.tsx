@@ -17,12 +17,20 @@ import { data } from "../../Components/CardSwiper/data";
 import CustomIcon from "../../Components/CustomIcon";
 import CustomInput from "../../Components/CustomInput";
 import { CustomText } from "../../Components/CustomText";
-import { categoriesData, CategoryType } from "../../Seeds/SearchHomeData";
+import {
+  categoriesData,
+  categoriesDataForMap,
+  CategoryType,
+} from "../../Seeds/SearchHomeData";
 import { SearchHomeScreenProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
 import { horizontalScale, verticalScale, wp } from "../../Utilities/Metrics";
+import dummyEvents from "../../Seeds/EventData";
+import { getDistance } from "../../Utilities/Helpers";
+import { USER_LOCATION } from "../Home";
 
-const SearchHome: FC<SearchHomeScreenProps> = ({ navigation }) => {
+const SearchHome: FC<SearchHomeScreenProps> = ({ navigation, route }) => {
+  const { isFromMap } = route.params;
   const insets = useSafeAreaInsets();
   const [searchedTerm, setSearchedTerm] = useState("");
   const [showRecents, setShowRecents] = useState(true);
@@ -42,7 +50,7 @@ const SearchHome: FC<SearchHomeScreenProps> = ({ navigation }) => {
     return (
       <View style={styles.container}>
         <FlatList
-          data={categoriesData}
+          data={isFromMap ? categoriesDataForMap : categoriesData}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <CategoryItem item={item} />}
           numColumns={3} // Adjust based on layout needs
@@ -97,20 +105,24 @@ const SearchHome: FC<SearchHomeScreenProps> = ({ navigation }) => {
           <CustomText fontFamily="medium">Event near you</CustomText>
         </View>
         <FlatList
-          data={Array.from({ length: 10 })}
+          data={dummyEvents}
           horizontal
           contentContainerStyle={styles.eventListContentContainer}
-          renderItem={({ item, index }) => (
-            <EventListCard
-              imageUrl="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bXVzaWN8ZW58MHx8MHx8fDA%3D"
-              title="Speed Dating & Trivia Ni..."
-              distance="2km away"
-              date="10 Feb 2025"
-              time="7: 00 PM"
-              address="Quizzy Café, 22 Knowledge Lane, Town..."
-              onPress={() => {}}
-            />
-          )}
+          renderItem={({ item, index }) => {
+            let distance = getDistance(
+              USER_LOCATION.latitude,
+              USER_LOCATION.longitude,
+              item.latitude,
+              item.longitude
+            ).toFixed(0);
+            return (
+              <EventListCard
+                eventData={item}
+                onPress={() => {}}
+                distance={distance}
+              />
+            );
+          }}
         />
       </View>
     );
@@ -176,7 +188,7 @@ const styles = StyleSheet.create({
     gap: verticalScale(20),
   },
   row: {
-    justifyContent: "center",
+    justifyContent: "flex-start",
     marginBottom: verticalScale(6),
   },
   categoryButton: {

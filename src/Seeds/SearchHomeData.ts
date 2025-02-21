@@ -6,7 +6,6 @@ export type CategoryType = {
   icon: any; // If ICONS are images or components, use 'any'. If they are SVGs, use React.FC<SvgProps>.
 };
 
-
 const categoriesData: CategoryType[] = [
   { id: "1", name: "People", icon: ICONS.PeopleTagIcon },
   { id: "2", name: "Events", icon: ICONS.EventTagIcon },
@@ -16,4 +15,9 @@ const categoriesData: CategoryType[] = [
   { id: "6", name: "DJ’s", icon: ICONS.DJTagICon },
 ];
 
-export {categoriesData}
+export const categoriesDataForMap: CategoryType[] = [
+  { id: "1", name: "People", icon: ICONS.PeopleTagIcon },
+  { id: "2", name: "Events", icon: ICONS.EventTagIcon },
+];
+
+export { categoriesData };

@@ -19,7 +19,7 @@ export type AuthStackParams = {
 export type MainStackParams = {
   tabs: NavigatorScreenParams<BottomTabParams>;
   notification: undefined;
-  searchHome: undefined;
+  searchHome: { isFromMap?: boolean };
   maps: undefined;
   createPost: { isFromRepost?: boolean; repostId?: string };
   postDetails: { postId: string };

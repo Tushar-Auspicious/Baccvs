@@ -90,6 +90,7 @@ import SubscriptionIcon from "./SubscriptionIcon.svg";
 import PaymentplusIcon from "./paymentplusIcon.svg";
 import RepostWithTakeIcon from "./rePostWithTakeIcon.svg";
 import RepostIcon from "./RepostIcon.svg";
+import MapMarkerIcon from "./MapMarkerIcon.svg";
 
 const ICONS = {
   HomeIcon,
@@ -182,6 +183,7 @@ const ICONS = {
   PaymentplusIcon,
   RepostIcon,
   RepostWithTakeIcon,
+  MapMarkerIcon,
 };
 
 export default ICONS;

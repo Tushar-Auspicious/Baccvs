@@ -1,42 +1,31 @@
-import {
-  Image,
-  ImageBackground,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
 import React, { FC } from "react";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import ICONS from "../../Assets/Icons";
+import { IEvents } from "../../Typings/type";
+import COLORS from "../../Utilities/Colors";
 import {
   horizontalScale,
   hp,
   verticalScale,
   wp,
 } from "../../Utilities/Metrics";
-import { CustomText } from "../CustomText";
 import CustomIcon from "../CustomIcon";
-import ICONS from "../../Assets/Icons";
-import COLORS from "../../Utilities/Colors";
+import { CustomText } from "../CustomText";
 
 type EventListCardrops = {
-  imageUrl: string;
-  title: string;
-  distance: string;
-  date: string;
-  time: string;
-  address: string;
+  eventData: IEvents;
   onPress: () => void;
+  distance: string;
 };
 
 const EventListCard: FC<EventListCardrops> = ({
-  imageUrl,
-  title,
-  distance,
-  date,
-  time,
-  address,
+  eventData,
   onPress,
+  distance,
 }) => {
+  const { address, date, imageUrl, latitude, longitude, time, title } =
+    eventData;
+
   return (
     <TouchableOpacity
       activeOpacity={0.9}
@@ -62,7 +51,7 @@ const EventListCard: FC<EventListCardrops> = ({
           <CustomText fontFamily="bold" fontSize={14}>
             {title}
           </CustomText>
-          <CustomText fontSize={12}>{distance}</CustomText>
+          <CustomText fontSize={12}>{distance} km away</CustomText>
         </View>
         <View
           style={{

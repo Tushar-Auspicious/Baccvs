@@ -1,12 +1,13 @@
-import { Platform, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
+import React, { FC, useState } from "react";
+import { Image, Platform, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import CustomIcon from "../../Components/CustomIcon";
 import ICONS from "../../Assets/Icons";
+import CustomIcon from "../../Components/CustomIcon";
+import { PostDetailScreenProps } from "../../Typings/route";
 import COLORS from "../../Utilities/Colors";
+import { horizontalScale, verticalScale } from "../../Utilities/Metrics";
 
-const PostDetail = () => {
+const PostDetail: FC<PostDetailScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
 
   return (
@@ -28,7 +29,7 @@ const PostDetail = () => {
       {/* Header */}
       <View style={styles.header}>
         <CustomIcon
-          onPress={() => {}}
+          onPress={() => navigation.goBack()}
           Icon={ICONS.backArrow}
           height={20}
           width={20}
